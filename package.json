@@ -1,0 +1,35 @@
+{
+  "name": "api_mi_angel_inevntario",
+  "version": "1.0.0",
+  "description": "esta es la api que se realizara para el proyecto final de grado",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app/index.js --exec babel-node",
+    "build": "babel app --out-dir dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Papeleria-Mi-angel/ms_inventario_api_mi_angel.git"
+  },
+  "author": "gian carlos giraldo fernandez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Papeleria-Mi-angel/ms_inventario_api_mi_angel/issues"
+  },
+  "homepage": "https://github.com/Papeleria-Mi-angel/ms_inventario_api_mi_angel#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.9.7"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.24.6",
+    "@babel/core": "^7.24.6",
+    "@babel/node": "^7.24.6",
+    "@babel/plugin-transform-runtime": "^7.24.6",
+    "@babel/preset-env": "^7.24.6",
+    "nodemon": "^3.1.1"
+  }
+}
