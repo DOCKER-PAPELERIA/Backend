@@ -3,6 +3,8 @@ import rutaCategoria from "./categoria.router";
 import rutaProducto from "./producto.router";
 import rutaProveedor from "./proveedor.roter";
 import rutaUsuario from "./usuarios.routers";
+import rutaRol from "./rol.router";
+import rutaCuenta from "./crearcuenta.router";
 
 const ruta = Router();
 
@@ -10,6 +12,8 @@ ruta.use("/categoria", rutaCategoria);
 ruta.use("/producto", rutaProducto);
 ruta.use("/proveedor", rutaProveedor);
 ruta.use("/usuario", rutaUsuario);
+ruta.use("/rol", rutaRol);
+ruta.use("/cuenta", rutaCuenta);
 
 
 export default ruta;
