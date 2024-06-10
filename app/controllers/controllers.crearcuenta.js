@@ -34,9 +34,10 @@ export const crearCuenta = async (req, res) => {
         const contrasena = hash;
         const hash1 = await bcrypt.hash(confirmacionsincifrar, 2);
         const confirmacion = hash1;
+
         const respuesta = await pool.query(`CALL SP_INSERTAR_CREARCUENTA("${idUsuario}", "${idRol}", "${correo}", "${contrasena}", "${confirmacion}", "${estado}");`);
-        if (respuesta[0].affectedRows == 1) {
-            success(req, res, 201, "Cuenta creada con éxito");
+        if (respuesta && respuesta.affectedRows == 1) {
+            success(req, res, 201, "Cuenta creada con exito");
         } else {
             error(req, res, 400, "No se pudo crear la cuenta");
         }
