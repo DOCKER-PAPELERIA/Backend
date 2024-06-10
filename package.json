@@ -19,9 +19,11 @@
   },
   "homepage": "https://github.com/Papeleria-Mi-angel/ms_inventario_api_mi_angel#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "colors": "^1.4.0",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.9.7"
   },
   "devDependencies": {

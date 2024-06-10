@@ -1,6 +1,8 @@
 import pool from "../config/mysql.db";
+import bcrypt, { hash } from "bcrypt";
 import { success, error } from "../messages/browser";
 import { config } from "dotenv";
+import jwt from "jsonwebtoken"
 config();
 
 
@@ -67,5 +69,38 @@ export const eliminarUsuario = async (req, res) => {
         }
     } catch (err) {
         error(req, res, 400, err);
+    }
+};
+
+
+export const loginUsuario = async (req, res) => {
+    const { usuario, contrasena } = req.body;
+    // const hash = await bcrypt.hash(contrasena, 2);
+
+    try {
+        const respuesta = await pool.query(`CALL SP_BUSCAR_LOGIN('${usuario}');`);
+        if (respuesta[0][0]== 0) {
+            error(req, res, 404, "Usuario no existe.");
+            return;
+        }
+        const match = await bcrypt.compare(contrasena, respuesta[0][0][0].contrasena);
+        if (!match){
+            error(req, res, 401, "Contraseña incorrecta");
+            return;
+        }
+        let payload = {
+            "usuario": usuario
+        }
+        let token = await jwt.sign(
+            payload,
+            process.env.TOKEN_PRIVATEKEY,
+            {
+                expiresIn : process.env.TOKEN_EXPIRES_IN
+            }); 
+        success(req, res, 200,token);
+         
+    } catch (e) {
+        console.error("Error en el servidor:", e);
+        error(req, res, 500, "error en el servidor, porfavor intente nuevamente");
     }
 };
