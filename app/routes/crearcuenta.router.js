@@ -8,11 +8,11 @@ import { crearCuenta,
 
 const rutaCuenta = Router();
 
-rutaCuenta.get("/mostrarCuenta/:id", mostrarCuenta);
-rutaCuenta.get("/listarCuenta", listarCuenta);
-rutaCuenta.post("/crearCuenta", crearCuenta);
-rutaCuenta.put("/modificarCuenta", modificarCuenta);
-rutaCuenta.delete("/eliminarCuenta", eliminarCuenta);
+rutaCuenta.get("/cuenta/:id", mostrarCuenta);
+rutaCuenta.get("/cuenta", listarCuenta);
+rutaCuenta.post("/cuenta", crearCuenta);
+rutaCuenta.put("/cuenta", modificarCuenta);
+rutaCuenta.delete("/cuenta", eliminarCuenta);
 
 
 

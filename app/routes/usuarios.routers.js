@@ -8,11 +8,11 @@ import { crearUsuario,
 
 const rutaUsuario = Router();
 
-rutaUsuario.get("/mostrarUsuario/:id", mostrarUsuario );
-rutaUsuario.get("/listarUsuario", listarUsuario);
-rutaUsuario.post("/crearUsuario", crearUsuario);
-rutaUsuario.put("/modificarUsuario", modificarUsuario);
-rutaUsuario.delete("/eliminarUsuario", eliminarUsuario);
+rutaUsuario.get("/usuario/:id", mostrarUsuario );
+rutaUsuario.get("/usuario", listarUsuario);
+rutaUsuario.post("/usuario", crearUsuario);
+rutaUsuario.put("/usuario", modificarUsuario);
+rutaUsuario.delete("/usuario", eliminarUsuario);
 rutaUsuario.post("/login", loginUsuario)
 
 export default rutaUsuario;

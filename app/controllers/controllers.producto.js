@@ -3,7 +3,6 @@ import { success, error } from "../messages/browser.js";
 import { config } from "dotenv";
 config();
 
-
 export const mostrarProducto = async (req, res) => {
     const id = req.params["id"];
     try {
@@ -20,11 +19,23 @@ export const listarProducto = async (req, res) => {
         const [respuesta] = await pool.query(`CALL SP_LISTAR_PRODUCTOS();`);
         success(req, res, 200, respuesta[0]);
     } catch (err) {
-        error(req, res, 500, err)
+        error(req, res, 500, err);
     }
 
 };
 
+export const agotado = async (req, res) => {
+    try {
+        const [respuesta] = await pool.query(`CALL SP_PRODUCTO_AGOTADO();`);
+        if (respuesta.length === 0 || (respuesta[0] && respuesta[0].length === 0)) {
+            success(req, res, 200, "No hay productos agotados.");
+        } else {
+            success(req, res, 200, respuesta[0], "Productos Agotados.");
+        }
+    } catch (err) {
+        error(req, res, 500, err);
+    }
+};
 
 export const crearProducto = async (req, res) => {
     const {descripcion, unidades, precio_compra, precio_venta } = req.body;
@@ -41,7 +52,6 @@ export const crearProducto = async (req, res) => {
 
 };
 
-
 export const modificarProducto = async (req, res) => {
     const {idProducto, descripcion, unidades, precio_compra, precio_venta } = req.body;
     try {
@@ -56,7 +66,6 @@ export const modificarProducto = async (req, res) => {
     }
 
 };
-
 
 export const eliminarProducto = async (req, res) => {
     const {idProducto} = req.body;

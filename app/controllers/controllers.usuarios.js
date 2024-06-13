@@ -5,7 +5,6 @@ import { config } from "dotenv";
 import jwt from "jsonwebtoken"
 config();
 
-
 export const mostrarUsuario = async (req, res) => {
     const id = req.params["id"];
     try {
@@ -27,7 +26,6 @@ export const listarUsuario = async (req, res) => {
     }
 };
 
-
 export const crearUsuario = async (req, res) => {
     const {identificacion, nombres, telefono, fecha_naci} = req.body;
     try {
@@ -41,7 +39,6 @@ export const crearUsuario = async (req, res) => {
         error(req, res, 400, err);
     }
 };
-
 
 export const modificarUsuario = async (req, res) => {
     const {idUsuario, identificacion, nombres, telefono, fecha_naci} = req.body;
@@ -57,7 +54,6 @@ export const modificarUsuario = async (req, res) => {
     }
 };
 
-
 export const eliminarUsuario = async (req, res) => {
     const {idUsuario} = req.body;
     try {
@@ -72,11 +68,8 @@ export const eliminarUsuario = async (req, res) => {
     }
 };
 
-
 export const loginUsuario = async (req, res) => {
     const { usuario, contrasena } = req.body;
-    // const hash = await bcrypt.hash(contrasena, 2);
-
     try {
         const respuesta = await pool.query(`CALL SP_BUSCAR_LOGIN('${usuario}');`);
         if (respuesta[0][0]== 0) {

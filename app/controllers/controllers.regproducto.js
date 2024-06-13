@@ -3,7 +3,6 @@ import { success, error } from "../messages/browser";
 import { config } from "dotenv";
 config();
 
-
 export const mostrarRegproducto = async (req, res) => {
     const id = req.params["id"];
     try {
@@ -14,7 +13,6 @@ export const mostrarRegproducto = async (req, res) => {
     }
 };
 
-
 export const listarRegproducto = async (req, res) => {
     try {
         const [respuesta] = await pool.query(`CALL SP_LISTAR_REGPRODUCTOS();`);
@@ -23,7 +21,6 @@ export const listarRegproducto = async (req, res) => {
         error(req, res, 500, err);
     }
 };
-
 
 export const crearRegproducto = async (req, res) => {
     const {idProducto, idCategoria, idProveedor, cantinicial, cantfinal, fecha, valorcompra, estado} = req.body;
@@ -39,11 +36,10 @@ export const crearRegproducto = async (req, res) => {
     }
 };
 
-
 export const modificarRegproducto = async (req, res) => {
-    const {idRegProducto, cantinicial, cantfinal, fecha, valorcompra, estado} = req.body;
+    const {idRegistro, cantinicial, cantfinal, fecha, valorcompra, estado} = req.body;
     try {
-        const respuesta = await pool.query(`CALL SP_EDITAR_REGPRODUCTO("${idRegProducto}", "${cantinicial}", "${cantfinal}", "${fecha}", "${valorcompra}", "${estado}");`);
+        const respuesta = await pool.query(`CALL SP_EDITAR_REGPRODUCTO("${idRegistro}", "${cantinicial}", "${cantfinal}", "${fecha}", "${valorcompra}", "${estado}");`);
         if (respuesta[0].affectedRows == 1) {
             success(req, res, 201, "Registro Producto modificado con exito.");
         } else {
@@ -54,11 +50,10 @@ export const modificarRegproducto = async (req, res) => {
     }
 };
 
-
 export const eliminarRegproducto = async (req, res) => {
-    const {idRegProducto} = req.body;
+    const {idRegistro} = req.body;
     try {
-        const respuesta = await pool.query(`CALL SP_ELIMINAR_REGPRODUCTO("${idRegProducto}");`);
+        const respuesta = await pool.query(`CALL SP_ELIMINAR_REGPRODUCTO("${idRegistro}");`);
         if (respuesta[0].affectedRows == 1) {
             success(req, res, 200, "Registro Producto Eliminado");
         } else {

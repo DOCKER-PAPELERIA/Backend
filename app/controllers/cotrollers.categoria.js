@@ -22,6 +22,24 @@ export const listarCategoria = async (req, res) => {
     }
 };
 
+export const descripcion = async (req, res) => {
+    try {
+        const [respuesta] = await pool.query(`CALL SP_MOSTRAR_CATE_PRODUC();`);
+        success(req, res, 200, respuesta[0]);
+    } catch (err) {
+        error(req, res, 500, err);
+    }
+};
+
+export const ordenAlfabetico = async (req, res) => {
+    try {
+        const [respuesta] = await pool.query(`CALL SP_CATEGORIAS_ORDENALFABETICO();`);
+        success(req, res, 200, respuesta[0]);
+    } catch (err) {
+        error(req, res, 500, err);
+    }
+};
+
 export const crearCategoria = async (req, res) => {
     const { Categoria, fecha } = req.body;
 

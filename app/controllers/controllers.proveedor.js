@@ -13,7 +13,6 @@ export const mostrarProveedor = async (req, res) => {
     }
 };
 
-
 export const listarProveedor = async (req, res) => {
     try {
         const [respuesta] = await pool.query(`CALL SP_LISTAR_PROVEEDOR();`);
@@ -22,7 +21,6 @@ export const listarProveedor = async (req, res) => {
         error(req, res, 500, err);
     }
 };
-
 
 export const crearProveedor = async (req, res) => {
     const {telefono, direccion, correo, nit} = req.body;
@@ -38,7 +36,6 @@ export const crearProveedor = async (req, res) => {
     }
 };
 
-
 export const modificarProveedor = async (req, res) => {
     const {idProveedor, telefono, direccion, correo, nit} = req.body;
     try {
@@ -53,7 +50,6 @@ export const modificarProveedor = async (req, res) => {
         
     }
 };
-
 
 export const eliminarProveedor = async (req, res) => {
     const {idProveedor} = req.body;

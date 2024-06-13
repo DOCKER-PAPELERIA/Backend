@@ -8,11 +8,11 @@ import { crearProveedor,
 
 const rutaProveedor = Router();
 
-rutaProveedor.get("/mostrarProveedor/:id", mostrarProveedor);
-rutaProveedor.get("/listarProveedor", listarProveedor);
-rutaProveedor.post("/crearProveedor", crearProveedor);
-rutaProveedor.put("/modificarProveedor", modificarProveedor);
-rutaProveedor.delete("/eliminarProveedor", eliminarProveedor);
+rutaProveedor.get("/proveedor/:id", mostrarProveedor);
+rutaProveedor.get("/proveedor", listarProveedor);
+rutaProveedor.post("/proveedor", crearProveedor);
+rutaProveedor.put("/proveedor", modificarProveedor);
+rutaProveedor.delete("/proveedor", eliminarProveedor);
 
 
 

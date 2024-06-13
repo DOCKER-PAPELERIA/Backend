@@ -8,12 +8,12 @@ import rutaRegproducto from "./regproducto.router";
 
 const ruta = Router();
 
-ruta.use("/categoria", rutaCategoria);
-ruta.use("/producto", rutaProducto);
-ruta.use("/proveedor", rutaProveedor);
-ruta.use("/usuario", rutaUsuario);
-ruta.use("/cuenta", rutaCuenta);
-ruta.use("/regproducto", rutaRegproducto);
+ruta.use("/api", rutaCategoria);
+ruta.use("/api", rutaProducto);
+ruta.use("/api", rutaProveedor);
+ruta.use("/api", rutaCuenta);
+ruta.use("/api", rutaRegproducto);
+ruta.use("/user", rutaUsuario);
 
 
 export default ruta;

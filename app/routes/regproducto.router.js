@@ -8,11 +8,11 @@ import { crearRegproducto,
 
 const rutaRegproducto = Router();
 
-rutaRegproducto.get("/mostrarRegproducto/:id", mostrarRegproducto);
-rutaRegproducto.get("/listarRegproducto", listarRegproducto);
-rutaRegproducto.post("/crearRegproducto", crearRegproducto);
-rutaRegproducto.put("/modificarRegproducto", modificarRegproducto);
-rutaRegproducto.delete("/eliminarRegproducto", eliminarRegproducto);
+rutaRegproducto.get("/regproducto/:id", mostrarRegproducto);
+rutaRegproducto.get("/regproducto", listarRegproducto);
+rutaRegproducto.post("/regproducto", crearRegproducto);
+rutaRegproducto.put("/regproducto", modificarRegproducto);
+rutaRegproducto.delete("/regproducto", eliminarRegproducto);
 
 
 
