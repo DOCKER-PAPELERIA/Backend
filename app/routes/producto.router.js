@@ -1,18 +1,28 @@
 import { Router } from "express";
-import { agotado, crearProducto, 
+import { Nuevo, Viejo, agotado, 
+        crearProducto, 
         eliminarProducto, 
         listarProducto, 
+        masCostoso, 
+        menosCostoso, 
         modificarProducto, 
-        mostrarProducto } from "../controllers/controllers.producto";
+        mostrarProducto, 
+        ordenAlfabetico} from "../controllers/controllers.producto";
+import { verifyToken } from "../middleware/oauth";
 
 const rutaProducto = Router();
 
 rutaProducto.get("/producto/:id", mostrarProducto);
 rutaProducto.get("/producto", listarProducto);
 rutaProducto.get("/agotado", agotado);
-rutaProducto.post("/producto", crearProducto);
-rutaProducto.put("/producto", modificarProducto);
-rutaProducto.delete("/producto", eliminarProducto);
+rutaProducto.get("/producto-ordenar", ordenAlfabetico);
+rutaProducto.get("/producto-nuevo", Nuevo);
+rutaProducto.get("/producto-viejo", Viejo);
+rutaProducto.get("/producto-maxcostoso", masCostoso);
+rutaProducto.get("/producto-mincostoso", menosCostoso);
+rutaProducto.post("/producto", verifyToken, crearProducto);
+rutaProducto.put("/producto", verifyToken, modificarProducto);
+rutaProducto.delete("/producto", verifyToken, eliminarProducto);
 
 
 export default rutaProducto;

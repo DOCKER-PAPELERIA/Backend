@@ -16,6 +16,7 @@ const outputFile = './swagger-output.json';
 const routes = [
     '../routes/categoria.router.js',
     '../routes/crearcuenta.router.js',
+    '../routes/factura.router.js',
     '../routes/producto.router.js',
     '../routes/proveedor.roter.js',
     '../routes/regproducto.router.js',

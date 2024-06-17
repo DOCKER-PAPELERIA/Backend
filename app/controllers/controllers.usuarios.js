@@ -5,6 +5,8 @@ import { config } from "dotenv";
 import jwt from "jsonwebtoken"
 config();
 
+
+// ------------------------------METODO DE MOSTRAR UN SOLO USUARIO------------------------------------------------
 export const mostrarUsuario = async (req, res) => {
     const id = req.params["id"];
     try {
@@ -16,6 +18,8 @@ export const mostrarUsuario = async (req, res) => {
     }
 };
 
+
+// ------------------------------METODO DE MOSTRAR TODOS USUARIO----------------------------------------------------
 export const listarUsuario = async (req, res) => {
     try {
         const [respuesta] = await pool.query(`CALL SP_LISTAR_USUARIO();`);
@@ -26,6 +30,8 @@ export const listarUsuario = async (req, res) => {
     }
 };
 
+
+// ------------------------------METODO DE CREAR USUARIO------------------------------------------------------------
 export const crearUsuario = async (req, res) => {
     const {identificacion, nombres, telefono, fecha_naci} = req.body;
     try {
@@ -40,6 +46,8 @@ export const crearUsuario = async (req, res) => {
     }
 };
 
+
+// ------------------------------METODO DE MODIFICAR USUARIO------------------------------------------------------------
 export const modificarUsuario = async (req, res) => {
     const {idUsuario, identificacion, nombres, telefono, fecha_naci} = req.body;
     try {
@@ -54,6 +62,8 @@ export const modificarUsuario = async (req, res) => {
     }
 };
 
+
+// ------------------------------METODO DE ELIMINAR USUARIO----------------------------------------------------------
 export const eliminarUsuario = async (req, res) => {
     const {idUsuario} = req.body;
     try {
@@ -68,6 +78,8 @@ export const eliminarUsuario = async (req, res) => {
     }
 };
 
+
+// ------------------------------METODO DE LOGUAR USUARIO------------------------------------------------------------
 export const loginUsuario = async (req, res) => {
     const { usuario, contrasena } = req.body;
     try {

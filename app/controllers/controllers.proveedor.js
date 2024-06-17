@@ -3,6 +3,8 @@ import { success, error } from "../messages/browser.js";
 import { config } from "dotenv";
 config();
 
+
+// ------------------------------METODO DE MOSTRAR UN SOLO PROVEEDOR------------------------------------------------
 export const mostrarProveedor = async (req, res) => {
     const id = req.params["id"];
     try {
@@ -13,6 +15,8 @@ export const mostrarProveedor = async (req, res) => {
     }
 };
 
+
+// ------------------------------METODO DE MOSTRAR TODOS LOS PROVEEDOR------------------------------------------------
 export const listarProveedor = async (req, res) => {
     try {
         const [respuesta] = await pool.query(`CALL SP_LISTAR_PROVEEDOR();`);
@@ -22,6 +26,8 @@ export const listarProveedor = async (req, res) => {
     }
 };
 
+
+// ------------------------------METODO DE CREAR PROVEEDOR--------------------------------------------------------
 export const crearProveedor = async (req, res) => {
     const {telefono, direccion, correo, nit} = req.body;
     try {
@@ -36,6 +42,8 @@ export const crearProveedor = async (req, res) => {
     }
 };
 
+
+// ------------------------------METODO DE MODIFICAR PROVEEDOR----------------------------------------------------
 export const modificarProveedor = async (req, res) => {
     const {idProveedor, telefono, direccion, correo, nit} = req.body;
     try {
@@ -51,6 +59,8 @@ export const modificarProveedor = async (req, res) => {
     }
 };
 
+
+// ------------------------------METODO DE ELIMINAR PROVEEDOR------------------------------------------------------
 export const eliminarProveedor = async (req, res) => {
     const {idProveedor} = req.body;
     try {

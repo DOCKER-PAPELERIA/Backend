@@ -4,15 +4,16 @@ import { crearCuenta,
         listarCuenta, 
         modificarCuenta, 
         mostrarCuenta } from "../controllers/controllers.crearcuenta";
+import { verifyToken } from "../middleware/oauth";
 
 
 const rutaCuenta = Router();
 
 rutaCuenta.get("/cuenta/:id", mostrarCuenta);
 rutaCuenta.get("/cuenta", listarCuenta);
-rutaCuenta.post("/cuenta", crearCuenta);
-rutaCuenta.put("/cuenta", modificarCuenta);
-rutaCuenta.delete("/cuenta", eliminarCuenta);
+rutaCuenta.post("/cuenta", verifyToken, crearCuenta);
+rutaCuenta.put("/cuenta", verifyToken, modificarCuenta);
+rutaCuenta.delete("/cuenta", verifyToken, eliminarCuenta);
 
 
 

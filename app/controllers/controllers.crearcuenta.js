@@ -4,6 +4,8 @@ import { config } from "dotenv";
 import bcrypt from "bcrypt";
 config();
 
+
+// ------------------------------METODO DE MOSTRAR UNA SOLA CUENTA------------------------------------------------
 export const mostrarCuenta = async (req, res) => {
     const id = req.params["id"];
     try {
@@ -15,6 +17,8 @@ export const mostrarCuenta = async (req, res) => {
 };
 
 
+
+// ------------------------------METODO DE MOSTRAR TODAS LAS CUENTAS------------------------------------------------
 export const listarCuenta = async (req, res) => {
     try {
         const [respuesta] = await pool.query(`CALL SP_LISTAR_CUENTA();`);
@@ -25,6 +29,8 @@ export const listarCuenta = async (req, res) => {
 };
 
 
+
+// ------------------------------METODO DE CREAR LAS CUENTAS------------------------------------------------------
 export const crearCuenta = async (req, res) => {
     const {idUsuario, idRol, correo, estado} = req.body;
     const contrasenasincifrar = req.body.contrasena;
@@ -47,6 +53,8 @@ export const crearCuenta = async (req, res) => {
 };
 
 
+
+// ------------------------------METODO DE MODIFICAR LAS CUENTAS---------------------------------------------------
 export const modificarCuenta = async (req, res) => {
     const {idcuenta, correo, estado} = req.body;
     const contrasenasincifrar = req.body.contrasena;
@@ -70,6 +78,8 @@ export const modificarCuenta = async (req, res) => {
 };
 
 
+
+// ------------------------------METODO DE ELIMINAR LAS CUENTAS---------------------------------------------------
 export const eliminarCuenta = async (req, res) => {
     const {idcuenta} = req.body;
     try {

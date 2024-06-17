@@ -8,17 +8,19 @@ import rutaProveedor from "./proveedor.roter";
 import rutaUsuario from "./usuarios.routers";
 import rutaCuenta from "./crearcuenta.router";
 import rutaRegproducto from "./regproducto.router";
+import rutaFactura from "./factura.router";
 
 const ruta = Router();
 
-ruta.use("/", (req, res) => {res.json({"respuesta":messageBrowse.principal})});
 ruta.use("/api", rutaCategoria);
 ruta.use("/api", rutaProducto);
 ruta.use("/api", rutaProveedor);
 ruta.use("/api", rutaCuenta);
 ruta.use("/api", rutaRegproducto);
+ruta.use("/api", rutaFactura);
 ruta.use("/user", rutaUsuario);
 ruta.use("/doc",  swaggerUi.serve, swaggerUi.setup(swaggerFile));
+ruta.use("/", (req, res) => {res.json({"respuesta":messageBrowse.principal})});
 
 
 export default ruta;

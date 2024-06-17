@@ -3,6 +3,9 @@ import { success, error } from "../messages/browser.js";
 import { config } from "dotenv";
 config();
 
+
+
+// ------------------------------METODO DE MOSTRAR UN SOLO PRODUCTO------------------------------------------------
 export const mostrarProducto = async (req, res) => {
     const id = req.params["id"];
     try {
@@ -11,9 +14,11 @@ export const mostrarProducto = async (req, res) => {
     } catch (err) {
         error(req, res, 500, err);
     }
-
 };
 
+
+
+// ------------------------------METODO DE MOSTRAR TODAS LOS PRODUCTOS------------------------------------------------
 export const listarProducto = async (req, res) => {
     try {
         const [respuesta] = await pool.query(`CALL SP_LISTAR_PRODUCTOS();`);
@@ -21,9 +26,11 @@ export const listarProducto = async (req, res) => {
     } catch (err) {
         error(req, res, 500, err);
     }
-
 };
 
+
+
+// ------------------------------METODO DE MOSTRAR EL PRODUCTO AGOTADO------------------------------------------------
 export const agotado = async (req, res) => {
     try {
         const [respuesta] = await pool.query(`CALL SP_PRODUCTO_AGOTADO();`);
@@ -37,6 +44,69 @@ export const agotado = async (req, res) => {
     }
 };
 
+
+
+// ------------------------------METODO DE MOSTRAR EL ORDEN ALFABETICO DE LOS PRODUCTOS----------------------------
+export const ordenAlfabetico = async (req, res) => {
+    try {
+        const [respuesta] = await pool.query(`CALL SP_PRODUCTO_ORDENALFABETICO();`);
+        success(req, res, 200, respuesta[0]);
+    } catch (err) {
+        error(req, res, 500, err);
+    }
+};
+
+
+
+// ------------------------------METODO DE MOSTRAR EL PRODUCTO MAS NUEVO A MAS VIEJO-------------------------------
+export const Nuevo = async (req, res) => {
+    try {
+        const [respuesta] = await pool.query(`CALL SP_PRODUCTO_MAS_NUEVO_VIEJO();`);
+        success(req, res, 200, respuesta[0]);
+    } catch (err) {
+        error(req, res, 500, err);
+    }
+};
+
+
+
+// ------------------------------METODO DE MOSTRAR EL PRODUCTO MAS VIEJO A MAS NUEVO------------------------------
+export const Viejo = async (req, res) => {
+    try {
+        const [respuesta] = await pool.query(`CALL SP_PRODUCTO_MAS_VIEJO_NUEVO();`);
+        success(req, res, 200, respuesta[0]);
+    } catch (err) {
+        error(req, res, 500, err);
+    }
+};
+
+
+
+// ------------------------------METODO DE MOSTRAR EL PRODUCTO MAS COSTOSO A MENOS---------------------------------
+export const masCostoso = async (req, res) => {
+    try {
+        const [respuesta] = await pool.query(`CALL SP_PRODUCTO_MAS_COSTOSO_MENOS();`);
+        success(req, res, 200, respuesta[0]);
+    } catch (err) {
+        error(req, res, 500, err);
+    }
+};
+
+
+
+// ------------------------------METODO DE MOSTRAR EL PRODUCTO MENOS COSTOSO A MAS---------------------------------
+export const menosCostoso = async (req, res) => {
+    try {
+        const [respuesta] = await pool.query(`CALL SP_PRODUCTO_MENOS_COSTOSO_MAS();`);
+        success(req, res, 200, respuesta[0]);
+    } catch (err) {
+        error(req, res, 500, err);
+    }
+};
+
+
+
+// ------------------------------METODO DE CREAR LOS PRODUCTOS----------------------------------------------------
 export const crearProducto = async (req, res) => {
     const {descripcion, unidades, precio_compra, precio_venta } = req.body;
     try {
@@ -49,9 +119,11 @@ export const crearProducto = async (req, res) => {
     } catch (err) {
         error(req, res, 400, err);
     }
-
 };
 
+
+
+// ------------------------------METODO DE MODIFICAR LOS PRODUCTOS------------------------------------------------
 export const modificarProducto = async (req, res) => {
     const {idProducto, descripcion, unidades, precio_compra, precio_venta } = req.body;
     try {
@@ -64,9 +136,11 @@ export const modificarProducto = async (req, res) => {
     } catch (err) {
         error(req, res, 400, err);
     }
-
 };
 
+
+
+// ------------------------------METODO DE ELIMINAR LOS PRODUCTOS-------------------------------------------------
 export const eliminarProducto = async (req, res) => {
     const {idProducto} = req.body;
     try {
@@ -79,6 +153,5 @@ export const eliminarProducto = async (req, res) => {
     } catch (err) {
         error(req, res, 400, err);
     }
-
 };
 

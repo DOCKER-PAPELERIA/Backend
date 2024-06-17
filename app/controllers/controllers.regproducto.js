@@ -3,6 +3,8 @@ import { success, error } from "../messages/browser";
 import { config } from "dotenv";
 config();
 
+
+// ------------------------------METODO DE MOSTRAR UN SOLO REGISTO PODUCTO------------------------------------------
 export const mostrarRegproducto = async (req, res) => {
     const id = req.params["id"];
     try {
@@ -13,6 +15,8 @@ export const mostrarRegproducto = async (req, res) => {
     }
 };
 
+
+// ------------------------------METODO DE MOSTRAR TODOS LOS REGISTO PODUCTO----------------------------------------
 export const listarRegproducto = async (req, res) => {
     try {
         const [respuesta] = await pool.query(`CALL SP_LISTAR_REGPRODUCTOS();`);
@@ -22,6 +26,8 @@ export const listarRegproducto = async (req, res) => {
     }
 };
 
+
+// ------------------------------METODO DE CREAR REGISTO PODUCTO---------------------------------------------------
 export const crearRegproducto = async (req, res) => {
     const {idProducto, idCategoria, idProveedor, cantinicial, cantfinal, fecha, valorcompra, estado} = req.body;
     try {
@@ -36,6 +42,8 @@ export const crearRegproducto = async (req, res) => {
     }
 };
 
+
+// ------------------------------METODO DE MODIFICAR REGISTO PODUCTO----------------------------------------------
 export const modificarRegproducto = async (req, res) => {
     const {idRegistro, cantinicial, cantfinal, fecha, valorcompra, estado} = req.body;
     try {
@@ -50,6 +58,8 @@ export const modificarRegproducto = async (req, res) => {
     }
 };
 
+
+// ------------------------------METODO DE ELIMINAR REGISTO PODUCTO------------------------------------------------
 export const eliminarRegproducto = async (req, res) => {
     const {idRegistro} = req.body;
     try {
