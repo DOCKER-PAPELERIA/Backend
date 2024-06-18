@@ -4,26 +4,26 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.mostrarProveedor = exports.modificarProveedor = exports.listarProveedor = exports.eliminarProveedor = exports.crearProveedor = void 0;
+exports.mostrarFactura = exports.modificarFactura = exports.listarFactura = exports.eliminarFactura = exports.crearFactura = void 0;
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 var _mysql = _interopRequireDefault(require("../config/mysql.db"));
-var _browser = require("../messages/browser.js");
+var _browser = require("../messages/browser");
 var _dotenv = require("dotenv");
 (0, _dotenv.config)();
 
-// ------------------------------METODO DE MOSTRAR UN SOLO PROVEEDOR------------------------------------------------
-var mostrarProveedor = exports.mostrarProveedor = /*#__PURE__*/function () {
+// ------------------------------METODO DE MOSTRAR UNA SOLA FACTURA------------------------------------------------
+var mostrarFactura = exports.mostrarFactura = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
     var id, _yield$pool$query, _yield$pool$query2, respuesta;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          id = req.params["id"];
+          id = req.params['id'];
           _context.prev = 1;
           _context.next = 4;
-          return _mysql["default"].query("CALL SP_MOSTRAR_PROVEEDOR(\"".concat(id, "\");"));
+          return _mysql["default"].query("CALL SP_MOSTRAR_FACTURA(\"".concat(id, "\");"));
         case 4:
           _yield$pool$query = _context.sent;
           _yield$pool$query2 = (0, _slicedToArray2["default"])(_yield$pool$query, 1);
@@ -41,13 +41,13 @@ var mostrarProveedor = exports.mostrarProveedor = /*#__PURE__*/function () {
       }
     }, _callee, null, [[1, 10]]);
   }));
-  return function mostrarProveedor(_x, _x2) {
+  return function mostrarFactura(_x, _x2) {
     return _ref.apply(this, arguments);
   };
 }();
 
-// ------------------------------METODO DE MOSTRAR TODOS LOS PROVEEDOR------------------------------------------------
-var listarProveedor = exports.listarProveedor = /*#__PURE__*/function () {
+// ------------------------------METODO DE MOSTRAR TODAS LAS FACTURA------------------------------------------------
+var listarFactura = exports.listarFactura = /*#__PURE__*/function () {
   var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
     var _yield$pool$query3, _yield$pool$query4, respuesta;
     return _regenerator["default"].wrap(function _callee2$(_context2) {
@@ -55,7 +55,7 @@ var listarProveedor = exports.listarProveedor = /*#__PURE__*/function () {
         case 0:
           _context2.prev = 0;
           _context2.next = 3;
-          return _mysql["default"].query("CALL SP_LISTAR_PROVEEDOR();");
+          return _mysql["default"].query("CALL SP_LISTAR_FACTURA();");
         case 3:
           _yield$pool$query3 = _context2.sent;
           _yield$pool$query4 = (0, _slicedToArray2["default"])(_yield$pool$query3, 1);
@@ -73,28 +73,28 @@ var listarProveedor = exports.listarProveedor = /*#__PURE__*/function () {
       }
     }, _callee2, null, [[0, 9]]);
   }));
-  return function listarProveedor(_x3, _x4) {
+  return function listarFactura(_x3, _x4) {
     return _ref2.apply(this, arguments);
   };
 }();
 
-// ------------------------------METODO DE CREAR PROVEEDOR--------------------------------------------------------
-var crearProveedor = exports.crearProveedor = /*#__PURE__*/function () {
+// ------------------------------METODO DE CREAR FACTURA----------------------------------------------------------
+var crearFactura = exports.crearFactura = /*#__PURE__*/function () {
   var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
-    var _req$body, telefono, direccion, correo, nit, respuesta;
+    var _req$body, idCuenta, idRegProducto, idMetodoPago, cantidad, fecha, respuesta;
     return _regenerator["default"].wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
-          _req$body = req.body, telefono = _req$body.telefono, direccion = _req$body.direccion, correo = _req$body.correo, nit = _req$body.nit;
+          _req$body = req.body, idCuenta = _req$body.idCuenta, idRegProducto = _req$body.idRegProducto, idMetodoPago = _req$body.idMetodoPago, cantidad = _req$body.cantidad, fecha = _req$body.fecha;
           _context3.prev = 1;
           _context3.next = 4;
-          return _mysql["default"].query("CALL SP_INSERTAR_PROVEEDOR(\"".concat(telefono, "\", \"").concat(direccion, "\", \"").concat(correo, "\", \"").concat(nit, "\");"));
+          return _mysql["default"].query("CALL SP_CREAR_FACTURA(\"".concat(idCuenta, "\", \"").concat(idRegProducto, "\", \"").concat(idMetodoPago, "\", \"").concat(cantidad, "\", \"").concat(fecha, "\");"));
         case 4:
           respuesta = _context3.sent;
           if (respuesta[0].affectedRows == 1) {
-            (0, _browser.success)(req, res, 201, "Proveedor creado correctamente.");
+            (0, _browser.success)(req, res, 201, "Factura Creada.");
           } else {
-            (0, _browser.error)(req, res, 400, "Proveedor NO se creo, Intenta mas tarde.");
+            (0, _browser.error)(req, res, 400, "No se creo la factura, Intentalo mas tarde.");
           }
           _context3.next = 11;
           break;
@@ -108,28 +108,28 @@ var crearProveedor = exports.crearProveedor = /*#__PURE__*/function () {
       }
     }, _callee3, null, [[1, 8]]);
   }));
-  return function crearProveedor(_x5, _x6) {
+  return function crearFactura(_x5, _x6) {
     return _ref3.apply(this, arguments);
   };
 }();
 
-// ------------------------------METODO DE MODIFICAR PROVEEDOR----------------------------------------------------
-var modificarProveedor = exports.modificarProveedor = /*#__PURE__*/function () {
+// ------------------------------METODO DE MODIFICAR FACTURA----------------------------------------------------------
+var modificarFactura = exports.modificarFactura = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
-    var _req$body2, idProveedor, telefono, direccion, correo, nit, respuesta;
+    var _req$body2, idFactura, idCuenta, idRegProducto, idMetodoPago, cantidad, fecha, respuesta;
     return _regenerator["default"].wrap(function _callee4$(_context4) {
       while (1) switch (_context4.prev = _context4.next) {
         case 0:
-          _req$body2 = req.body, idProveedor = _req$body2.idProveedor, telefono = _req$body2.telefono, direccion = _req$body2.direccion, correo = _req$body2.correo, nit = _req$body2.nit;
+          _req$body2 = req.body, idFactura = _req$body2.idFactura, idCuenta = _req$body2.idCuenta, idRegProducto = _req$body2.idRegProducto, idMetodoPago = _req$body2.idMetodoPago, cantidad = _req$body2.cantidad, fecha = _req$body2.fecha;
           _context4.prev = 1;
           _context4.next = 4;
-          return _mysql["default"].query("CALL SP_EDITAR_PROVEEDOR(\"".concat(idProveedor, "\", \"").concat(telefono, "\", \"").concat(direccion, "\", \"").concat(correo, "\", \"").concat(nit, "\");"));
+          return _mysql["default"].query("CALL SP_EDITAR_FACTURA(\"".concat(idFactura, "\", \"").concat(idCuenta, "\", \"").concat(idRegProducto, "\", \"").concat(idMetodoPago, "\", \"").concat(cantidad, "\", \"").concat(fecha, "\");"));
         case 4:
           respuesta = _context4.sent;
           if (respuesta[0].affectedRows == 1) {
-            (0, _browser.success)(req, res, 201, "Proveedor Modificado correctamente.");
+            (0, _browser.success)(req, res, 201, "Factura Modificada.");
           } else {
-            (0, _browser.error)(req, res, 400, "Proveedor NO se modifico, Intenta mas tarde.");
+            (0, _browser.error)(req, res, 400, "No se modifico la factura, Intentalo mas tarde.");
           }
           _context4.next = 11;
           break;
@@ -143,28 +143,28 @@ var modificarProveedor = exports.modificarProveedor = /*#__PURE__*/function () {
       }
     }, _callee4, null, [[1, 8]]);
   }));
-  return function modificarProveedor(_x7, _x8) {
+  return function modificarFactura(_x7, _x8) {
     return _ref4.apply(this, arguments);
   };
 }();
 
-// ------------------------------METODO DE ELIMINAR PROVEEDOR------------------------------------------------------
-var eliminarProveedor = exports.eliminarProveedor = /*#__PURE__*/function () {
+// ------------------------------METODO DE ELIMINAR FACTURA----------------------------------------------------------
+var eliminarFactura = exports.eliminarFactura = /*#__PURE__*/function () {
   var _ref5 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
-    var idProveedor, respuesta;
+    var idFactura, respuesta;
     return _regenerator["default"].wrap(function _callee5$(_context5) {
       while (1) switch (_context5.prev = _context5.next) {
         case 0:
-          idProveedor = req.body.idProveedor;
+          idFactura = req.body.idFactura;
           _context5.prev = 1;
           _context5.next = 4;
-          return _mysql["default"].query("CALL SP_ELIMINAR_PROVEEDOR(\"".concat(idProveedor, "\");"));
+          return _mysql["default"].query("CALL SP_ELIMINAR_FACTURA(\"".concat(idFactura, "\");"));
         case 4:
           respuesta = _context5.sent;
           if (respuesta[0].affectedRows == 1) {
-            (0, _browser.success)(req, res, 200, "Proveedor Eliminado");
+            (0, _browser.success)(req, res, 201, "Factura eliminada.");
           } else {
-            (0, _browser.error)(req, res, 400, "Proveedor NO se elimino, Intenta mas tarde.");
+            (0, _browser.error)(req, res, 400, "No se elimino la factura, Intentalo mas tarde.");
           }
           _context5.next = 11;
           break;
@@ -178,7 +178,7 @@ var eliminarProveedor = exports.eliminarProveedor = /*#__PURE__*/function () {
       }
     }, _callee5, null, [[1, 8]]);
   }));
-  return function eliminarProveedor(_x9, _x10) {
+  return function eliminarFactura(_x9, _x10) {
     return _ref5.apply(this, arguments);
   };
 }();

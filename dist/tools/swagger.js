@@ -13,5 +13,5 @@ var doc = {
   host: 'localhost:' + port + '/api'
 };
 var outputFile = './swagger-output.json';
-var routes = ['../routes/categoria.router.js', '../routes/crearcuenta.router.js', '../routes/producto.router.js', '../routes/proveedor.roter.js', '../routes/regproducto.router.js', '../routes/usuarios.routers.js'];
+var routes = ['../routes/categoria.router.js', '../routes/crearcuenta.router.js', '../routes/factura.router.js', '../routes/producto.router.js', '../routes/proveedor.roter.js', '../routes/regproducto.router.js', '../routes/usuarios.routers.js'];
 (0, _swaggerAutogen["default"])()(outputFile, routes, doc);

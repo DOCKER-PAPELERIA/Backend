@@ -13,6 +13,8 @@ var _browser = require("../messages/browser");
 var _dotenv = require("dotenv");
 var _bcrypt = _interopRequireDefault(require("bcrypt"));
 (0, _dotenv.config)();
+
+// ------------------------------METODO DE MOSTRAR UNA SOLA CUENTA------------------------------------------------
 var mostrarCuenta = exports.mostrarCuenta = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
     var id, _yield$pool$query, _yield$pool$query2, respuesta;
@@ -44,6 +46,8 @@ var mostrarCuenta = exports.mostrarCuenta = /*#__PURE__*/function () {
     return _ref.apply(this, arguments);
   };
 }();
+
+// ------------------------------METODO DE MOSTRAR TODAS LAS CUENTAS------------------------------------------------
 var listarCuenta = exports.listarCuenta = /*#__PURE__*/function () {
   var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
     var _yield$pool$query3, _yield$pool$query4, respuesta;
@@ -74,6 +78,8 @@ var listarCuenta = exports.listarCuenta = /*#__PURE__*/function () {
     return _ref2.apply(this, arguments);
   };
 }();
+
+// ------------------------------METODO DE CREAR LAS CUENTAS------------------------------------------------------
 var crearCuenta = exports.crearCuenta = /*#__PURE__*/function () {
   var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
     var _req$body, idUsuario, idRol, correo, estado, contrasenasincifrar, confirmacionsincifrar, hash, contrasena, hash1, confirmacion, respuesta;
@@ -119,6 +125,8 @@ var crearCuenta = exports.crearCuenta = /*#__PURE__*/function () {
     return _ref3.apply(this, arguments);
   };
 }();
+
+// ------------------------------METODO DE MODIFICAR LAS CUENTAS---------------------------------------------------
 var modificarCuenta = exports.modificarCuenta = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
     var _req$body2, idcuenta, correo, estado, contrasenasincifrar, confirmacionsincifrar, hash, contrasena, hash1, confirmacion, respuesta;
@@ -164,6 +172,8 @@ var modificarCuenta = exports.modificarCuenta = /*#__PURE__*/function () {
     return _ref4.apply(this, arguments);
   };
 }();
+
+// ------------------------------METODO DE ELIMINAR LAS CUENTAS---------------------------------------------------
 var eliminarCuenta = exports.eliminarCuenta = /*#__PURE__*/function () {
   var _ref5 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
     var idcuenta, respuesta;

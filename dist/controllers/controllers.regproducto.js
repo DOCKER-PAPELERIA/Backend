@@ -12,6 +12,8 @@ var _mysql = _interopRequireDefault(require("../config/mysql.db"));
 var _browser = require("../messages/browser");
 var _dotenv = require("dotenv");
 (0, _dotenv.config)();
+
+// ------------------------------METODO DE MOSTRAR UN SOLO REGISTO PODUCTO------------------------------------------
 var mostrarRegproducto = exports.mostrarRegproducto = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
     var id, _yield$pool$query, _yield$pool$query2, respuesta;
@@ -43,6 +45,8 @@ var mostrarRegproducto = exports.mostrarRegproducto = /*#__PURE__*/function () {
     return _ref.apply(this, arguments);
   };
 }();
+
+// ------------------------------METODO DE MOSTRAR TODOS LOS REGISTO PODUCTO----------------------------------------
 var listarRegproducto = exports.listarRegproducto = /*#__PURE__*/function () {
   var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
     var _yield$pool$query3, _yield$pool$query4, respuesta;
@@ -73,6 +77,8 @@ var listarRegproducto = exports.listarRegproducto = /*#__PURE__*/function () {
     return _ref2.apply(this, arguments);
   };
 }();
+
+// ------------------------------METODO DE CREAR REGISTO PODUCTO---------------------------------------------------
 var crearRegproducto = exports.crearRegproducto = /*#__PURE__*/function () {
   var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
     var _req$body, idProducto, idCategoria, idProveedor, cantinicial, cantfinal, fecha, valorcompra, estado, respuesta;
@@ -106,6 +112,8 @@ var crearRegproducto = exports.crearRegproducto = /*#__PURE__*/function () {
     return _ref3.apply(this, arguments);
   };
 }();
+
+// ------------------------------METODO DE MODIFICAR REGISTO PODUCTO----------------------------------------------
 var modificarRegproducto = exports.modificarRegproducto = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
     var _req$body2, idRegistro, cantinicial, cantfinal, fecha, valorcompra, estado, respuesta;
@@ -139,6 +147,8 @@ var modificarRegproducto = exports.modificarRegproducto = /*#__PURE__*/function 
     return _ref4.apply(this, arguments);
   };
 }();
+
+// ------------------------------METODO DE ELIMINAR REGISTO PODUCTO------------------------------------------------
 var eliminarRegproducto = exports.eliminarRegproducto = /*#__PURE__*/function () {
   var _ref5 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
     var idRegistro, respuesta;

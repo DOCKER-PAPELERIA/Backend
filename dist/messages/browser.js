@@ -4,24 +4,15 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.success = exports.error = void 0;
+exports.success = exports.messageBrowse = exports.error = void 0;
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
-// export const success = (req, res, status=200, mensaje = null) => {
-//     res.status(status).json({
-//         error: false,
-//         status:status,
-//         body:mensaje
-//     })
-// };
-
-// export const error = (req, res, status=500, mensaje="")  => {
-//     res.status(status).json({
-//         error: true,
-//         status:status,
-//         body:mensaje
-//     })
-// };
-
+var messageBrowse = exports.messageBrowse = {
+  principal: "Bienvenido",
+  home: "Hola home",
+  gallery: "Hola gallery",
+  about: "Hola about",
+  contact: "Hola contact"
+};
 var success = exports.success = function success(req, res) {
   var status = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 200;
   var body = arguments.length > 3 ? arguments[3] : undefined;
@@ -42,3 +33,19 @@ var error = exports.error = function error(req, res) {
     status: status
   }, "error", err.message || err));
 };
+
+// export const success = (req, res, status=200, mensaje = null) => {
+//     res.status(status).json({
+//         error: false,
+//         status:status,
+//         body:mensaje
+//     })
+// };
+
+// export const error = (req, res, status=500, mensaje="")  => {
+//     res.status(status).json({
+//         error: true,
+//         status:status,
+//         body:mensaje
+//     })
+// };

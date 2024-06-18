@@ -17,6 +17,8 @@ var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { "default": e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n["default"] = e, t && t.set(e, n), n; }
 (0, _dotenv.config)();
+
+// ------------------------------METODO DE MOSTRAR UN SOLO USUARIO------------------------------------------------
 var mostrarUsuario = exports.mostrarUsuario = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
     var id, _yield$pool$query, _yield$pool$query2, respuesta;
@@ -48,6 +50,8 @@ var mostrarUsuario = exports.mostrarUsuario = /*#__PURE__*/function () {
     return _ref.apply(this, arguments);
   };
 }();
+
+// ------------------------------METODO DE MOSTRAR TODOS USUARIO----------------------------------------------------
 var listarUsuario = exports.listarUsuario = /*#__PURE__*/function () {
   var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
     var _yield$pool$query3, _yield$pool$query4, respuesta;
@@ -78,6 +82,8 @@ var listarUsuario = exports.listarUsuario = /*#__PURE__*/function () {
     return _ref2.apply(this, arguments);
   };
 }();
+
+// ------------------------------METODO DE CREAR USUARIO------------------------------------------------------------
 var crearUsuario = exports.crearUsuario = /*#__PURE__*/function () {
   var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
     var _req$body, identificacion, nombres, telefono, fecha_naci, respuesta;
@@ -111,6 +117,8 @@ var crearUsuario = exports.crearUsuario = /*#__PURE__*/function () {
     return _ref3.apply(this, arguments);
   };
 }();
+
+// ------------------------------METODO DE MODIFICAR USUARIO------------------------------------------------------------
 var modificarUsuario = exports.modificarUsuario = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
     var _req$body2, idUsuario, identificacion, nombres, telefono, fecha_naci, respuesta;
@@ -144,6 +152,8 @@ var modificarUsuario = exports.modificarUsuario = /*#__PURE__*/function () {
     return _ref4.apply(this, arguments);
   };
 }();
+
+// ------------------------------METODO DE ELIMINAR USUARIO----------------------------------------------------------
 var eliminarUsuario = exports.eliminarUsuario = /*#__PURE__*/function () {
   var _ref5 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
     var idUsuario, respuesta;
@@ -177,6 +187,8 @@ var eliminarUsuario = exports.eliminarUsuario = /*#__PURE__*/function () {
     return _ref5.apply(this, arguments);
   };
 }();
+
+// ------------------------------METODO DE LOGUAR USUARIO------------------------------------------------------------
 var loginUsuario = exports.loginUsuario = /*#__PURE__*/function () {
   var _ref6 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(req, res) {
     var _req$body3, usuario, contrasena, respuesta, match, payload, token;
