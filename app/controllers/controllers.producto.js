@@ -108,9 +108,9 @@ export const menosCostoso = async (req, res) => {
 
 // ------------------------------METODO DE CREAR LOS PRODUCTOS----------------------------------------------------
 export const crearProducto = async (req, res) => {
-    const {descripcion, unidades, precio_compra, precio_venta } = req.body;
+    const {descripcion, unidades, codigo, imagen, precio_compra, precio_venta } = req.body;
     try {
-        const respuesta = await pool.query(`CALL  SP_INSERTAR_PRODUCTOS("${descripcion}", "${unidades}", "${precio_compra}", "${precio_venta}");`);
+        const respuesta = await pool.query(`CALL  SP_INSERTAR_PRODUCTOS("${descripcion}", "${unidades}", "${codigo}", "${imagen}", "${precio_compra}", "${precio_venta}");`);
         if (respuesta[0].affectedRows == 1) {
             success(req, res, 201, "Producto creado correctamente.");
         } else {
@@ -125,9 +125,9 @@ export const crearProducto = async (req, res) => {
 
 // ------------------------------METODO DE MODIFICAR LOS PRODUCTOS------------------------------------------------
 export const modificarProducto = async (req, res) => {
-    const {idProducto, descripcion, unidades, precio_compra, precio_venta } = req.body;
+    const {idProducto, descripcion, unidades, codigo, imagen, precio_compra, precio_venta } = req.body;
     try {
-        const respuesta = await pool.query(`CALL SP_EDITAR_PRODUCTO("${idProducto}", "${descripcion}", "${unidades}", "${precio_compra}", "${precio_venta}");`);
+        const respuesta = await pool.query(`CALL SP_EDITAR_PRODUCTO("${idProducto}", "${descripcion}", "${unidades}", "${codigo}", "${imagen}", "${precio_compra}", "${precio_venta}");`);
         if (respuesta[0].affectedRows == 1) {
             success(req, res, 201, "Producto modificado correctamente.");
         } else {

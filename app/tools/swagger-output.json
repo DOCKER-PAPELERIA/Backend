@@ -58,6 +58,9 @@
                 "descripcion_categoria": {
                   "example": "any"
                 },
+                "imagen": {
+                  "example": "any"
+                },
                 "fecha": {
                   "example": "any"
                 }
@@ -92,6 +95,9 @@
                   "example": "any"
                 },
                 "descripcion_categoria": {
+                  "example": "any"
+                },
+                "imagen": {
                   "example": "any"
                 },
                 "fecha": {
@@ -494,6 +500,12 @@
                 "unidades": {
                   "example": "any"
                 },
+                "codigo": {
+                  "example": "any"
+                },
+                "imagen": {
+                  "example": "any"
+                },
                 "precio_compra": {
                   "example": "any"
                 },
@@ -531,6 +543,12 @@
                   "example": "any"
                 },
                 "unidades": {
+                  "example": "any"
+                },
+                "codigo": {
+                  "example": "any"
+                },
+                "imagen": {
                   "example": "any"
                 },
                 "precio_compra": {

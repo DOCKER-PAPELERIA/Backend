@@ -40,6 +40,13 @@
       },
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "name": "apply(this",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -48,6 +55,13 @@
       },
       "put": {
         "description": "",
+        "parameters": [
+          {
+            "name": "apply(this",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -66,6 +80,26 @@
       }
     },
     "/categoria-ordena": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/categoria-nuevo": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/categoria-viejo": {
       "get": {
         "description": "",
         "responses": {
@@ -106,6 +140,11 @@
         "description": "",
         "parameters": [
           {
+            "name": "apply(this",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -131,6 +170,11 @@
         "description": "",
         "parameters": [
           {
+            "name": "apply(this",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -144,6 +188,64 @@
                 }
               }
             }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/factura/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/factura": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "apply(this",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "apply(this",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -182,6 +284,13 @@
       },
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "name": "apply(this",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -190,6 +299,13 @@
       },
       "put": {
         "description": "",
+        "parameters": [
+          {
+            "name": "apply(this",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -198,6 +314,56 @@
       }
     },
     "/agotado": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/producto-ordenar": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/producto-nuevo": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/producto-viejo": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/producto-maxcostoso": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/producto-mincostoso": {
       "get": {
         "description": "",
         "responses": {
@@ -236,6 +402,13 @@
       },
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "name": "apply(this",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -244,6 +417,13 @@
       },
       "put": {
         "description": "",
+        "parameters": [
+          {
+            "name": "apply(this",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -280,6 +460,13 @@
       },
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "name": "apply(this",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -288,6 +475,13 @@
       },
       "put": {
         "description": "",
+        "parameters": [
+          {
+            "name": "apply(this",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -324,6 +518,13 @@
       },
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "name": "apply(this",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -332,6 +533,13 @@
       },
       "put": {
         "description": "",
+        "parameters": [
+          {
+            "name": "apply(this",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "default": {
             "description": ""

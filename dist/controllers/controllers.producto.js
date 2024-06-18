@@ -277,14 +277,14 @@ var menosCostoso = exports.menosCostoso = /*#__PURE__*/function () {
 // ------------------------------METODO DE CREAR LOS PRODUCTOS----------------------------------------------------
 var crearProducto = exports.crearProducto = /*#__PURE__*/function () {
   var _ref9 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee9(req, res) {
-    var _req$body, descripcion, unidades, precio_compra, precio_venta, respuesta;
+    var _req$body, descripcion, unidades, codigo, imagen, precio_compra, precio_venta, respuesta;
     return _regenerator["default"].wrap(function _callee9$(_context9) {
       while (1) switch (_context9.prev = _context9.next) {
         case 0:
-          _req$body = req.body, descripcion = _req$body.descripcion, unidades = _req$body.unidades, precio_compra = _req$body.precio_compra, precio_venta = _req$body.precio_venta;
+          _req$body = req.body, descripcion = _req$body.descripcion, unidades = _req$body.unidades, codigo = _req$body.codigo, imagen = _req$body.imagen, precio_compra = _req$body.precio_compra, precio_venta = _req$body.precio_venta;
           _context9.prev = 1;
           _context9.next = 4;
-          return _mysql["default"].query("CALL  SP_INSERTAR_PRODUCTOS(\"".concat(descripcion, "\", \"").concat(unidades, "\", \"").concat(precio_compra, "\", \"").concat(precio_venta, "\");"));
+          return _mysql["default"].query("CALL  SP_INSERTAR_PRODUCTOS(\"".concat(descripcion, "\", \"").concat(unidades, "\", \"").concat(codigo, "\", \"").concat(imagen, "\", \"").concat(precio_compra, "\", \"").concat(precio_venta, "\");"));
         case 4:
           respuesta = _context9.sent;
           if (respuesta[0].affectedRows == 1) {
@@ -312,14 +312,14 @@ var crearProducto = exports.crearProducto = /*#__PURE__*/function () {
 // ------------------------------METODO DE MODIFICAR LOS PRODUCTOS------------------------------------------------
 var modificarProducto = exports.modificarProducto = /*#__PURE__*/function () {
   var _ref10 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee10(req, res) {
-    var _req$body2, idProducto, descripcion, unidades, precio_compra, precio_venta, respuesta;
+    var _req$body2, idProducto, descripcion, unidades, codigo, imagen, precio_compra, precio_venta, respuesta;
     return _regenerator["default"].wrap(function _callee10$(_context10) {
       while (1) switch (_context10.prev = _context10.next) {
         case 0:
-          _req$body2 = req.body, idProducto = _req$body2.idProducto, descripcion = _req$body2.descripcion, unidades = _req$body2.unidades, precio_compra = _req$body2.precio_compra, precio_venta = _req$body2.precio_venta;
+          _req$body2 = req.body, idProducto = _req$body2.idProducto, descripcion = _req$body2.descripcion, unidades = _req$body2.unidades, codigo = _req$body2.codigo, imagen = _req$body2.imagen, precio_compra = _req$body2.precio_compra, precio_venta = _req$body2.precio_venta;
           _context10.prev = 1;
           _context10.next = 4;
-          return _mysql["default"].query("CALL SP_EDITAR_PRODUCTO(\"".concat(idProducto, "\", \"").concat(descripcion, "\", \"").concat(unidades, "\", \"").concat(precio_compra, "\", \"").concat(precio_venta, "\");"));
+          return _mysql["default"].query("CALL SP_EDITAR_PRODUCTO(\"".concat(idProducto, "\", \"").concat(descripcion, "\", \"").concat(unidades, "\", \"").concat(codigo, "\", \"").concat(imagen, "\", \"").concat(precio_compra, "\", \"").concat(precio_venta, "\");"));
         case 4:
           respuesta = _context10.sent;
           if (respuesta[0].affectedRows == 1) {

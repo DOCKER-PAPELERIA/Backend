@@ -209,14 +209,14 @@ var Viejo = exports.Viejo = /*#__PURE__*/function () {
 // ------------------------------METODO DE CREAR LAS CATEGORIAS------------------------------------------------------
 var crearCategoria = exports.crearCategoria = /*#__PURE__*/function () {
   var _ref7 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee7(req, res) {
-    var _req$body, Categoria, descripcion_categoria, fecha, respuesta;
+    var _req$body, Categoria, descripcion_categoria, imagen, fecha, respuesta;
     return _regenerator["default"].wrap(function _callee7$(_context7) {
       while (1) switch (_context7.prev = _context7.next) {
         case 0:
-          _req$body = req.body, Categoria = _req$body.Categoria, descripcion_categoria = _req$body.descripcion_categoria, fecha = _req$body.fecha;
+          _req$body = req.body, Categoria = _req$body.Categoria, descripcion_categoria = _req$body.descripcion_categoria, imagen = _req$body.imagen, fecha = _req$body.fecha;
           _context7.prev = 1;
           _context7.next = 4;
-          return _mysql["default"].query("CALL SP_INSERTAR_CATEGORIA(\"".concat(Categoria, "\", \"").concat(descripcion_categoria, "\", \"").concat(fecha, "\");"));
+          return _mysql["default"].query("CALL SP_INSERTAR_CATEGORIA(\"".concat(Categoria, "\", \"").concat(descripcion_categoria, "\", \"").concat(imagen, "\", \"").concat(fecha, "\");"));
         case 4:
           respuesta = _context7.sent;
           if (respuesta[0].affectedRows == 1) {
@@ -244,14 +244,14 @@ var crearCategoria = exports.crearCategoria = /*#__PURE__*/function () {
 // ------------------------------METODO DE MODIFICAR LAS CATEGORIAS--------------------------------------------------
 var modificarCategoria = exports.modificarCategoria = /*#__PURE__*/function () {
   var _ref8 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee8(req, res) {
-    var _req$body2, idCategorias, Categoria, descripcion_categoria, fecha, respuesta;
+    var _req$body2, idCategorias, Categoria, descripcion_categoria, imagen, fecha, respuesta;
     return _regenerator["default"].wrap(function _callee8$(_context8) {
       while (1) switch (_context8.prev = _context8.next) {
         case 0:
-          _req$body2 = req.body, idCategorias = _req$body2.idCategorias, Categoria = _req$body2.Categoria, descripcion_categoria = _req$body2.descripcion_categoria, fecha = _req$body2.fecha;
+          _req$body2 = req.body, idCategorias = _req$body2.idCategorias, Categoria = _req$body2.Categoria, descripcion_categoria = _req$body2.descripcion_categoria, imagen = _req$body2.imagen, fecha = _req$body2.fecha;
           _context8.prev = 1;
           _context8.next = 4;
-          return _mysql["default"].query("CALL SP_EDITAR_CATEGORIAS(\"".concat(idCategorias, "\", \"").concat(Categoria, "\", \"").concat(descripcion_categoria, "\", \"").concat(fecha, "\");"));
+          return _mysql["default"].query("CALL SP_EDITAR_CATEGORIAS(\"".concat(idCategorias, "\", \"").concat(Categoria, "\", \"").concat(descripcion_categoria, "\", \"").concat(imagen, "\", \"").concat(fecha, "\");"));
         case 4:
           respuesta = _context8.sent;
           if (respuesta[0].affectedRows == 1) {

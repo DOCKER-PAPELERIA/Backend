@@ -80,10 +80,10 @@ export const Viejo = async (req, res) => {
 
 // ------------------------------METODO DE CREAR LAS CATEGORIAS------------------------------------------------------
 export const crearCategoria = async (req, res) => {
-    const { Categoria, descripcion_categoria, fecha } = req.body;
+    const { Categoria, descripcion_categoria, imagen, fecha } = req.body;
 
     try {
-        const respuesta = await pool.query(`CALL SP_INSERTAR_CATEGORIA("${Categoria}", "${descripcion_categoria}", "${fecha}");`);
+        const respuesta = await pool.query(`CALL SP_INSERTAR_CATEGORIA("${Categoria}", "${descripcion_categoria}", "${imagen}", "${fecha}");`);
         if (respuesta[0].affectedRows == 1) {
             success(req, res, 201, "La Categoria ha sido Registrada.");
         } else {
@@ -98,10 +98,10 @@ export const crearCategoria = async (req, res) => {
 
 // ------------------------------METODO DE MODIFICAR LAS CATEGORIAS--------------------------------------------------
 export const modificarCategoria = async (req, res) => {
-    const {idCategorias, Categoria, descripcion_categoria, fecha} = req.body;
+    const {idCategorias, Categoria, descripcion_categoria, imagen, fecha} = req.body;
 
     try {
-        const respuesta = await pool.query(`CALL SP_EDITAR_CATEGORIAS("${idCategorias}", "${Categoria}", "${descripcion_categoria}", "${fecha}");`);
+        const respuesta = await pool.query(`CALL SP_EDITAR_CATEGORIAS("${idCategorias}", "${Categoria}", "${descripcion_categoria}", "${imagen}", "${fecha}");`);
         if (respuesta[0].affectedRows == 1) {
             success(req, res, 201, "La Categoria ha sido Modificada.");
         } else {
