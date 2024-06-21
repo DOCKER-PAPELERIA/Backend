@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Nuevo, Viejo, agotado, 
+import { Nuevo, Precios, Viejo, agotado, 
         crearProducto, 
         eliminarProducto, 
         listarProducto, 
@@ -20,6 +20,7 @@ rutaProducto.get("/producto-nuevo", Nuevo);
 rutaProducto.get("/producto-viejo", Viejo);
 rutaProducto.get("/producto-maxcostoso", masCostoso);
 rutaProducto.get("/producto-mincostoso", menosCostoso);
+rutaProducto.get("/producto-precio", Precios);
 rutaProducto.post("/producto", verifyToken, crearProducto);
 rutaProducto.put("/producto", verifyToken, modificarProducto);
 rutaProducto.delete("/producto", verifyToken, eliminarProducto);

@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ordenAlfabetico = exports.mostrarProducto = exports.modificarProducto = exports.menosCostoso = exports.masCostoso = exports.listarProducto = exports.eliminarProducto = exports.crearProducto = exports.agotado = exports.Viejo = exports.Nuevo = void 0;
+exports.ordenAlfabetico = exports.mostrarProducto = exports.modificarProducto = exports.menosCostoso = exports.masCostoso = exports.listarProducto = exports.eliminarProducto = exports.crearProducto = exports.agotado = exports.Viejo = exports.Precios = exports.Nuevo = void 0;
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
@@ -274,58 +274,55 @@ var menosCostoso = exports.menosCostoso = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE CREAR LOS PRODUCTOS----------------------------------------------------
-var crearProducto = exports.crearProducto = /*#__PURE__*/function () {
+// ------------------------------METODO DE MOSTRAR EL PRODUCTO Y SU PRECIO---------------------------------
+var Precios = exports.Precios = /*#__PURE__*/function () {
   var _ref9 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee9(req, res) {
-    var _req$body, descripcion, unidades, codigo, imagen, precio_compra, precio_venta, respuesta;
+    var _yield$pool$query17, _yield$pool$query18, respuesta;
     return _regenerator["default"].wrap(function _callee9$(_context9) {
       while (1) switch (_context9.prev = _context9.next) {
         case 0:
-          _req$body = req.body, descripcion = _req$body.descripcion, unidades = _req$body.unidades, codigo = _req$body.codigo, imagen = _req$body.imagen, precio_compra = _req$body.precio_compra, precio_venta = _req$body.precio_venta;
-          _context9.prev = 1;
-          _context9.next = 4;
-          return _mysql["default"].query("CALL  SP_INSERTAR_PRODUCTOS(\"".concat(descripcion, "\", \"").concat(unidades, "\", \"").concat(codigo, "\", \"").concat(imagen, "\", \"").concat(precio_compra, "\", \"").concat(precio_venta, "\");"));
-        case 4:
-          respuesta = _context9.sent;
-          if (respuesta[0].affectedRows == 1) {
-            (0, _browser.success)(req, res, 201, "Producto creado correctamente.");
-          } else {
-            (0, _browser.error)(req, res, 400, "Producto NO se creo, Intenta mas tarde.");
-          }
-          _context9.next = 11;
+          _context9.prev = 0;
+          _context9.next = 3;
+          return _mysql["default"].query("CALL SP_PRODUCTO_PRECIOS();");
+        case 3:
+          _yield$pool$query17 = _context9.sent;
+          _yield$pool$query18 = (0, _slicedToArray2["default"])(_yield$pool$query17, 1);
+          respuesta = _yield$pool$query18[0];
+          (0, _browser.success)(req, res, 200, respuesta[0]);
+          _context9.next = 12;
           break;
-        case 8:
-          _context9.prev = 8;
-          _context9.t0 = _context9["catch"](1);
-          (0, _browser.error)(req, res, 400, _context9.t0);
-        case 11:
+        case 9:
+          _context9.prev = 9;
+          _context9.t0 = _context9["catch"](0);
+          (0, _browser.error)(req, res, 500, _context9.t0);
+        case 12:
         case "end":
           return _context9.stop();
       }
-    }, _callee9, null, [[1, 8]]);
+    }, _callee9, null, [[0, 9]]);
   }));
-  return function crearProducto(_x17, _x18) {
+  return function Precios(_x17, _x18) {
     return _ref9.apply(this, arguments);
   };
 }();
 
-// ------------------------------METODO DE MODIFICAR LOS PRODUCTOS------------------------------------------------
-var modificarProducto = exports.modificarProducto = /*#__PURE__*/function () {
+// ------------------------------METODO DE CREAR LOS PRODUCTOS----------------------------------------------------
+var crearProducto = exports.crearProducto = /*#__PURE__*/function () {
   var _ref10 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee10(req, res) {
-    var _req$body2, idProducto, descripcion, unidades, codigo, imagen, precio_compra, precio_venta, respuesta;
+    var _req$body, descripcion, unidades, codigo, imagen, precio_compra, precio_venta, respuesta;
     return _regenerator["default"].wrap(function _callee10$(_context10) {
       while (1) switch (_context10.prev = _context10.next) {
         case 0:
-          _req$body2 = req.body, idProducto = _req$body2.idProducto, descripcion = _req$body2.descripcion, unidades = _req$body2.unidades, codigo = _req$body2.codigo, imagen = _req$body2.imagen, precio_compra = _req$body2.precio_compra, precio_venta = _req$body2.precio_venta;
+          _req$body = req.body, descripcion = _req$body.descripcion, unidades = _req$body.unidades, codigo = _req$body.codigo, imagen = _req$body.imagen, precio_compra = _req$body.precio_compra, precio_venta = _req$body.precio_venta;
           _context10.prev = 1;
           _context10.next = 4;
-          return _mysql["default"].query("CALL SP_EDITAR_PRODUCTO(\"".concat(idProducto, "\", \"").concat(descripcion, "\", \"").concat(unidades, "\", \"").concat(codigo, "\", \"").concat(imagen, "\", \"").concat(precio_compra, "\", \"").concat(precio_venta, "\");"));
+          return _mysql["default"].query("CALL  SP_INSERTAR_PRODUCTOS(\"".concat(descripcion, "\", \"").concat(unidades, "\", \"").concat(codigo, "\", \"").concat(imagen, "\", \"").concat(precio_compra, "\", \"").concat(precio_venta, "\");"));
         case 4:
           respuesta = _context10.sent;
           if (respuesta[0].affectedRows == 1) {
-            (0, _browser.success)(req, res, 201, "Producto modificado correctamente.");
+            (0, _browser.success)(req, res, 201, "Producto creado correctamente.");
           } else {
-            (0, _browser.error)(req, res, 400, "Producto NO se modifico, Intenta mas tarde.");
+            (0, _browser.error)(req, res, 400, "Producto NO se creo, Intenta mas tarde.");
           }
           _context10.next = 11;
           break;
@@ -339,28 +336,28 @@ var modificarProducto = exports.modificarProducto = /*#__PURE__*/function () {
       }
     }, _callee10, null, [[1, 8]]);
   }));
-  return function modificarProducto(_x19, _x20) {
+  return function crearProducto(_x19, _x20) {
     return _ref10.apply(this, arguments);
   };
 }();
 
-// ------------------------------METODO DE ELIMINAR LOS PRODUCTOS-------------------------------------------------
-var eliminarProducto = exports.eliminarProducto = /*#__PURE__*/function () {
+// ------------------------------METODO DE MODIFICAR LOS PRODUCTOS------------------------------------------------
+var modificarProducto = exports.modificarProducto = /*#__PURE__*/function () {
   var _ref11 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee11(req, res) {
-    var idProducto, respuesta;
+    var _req$body2, idProducto, descripcion, unidades, codigo, imagen, precio_compra, precio_venta, respuesta;
     return _regenerator["default"].wrap(function _callee11$(_context11) {
       while (1) switch (_context11.prev = _context11.next) {
         case 0:
-          idProducto = req.body.idProducto;
+          _req$body2 = req.body, idProducto = _req$body2.idProducto, descripcion = _req$body2.descripcion, unidades = _req$body2.unidades, codigo = _req$body2.codigo, imagen = _req$body2.imagen, precio_compra = _req$body2.precio_compra, precio_venta = _req$body2.precio_venta;
           _context11.prev = 1;
           _context11.next = 4;
-          return _mysql["default"].query("CALL SP_ELIMINAR_PRODUCTO(\"".concat(idProducto, "\");"));
+          return _mysql["default"].query("CALL SP_EDITAR_PRODUCTO(\"".concat(idProducto, "\", \"").concat(descripcion, "\", \"").concat(unidades, "\", \"").concat(codigo, "\", \"").concat(imagen, "\", \"").concat(precio_compra, "\", \"").concat(precio_venta, "\");"));
         case 4:
           respuesta = _context11.sent;
           if (respuesta[0].affectedRows == 1) {
-            (0, _browser.success)(req, res, 200, "Producto Eliminado");
+            (0, _browser.success)(req, res, 201, "Producto modificado correctamente.");
           } else {
-            (0, _browser.error)(req, res, 400, "Producto NO se elimino, Intenta mas tarde.");
+            (0, _browser.error)(req, res, 400, "Producto NO se modifico, Intenta mas tarde.");
           }
           _context11.next = 11;
           break;
@@ -374,7 +371,42 @@ var eliminarProducto = exports.eliminarProducto = /*#__PURE__*/function () {
       }
     }, _callee11, null, [[1, 8]]);
   }));
-  return function eliminarProducto(_x21, _x22) {
+  return function modificarProducto(_x21, _x22) {
     return _ref11.apply(this, arguments);
+  };
+}();
+
+// ------------------------------METODO DE ELIMINAR LOS PRODUCTOS-------------------------------------------------
+var eliminarProducto = exports.eliminarProducto = /*#__PURE__*/function () {
+  var _ref12 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee12(req, res) {
+    var idProducto, respuesta;
+    return _regenerator["default"].wrap(function _callee12$(_context12) {
+      while (1) switch (_context12.prev = _context12.next) {
+        case 0:
+          idProducto = req.body.idProducto;
+          _context12.prev = 1;
+          _context12.next = 4;
+          return _mysql["default"].query("CALL SP_ELIMINAR_PRODUCTO(\"".concat(idProducto, "\");"));
+        case 4:
+          respuesta = _context12.sent;
+          if (respuesta[0].affectedRows == 1) {
+            (0, _browser.success)(req, res, 200, "Producto Eliminado");
+          } else {
+            (0, _browser.error)(req, res, 400, "Producto NO se elimino, Intenta mas tarde.");
+          }
+          _context12.next = 11;
+          break;
+        case 8:
+          _context12.prev = 8;
+          _context12.t0 = _context12["catch"](1);
+          (0, _browser.error)(req, res, 400, _context12.t0);
+        case 11:
+        case "end":
+          return _context12.stop();
+      }
+    }, _callee12, null, [[1, 8]]);
+  }));
+  return function eliminarProducto(_x23, _x24) {
+    return _ref12.apply(this, arguments);
   };
 }();

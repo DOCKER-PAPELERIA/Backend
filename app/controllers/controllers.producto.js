@@ -105,6 +105,16 @@ export const menosCostoso = async (req, res) => {
 };
 
 
+// ------------------------------METODO DE MOSTRAR EL PRODUCTO Y SU PRECIO---------------------------------
+export const Precios = async (req, res) => {
+    try {
+        const [respuesta] = await pool.query(`CALL SP_PRODUCTO_PRECIOS();`);
+        success(req, res, 200, respuesta[0]);
+    } catch (err) {
+        error(req, res, 500, err);
+    }
+};
+
 
 // ------------------------------METODO DE CREAR LOS PRODUCTOS----------------------------------------------------
 export const crearProducto = async (req, res) => {

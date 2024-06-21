@@ -1,0 +1,108 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "usuario",
+    "collectionId": "b25effbb-2ed2-42d4-aca5-68f59151ac9b",
+    "dateExported": "2024-06-21T02:34:07.238Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "334b14ec-3fc1-4923-b3a1-71eb0edcaa66",
+            "colId": "b25effbb-2ed2-42d4-aca5-68f59151ac9b",
+            "containerId": "",
+            "name": "mostrarUsuario",
+            "url": "http://localhost:3000/user/usuario/2",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-05-23T01:30:00.990Z",
+            "modified": "2024-06-13T00:08:54.647Z",
+            "headers": []
+        },
+        {
+            "_id": "7460c74b-4579-4112-bd7b-c46afb9c3f7d",
+            "colId": "b25effbb-2ed2-42d4-aca5-68f59151ac9b",
+            "containerId": "",
+            "name": "listarUsuario",
+            "url": "http://localhost:3000/user/usuario",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-05-23T02:04:52.151Z",
+            "modified": "2024-06-13T00:09:09.496Z",
+            "headers": []
+        },
+        {
+            "_id": "fe0ded64-9c4e-4bdb-854d-8c90f4439ab8",
+            "colId": "b25effbb-2ed2-42d4-aca5-68f59151ac9b",
+            "containerId": "",
+            "name": "crearUsuario",
+            "url": "http://localhost:3000/user/usuario",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-05-23T02:17:33.379Z",
+            "modified": "2024-06-17T00:55:00.827Z",
+            "headers": [
+                {
+                    "name": "x-access-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiQ2FybG9zIEdvbnrDoWxleiIsImlhdCI6MTcxODU4NTYxOSwiZXhwIjoxNzE4NTg4NjE5fQ.ImdXhk9Rlp6DHozbE-9LY50htx6qNh92kAuqcRv5Fhs"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"identificacion\": 12222224,\n  \"nombres\": \"corls\",\n  \"telefono\": 1222367,\n  \"fecha_naci\":20410915\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "8d102a6a-41e5-41c1-8d7d-273671ffd8c8",
+            "colId": "b25effbb-2ed2-42d4-aca5-68f59151ac9b",
+            "containerId": "",
+            "name": "modificarFactura",
+            "url": "http://localhost:3000/user/usuario",
+            "method": "PUT",
+            "sortNum": 65000,
+            "created": "2024-05-25T01:07:27.459Z",
+            "modified": "2024-06-13T00:09:36.820Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"idUsuario\": 2,\n  \"identificacion\": 12344,\n  \"nombres\": \"carlos carlo\",\n  \"telefono\": 1234567,\n  \"fecha_naci\":20410913\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "5581be96-cf6c-4462-b5c7-6908ba52d7d3",
+            "colId": "b25effbb-2ed2-42d4-aca5-68f59151ac9b",
+            "containerId": "",
+            "name": "login",
+            "url": "http://localhost:3000/user/login",
+            "method": "POST",
+            "sortNum": 67500,
+            "created": "2024-06-02T23:15:17.171Z",
+            "modified": "2024-06-17T00:53:39.310Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"usuario\": \"Carlos González\",\n  \"contrasena\": \"1\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "aebfd224-b280-4b5f-a290-3b70c82ade17",
+            "colId": "b25effbb-2ed2-42d4-aca5-68f59151ac9b",
+            "containerId": "",
+            "name": "eliminar",
+            "url": "http://localhost:3000/user/usuario",
+            "method": "DELETE",
+            "sortNum": 70000,
+            "created": "2024-05-23T23:45:00.658Z",
+            "modified": "2024-06-13T00:10:05.950Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"idUsuario\": 15\n}",
+                "form": []
+            }
+        }
+    ],
+    "ref": "2eQeK7uON990ui-YEreNfGydbZ0hJAAj72B0w7FI6Lm9YcR5MbuHZvY7FsIThebf3_izroQ-5dFsfBlMYFbi9g"
+}

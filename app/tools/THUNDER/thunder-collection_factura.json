@@ -1,0 +1,86 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "factura",
+    "collectionId": "e59780db-ef9a-49b4-8c35-8085d0cf474e",
+    "dateExported": "2024-06-21T02:34:56.873Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "c7eea4bc-f470-4b31-9c37-e0bb4bf55e07",
+            "colId": "e59780db-ef9a-49b4-8c35-8085d0cf474e",
+            "containerId": "",
+            "name": "listar",
+            "url": "http://localhost:3000/api/factura/14",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-06-17T04:44:16.897Z",
+            "modified": "2024-06-17T04:45:34.484Z",
+            "headers": []
+        },
+        {
+            "_id": "f608f1fe-8a4e-42cc-883b-c503baa320ba",
+            "colId": "e59780db-ef9a-49b4-8c35-8085d0cf474e",
+            "containerId": "",
+            "name": "mostrar",
+            "url": "http://localhost:3000/api/factura",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-06-17T04:45:49.369Z",
+            "modified": "2024-06-17T04:45:57.070Z",
+            "headers": []
+        },
+        {
+            "_id": "f33c2648-6ba2-4a1e-874c-5ca5a61e766f",
+            "colId": "e59780db-ef9a-49b4-8c35-8085d0cf474e",
+            "containerId": "",
+            "name": "crear",
+            "url": "http://localhost:3000/api/factura",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-06-17T04:46:05.794Z",
+            "modified": "2024-06-17T05:07:06.781Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"idCuenta\": 80, \n  \"idRegProducto\": 5, \n  \"idMetodoPago\":1 , \n  \"cantidad\": 34, \n  \"fecha\": 20240614\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "9f6d704c-eeac-42f3-b845-c23a34c0711b",
+            "colId": "e59780db-ef9a-49b4-8c35-8085d0cf474e",
+            "containerId": "",
+            "name": "modificar",
+            "url": "http://localhost:3000/api/factura",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2024-06-17T05:09:31.262Z",
+            "modified": "2024-06-17T05:10:06.531Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"idFactura\": 14,\n  \"idCuenta\": 80, \n  \"idRegProducto\": 5, \n  \"idMetodoPago\":1 , \n  \"cantidad\": 34, \n  \"fecha\": 20240614\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "52c0b453-c9e0-44fd-8058-2512c6b6c014",
+            "colId": "e59780db-ef9a-49b4-8c35-8085d0cf474e",
+            "containerId": "",
+            "name": "eliminar",
+            "url": "http://localhost:3000/api/factura",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2024-06-17T05:10:59.568Z",
+            "modified": "2024-06-17T05:11:38.858Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"idFactura\": 19\n}",
+                "form": []
+            }
+        }
+    ],
+    "ref": "wt82SgOci1RXY8eNOVnBU30SRl1noEn0nAFXGQk-9kl1XLPgFbJ4-81xd6WBBpjRsm1m2HgZo7ii6iNHWTDkqw"
+}

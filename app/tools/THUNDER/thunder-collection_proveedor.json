@@ -1,0 +1,86 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "proveedor",
+    "collectionId": "93962ebf-afef-4e3a-918f-60d7cbe9e718",
+    "dateExported": "2024-06-21T02:34:44.297Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "3929305c-891d-4ece-8d95-cc62fdfafb9e",
+            "colId": "93962ebf-afef-4e3a-918f-60d7cbe9e718",
+            "containerId": "",
+            "name": "mostrar",
+            "url": "http://localhost:3000/api/proveedor/2",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-05-28T23:14:18.327Z",
+            "modified": "2024-06-12T23:55:31.723Z",
+            "headers": []
+        },
+        {
+            "_id": "d482a41f-89d5-4951-b33a-ea083eca6282",
+            "colId": "93962ebf-afef-4e3a-918f-60d7cbe9e718",
+            "containerId": "",
+            "name": "listar",
+            "url": "http://localhost:3000/api/proveedor",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-05-28T23:14:24.829Z",
+            "modified": "2024-06-12T23:55:53.576Z",
+            "headers": []
+        },
+        {
+            "_id": "bd32d8f5-b4ec-462c-a75b-2647840cd2d2",
+            "colId": "93962ebf-afef-4e3a-918f-60d7cbe9e718",
+            "containerId": "",
+            "name": "crear",
+            "url": "http://localhost:3000/api/proveedor",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-05-28T23:14:32.945Z",
+            "modified": "2024-06-12T23:57:15.141Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"telefono\": 13131313,\n  \"direccion\": \"ldkdkdkk\",\n  \"correo\": \"odvnven@xnvdvn.com\",\n  \"nit\": 2341315\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "722890f8-7655-4fc4-8f3e-b8bf872f1d6f",
+            "colId": "93962ebf-afef-4e3a-918f-60d7cbe9e718",
+            "containerId": "",
+            "name": "modificar",
+            "url": "http://localhost:3000/api/proveedor",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2024-05-28T23:14:38.715Z",
+            "modified": "2024-06-12T23:57:56.800Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"idProveedor\": 13,\n  \"telefono\": 1222222213,\n  \"direccion\": \"ldkdkeeeeeeedkk\",\n  \"correo\": \"odvneeeeeven@xnvdvn.com\",\n  \"nit\": 2341333333315\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "61a0c918-1c01-4df8-a30b-b66b76707a13",
+            "colId": "93962ebf-afef-4e3a-918f-60d7cbe9e718",
+            "containerId": "",
+            "name": "eliminar",
+            "url": "http://localhost:3000/api/proveedor",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2024-05-28T23:14:44.195Z",
+            "modified": "2024-06-12T23:58:25.431Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"idProveedor\": 13\n}",
+                "form": []
+            }
+        }
+    ],
+    "ref": "QIvBExWcvDqMfXg8lJXpUa2Pjz3W7vSylfu3HqiLdEfFpcJjUlczbHobloYNOxV1mvP1gBrV0zW4NSSYoRdACw"
+}

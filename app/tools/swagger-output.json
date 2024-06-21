@@ -655,6 +655,16 @@
         }
       }
     },
+    "/producto-precio": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/proveedor/{id}": {
       "get": {
         "description": "",

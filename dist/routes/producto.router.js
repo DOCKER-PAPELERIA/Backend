@@ -16,6 +16,7 @@ rutaProducto.get("/producto-nuevo", _controllers.Nuevo);
 rutaProducto.get("/producto-viejo", _controllers.Viejo);
 rutaProducto.get("/producto-maxcostoso", _controllers.masCostoso);
 rutaProducto.get("/producto-mincostoso", _controllers.menosCostoso);
+rutaProducto.get("/producto-precio", _controllers.Precios);
 rutaProducto.post("/producto", _oauth.verifyToken, _controllers.crearProducto);
 rutaProducto.put("/producto", _oauth.verifyToken, _controllers.modificarProducto);
 rutaProducto["delete"]("/producto", _oauth.verifyToken, _controllers.eliminarProducto);
