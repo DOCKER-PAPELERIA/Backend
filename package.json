@@ -40,6 +40,6 @@
     "@babel/plugin-transform-runtime": "^7.24.6",
     "@babel/preset-env": "^7.24.6",
     "jsdoc": "^4.0.3",
-    "nodemon": "^3.1.1"
+    "nodemon": "^3.1.4"
   }
 }

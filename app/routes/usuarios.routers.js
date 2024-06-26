@@ -14,6 +14,6 @@ rutaUsuario.get("/usuario", listarUsuario);
 rutaUsuario.post("/usuario", verifyToken, crearUsuario);
 rutaUsuario.put("/usuario", verifyToken, modificarUsuario);
 rutaUsuario.delete("/usuario", verifyToken, eliminarUsuario);
-rutaUsuario.post("/login", loginUsuario)
+rutaUsuario.post("/login", loginUsuario);
 
 export default rutaUsuario;

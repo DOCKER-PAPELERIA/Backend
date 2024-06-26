@@ -32,16 +32,16 @@ export const crearFactura = async (req, res) => {
     const {idUsuario, idProducto, idMetodoPago, cantidad, fecha} = req.body;
     try {
         const respuesta = await pool.query(`CALL SP_CREAR_FACTURA("${idUsuario}", "${idProducto}", "${idMetodoPago}", "${cantidad}", "${fecha}");`);
-        if (respuesta[0].affectedRows == 1) {
+        console.log(respuesta);
+        if (respuesta[0].affectedRows >= 1) {
             success(req, res, 201, "Factura Creada.");
         } else {
-            error(req, res, 400, "No se creo la factura, Intentalo mas tarde.");
+            error(req, res, 401, "No se creo la factura, Intentalo mas tarde.");
         }
     } catch (err) {
         error(req, res, 400, err);
     }
 };
-
 
 // ------------------------------METODO DE MODIFICAR FACTURA----------------------------------------------------------
 export const modificarFactura = async (req, res) => {

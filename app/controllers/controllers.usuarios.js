@@ -33,9 +33,14 @@ export const listarUsuario = async (req, res) => {
 
 // ------------------------------METODO DE CREAR USUARIO------------------------------------------------------------
 export const crearUsuario = async (req, res) => {
-    const {identificacion, nombres, telefono, fecha_naci} = req.body;
+    const {idRol, identificacion, nombres, telefono, fecha_naci, correo, estado} = req.body;
+    const contrasenasincifrar = req.body.contrasena;
     try {
-        const respuesta = await pool.query(`CALL SP_INSERTAR_USUARIO("${identificacion}", "${nombres}", "${telefono}", "${fecha_naci}");`);
+
+        const hash = await bcrypt.hash(contrasenasincifrar, 2);
+        const  contrasena = hash;
+
+        const respuesta = await pool.query(`CALL SP_INSERTAR_USUARIO("${idRol}", "${identificacion}", "${nombres}", "${telefono}", "${fecha_naci}", "${correo}", "${contrasena}", "${estado}");`);
         if (respuesta[0].affectedRows == 1) {
             success(req, res, 201, "Usuario creado correctamente");
         } else {
@@ -49,9 +54,14 @@ export const crearUsuario = async (req, res) => {
 
 // ------------------------------METODO DE MODIFICAR USUARIO------------------------------------------------------------
 export const modificarUsuario = async (req, res) => {
-    const {idUsuario, identificacion, nombres, telefono, fecha_naci} = req.body;
+    const {idUsuario, identificacion, nombres, telefono, fecha_naci, correo, estado} = req.body;
+    const contrasenasincifrar = req.body.contrasena;
     try {
-        const respuesta = await pool.query(`CALL SP_EDITAR_USUARIO("${idUsuario}", "${identificacion}", "${nombres}", "${telefono}", "${fecha_naci}");`);
+        
+        const hash = await bcrypt.hash(contrasenasincifrar, 2);
+        const contrasena= hash;
+        
+        const respuesta = await pool.query(`CALL SP_EDITAR_USUARIO("${idUsuario}", "${identificacion}", "${nombres}", "${telefono}", "${fecha_naci}", "${correo}", "${contrasena}", "${estado}");`);
         if (respuesta[0].affectedRows == 1) {
             success(req, res, 201, "Usuario modificado correctamente");
         } else {
@@ -81,9 +91,9 @@ export const eliminarUsuario = async (req, res) => {
 
 // ------------------------------METODO DE LOGUAR USUARIO------------------------------------------------------------
 export const loginUsuario = async (req, res) => {
-    const { usuario, contrasena } = req.body;
+    const { correo, contrasena } = req.body;
     try {
-        const respuesta = await pool.query(`CALL SP_BUSCAR_LOGIN('${usuario}');`);
+        const respuesta = await pool.query(`CALL SP_BUSCAR_LOGIN('${correo}');`);
         if (respuesta[0][0]== 0) {
             error(req, res, 404, "Usuario no existe.");
             return;
@@ -94,7 +104,7 @@ export const loginUsuario = async (req, res) => {
             return;
         }
         let payload = {
-            "usuario": usuario
+            "correo": correo
         }
         let token = await jwt.sign(
             payload,
