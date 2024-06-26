@@ -4,7 +4,6 @@ import { config } from "dotenv";
 config();
 
 
-
 // ------------------------------METODO DE MOSTRAR UN SOLO PRODUCTO------------------------------------------------
 export const mostrarProducto = async (req, res) => {
     const id = req.params["id"];
@@ -17,7 +16,6 @@ export const mostrarProducto = async (req, res) => {
 };
 
 
-
 // ------------------------------METODO DE MOSTRAR TODAS LOS PRODUCTOS------------------------------------------------
 export const listarProducto = async (req, res) => {
     try {
@@ -27,7 +25,6 @@ export const listarProducto = async (req, res) => {
         error(req, res, 500, err);
     }
 };
-
 
 
 // ------------------------------METODO DE MOSTRAR EL PRODUCTO AGOTADO------------------------------------------------
@@ -45,70 +42,10 @@ export const agotado = async (req, res) => {
 };
 
 
-
-// ------------------------------METODO DE MOSTRAR EL ORDEN ALFABETICO DE LOS PRODUCTOS----------------------------
-export const ordenAlfabetico = async (req, res) => {
-    try {
-        const [respuesta] = await pool.query(`CALL SP_PRODUCTO_ORDENALFABETICO();`);
-        success(req, res, 200, respuesta[0]);
-    } catch (err) {
-        error(req, res, 500, err);
-    }
-};
-
-
-
-// ------------------------------METODO DE MOSTRAR EL PRODUCTO MAS NUEVO A MAS VIEJO-------------------------------
-export const Nuevo = async (req, res) => {
-    try {
-        const [respuesta] = await pool.query(`CALL SP_PRODUCTO_MAS_NUEVO_VIEJO();`);
-        success(req, res, 200, respuesta[0]);
-    } catch (err) {
-        error(req, res, 500, err);
-    }
-};
-
-
-
-// ------------------------------METODO DE MOSTRAR EL PRODUCTO MAS VIEJO A MAS NUEVO------------------------------
-export const Viejo = async (req, res) => {
-    try {
-        const [respuesta] = await pool.query(`CALL SP_PRODUCTO_MAS_VIEJO_NUEVO();`);
-        success(req, res, 200, respuesta[0]);
-    } catch (err) {
-        error(req, res, 500, err);
-    }
-};
-
-
-
-// ------------------------------METODO DE MOSTRAR EL PRODUCTO MAS COSTOSO A MENOS---------------------------------
-export const masCostoso = async (req, res) => {
-    try {
-        const [respuesta] = await pool.query(`CALL SP_PRODUCTO_MAS_COSTOSO_MENOS();`);
-        success(req, res, 200, respuesta[0]);
-    } catch (err) {
-        error(req, res, 500, err);
-    }
-};
-
-
-
-// ------------------------------METODO DE MOSTRAR EL PRODUCTO MENOS COSTOSO A MAS---------------------------------
-export const menosCostoso = async (req, res) => {
-    try {
-        const [respuesta] = await pool.query(`CALL SP_PRODUCTO_MENOS_COSTOSO_MAS();`);
-        success(req, res, 200, respuesta[0]);
-    } catch (err) {
-        error(req, res, 500, err);
-    }
-};
-
-
 // ------------------------------METODO DE MOSTRAR EL PRODUCTO Y SU PRECIO---------------------------------
 export const Precios = async (req, res) => {
     try {
-        const [respuesta] = await pool.query(`CALL SP_PRODUCTO_PRECIOS();`);
+        const [respuesta] = await pool.query(`CALL SP_MOSTRAR_PRECIOS();`);
         success(req, res, 200, respuesta[0]);
     } catch (err) {
         error(req, res, 500, err);
@@ -118,9 +55,9 @@ export const Precios = async (req, res) => {
 
 // ------------------------------METODO DE CREAR LOS PRODUCTOS----------------------------------------------------
 export const crearProducto = async (req, res) => {
-    const {descripcion, unidades, codigo, imagen, precio_compra, precio_venta } = req.body;
+    const {idCategorias, idProveedor, nombre_product, stock, codigo_producto, imagen, precio, fecha, estado} = req.body;
     try {
-        const respuesta = await pool.query(`CALL  SP_INSERTAR_PRODUCTOS("${descripcion}", "${unidades}", "${codigo}", "${imagen}", "${precio_compra}", "${precio_venta}");`);
+        const respuesta = await pool.query(`CALL  SP_INSERTAR_PRODUCTOS("${idCategorias}", "${idProveedor}", "${nombre_product}", "${stock}", "${codigo_producto}", "${imagen}", "${precio}", "${fecha}", "${estado}");`);
         if (respuesta[0].affectedRows == 1) {
             success(req, res, 201, "Producto creado correctamente.");
         } else {
@@ -132,22 +69,20 @@ export const crearProducto = async (req, res) => {
 };
 
 
-
 // ------------------------------METODO DE MODIFICAR LOS PRODUCTOS------------------------------------------------
 export const modificarProducto = async (req, res) => {
-    const {idProducto, descripcion, unidades, codigo, imagen, precio_compra, precio_venta } = req.body;
+    const {idProducto, idCategorias, idProveedor, nombre_product, stock, codigo_producto, imagen, precio, fecha, estado} = req.body;
     try {
-        const respuesta = await pool.query(`CALL SP_EDITAR_PRODUCTO("${idProducto}", "${descripcion}", "${unidades}", "${codigo}", "${imagen}", "${precio_compra}", "${precio_venta}");`);
+        const respuesta = await pool.query(`CALL SP_EDITAR_PRODUCTO("${idProducto}", "${idCategorias}", "${idProveedor}", "${nombre_product}", "${stock}", "${codigo_producto}", "${imagen}", "${precio}", "${fecha}", "${estado}");`);
         if (respuesta[0].affectedRows == 1) {
-            success(req, res, 201, "Producto modificado correctamente.");
+            success(req, res, 201, "Producto  modificado correctamete.");
         } else {
-            error(req, res, 400, "Producto NO se modifico, Intenta mas tarde.");
+            error(req, res, 401, "Producto No se modifico, Intentalo mas tarde.");
         }
     } catch (err) {
         error(req, res, 400, err);
     }
 };
-
 
 
 // ------------------------------METODO DE ELIMINAR LOS PRODUCTOS-------------------------------------------------
@@ -164,4 +99,3 @@ export const eliminarProducto = async (req, res) => {
         error(req, res, 400, err);
     }
 };
-

@@ -29,55 +29,6 @@ export const listarCategoria = async (req, res) => {
 };
 
 
-
-// ------------------------------METODO DE MOSTRAR LA DESCRIPCON DE LA CATEGORIA Y PRODUCTO--------------------------
-export const descripcion = async (req, res) => {
-    try {
-        const [respuesta] = await pool.query(`CALL SP_MOSTRAR_CATE_PRODUC();`);
-        success(req, res, 200, respuesta);
-    } catch (err) {
-        error(req, res, 500, err);
-    }
-};
-
-
-
-// ------------------------------METODO DE MOSTRAR CATEGORIA POR ORDEN ALFABETICO------------------------------------
-export const ordenAlfabetico = async (req, res) => {
-    try {
-        const [respuesta] = await pool.query(`CALL SP_CATEGORIAS_ORDENALFABETICO();`);
-        success(req, res, 200, respuesta[0]);
-    } catch (err) {
-        error(req, res, 500, err);
-    }
-};
-
-
-
-// ------------------------------METODO DE MOSTRAR CATEGORIA DE LA MAS NUEVA A LA MAS VIEJA--------------------------
-export const Nuevo = async (req, res) => {
-    try {
-        const [respuesta] = await pool.query(`CALL SP_CATEGORIAS_MAS_NUEVO_VIEJO();`);
-        success(req, res, 200, respuesta[0]);
-    } catch (err) {
-        error(req, res, 500, err);
-    }
-};
-
-
-
-// ------------------------------METODO DE MOSTRAR CATEGORIA DE LA MAS VIEJA A LA MAS NUEVA--------------------------
-export const Viejo = async (req, res) => {
-    try {
-        const [respuesta] = await pool.query(`CALL SP_CATEGORIAS_MAS_VIEJO_NUEVO();`);
-        success(req, res, 200, respuesta[0]);
-    } catch (err) {
-        error(req, res, 500, err);
-    }
-};
-
-
-
 // ------------------------------METODO DE CREAR LAS CATEGORIAS------------------------------------------------------
 export const crearCategoria = async (req, res) => {
     const { Categoria, descripcion_categoria, imagen, fecha } = req.body;

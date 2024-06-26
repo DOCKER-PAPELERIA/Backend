@@ -29,9 +29,9 @@ export const listarProveedor = async (req, res) => {
 
 // ------------------------------METODO DE CREAR PROVEEDOR--------------------------------------------------------
 export const crearProveedor = async (req, res) => {
-    const {telefono, direccion, correo, nit} = req.body;
+    const {nombre_proveedor , telefono , correo} = req.body;
     try {
-        const respuesta = await pool.query(`CALL SP_INSERTAR_PROVEEDOR("${telefono}", "${direccion}", "${correo}", "${nit}");`);
+        const respuesta = await pool.query(`CALL SP_INSERTAR_PROVEEDOR("${nombre_proveedor}", "${telefono}", "${correo}");`);
         if (respuesta[0].affectedRows == 1) {
             success(req, res, 201, "Proveedor creado correctamente.");
         } else {
@@ -45,9 +45,9 @@ export const crearProveedor = async (req, res) => {
 
 // ------------------------------METODO DE MODIFICAR PROVEEDOR----------------------------------------------------
 export const modificarProveedor = async (req, res) => {
-    const {idProveedor, telefono, direccion, correo, nit} = req.body;
+    const {idProveedor, nombre_proveedor, telefono, correo} = req.body;
     try {
-        const respuesta = await pool.query(`CALL SP_EDITAR_PROVEEDOR("${idProveedor}", "${telefono}", "${direccion}", "${correo}", "${nit}");`);
+        const respuesta = await pool.query(`CALL SP_EDITAR_PROVEEDOR("${idProveedor}", "${nombre_proveedor}", "${telefono}", "${correo}");`);
         if (respuesta[0].affectedRows == 1) {
             success(req, res, 201, "Proveedor Modificado correctamente.");
         } else {

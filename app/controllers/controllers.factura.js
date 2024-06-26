@@ -29,9 +29,9 @@ export const listarFactura = async (req, res)  => {
 
 // ------------------------------METODO DE CREAR FACTURA----------------------------------------------------------
 export const crearFactura = async (req, res) => {
-    const {idCuenta, idRegProducto, idMetodoPago, cantidad, fecha} = req.body;
+    const {idUsuario, idProducto, idMetodoPago, cantidad, fecha} = req.body;
     try {
-        const respuesta = await pool.query(`CALL SP_CREAR_FACTURA("${idCuenta}", "${idRegProducto}", "${idMetodoPago}", "${cantidad}", "${fecha}");`);
+        const respuesta = await pool.query(`CALL SP_CREAR_FACTURA("${idUsuario}", "${idProducto}", "${idMetodoPago}", "${cantidad}", "${fecha}");`);
         if (respuesta[0].affectedRows == 1) {
             success(req, res, 201, "Factura Creada.");
         } else {
@@ -45,9 +45,9 @@ export const crearFactura = async (req, res) => {
 
 // ------------------------------METODO DE MODIFICAR FACTURA----------------------------------------------------------
 export const modificarFactura = async (req, res) => {
-    const {idFactura, idCuenta, idRegProducto, idMetodoPago, cantidad, fecha} = req.body;
+    const {idFactura, idUsuario, idProducto, idMetodoPago, cantidad, fecha} = req.body;
     try {
-        const respuesta = await pool.query(`CALL SP_EDITAR_FACTURA("${idFactura}", "${idCuenta}", "${idRegProducto}", "${idMetodoPago}", "${cantidad}", "${fecha}");`);
+        const respuesta = await pool.query(`CALL SP_EDITAR_FACTURA("${idFactura}", "${idUsuario}", "${idProducto}", "${idMetodoPago}", "${cantidad}", "${fecha}");`);
         if (respuesta[0].affectedRows == 1) {
             success(req, res, 201, "Factura Modificada.");
         } else {

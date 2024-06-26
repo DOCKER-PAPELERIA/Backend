@@ -1,0 +1,111 @@
+
+Este codigo es de el controlador PRODUCTOS, se hizo la retiracion de el controlador por que se reorganizo la base de datos
+
+// // ------------------------------METODO DE MOSTRAR EL ORDEN ALFABETICO DE LOS PRODUCTOS----------------------------
+// export const ordenAlfabetico = async (req, res) => {
+//     try {
+//         const [respuesta] = await pool.query(`CALL SP_PRODUCTO_ORDENALFABETICO();`);
+//         success(req, res, 200, respuesta[0]);
+//     } catch (err) {
+//         error(req, res, 500, err);
+//     }
+// };
+
+
+
+// // ------------------------------METODO DE MOSTRAR EL PRODUCTO MAS NUEVO A MAS VIEJO-------------------------------
+// export const Nuevo = async (req, res) => {
+//     try {
+//         const [respuesta] = await pool.query(`CALL SP_PRODUCTO_MAS_NUEVO_VIEJO();`);
+//         success(req, res, 200, respuesta[0]);
+//     } catch (err) {
+//         error(req, res, 500, err);
+//     }
+// };
+
+
+
+// // ------------------------------METODO DE MOSTRAR EL PRODUCTO MAS VIEJO A MAS NUEVO------------------------------
+// export const Viejo = async (req, res) => {
+//     try {
+//         const [respuesta] = await pool.query(`CALL SP_PRODUCTO_MAS_VIEJO_NUEVO();`);
+//         success(req, res, 200, respuesta[0]);
+//     } catch (err) {
+//         error(req, res, 500, err);
+//     }
+// };
+
+
+
+// // ------------------------------METODO DE MOSTRAR EL PRODUCTO MAS COSTOSO A MENOS---------------------------------
+// export const masCostoso = async (req, res) => {
+//     try {
+//         const [respuesta] = await pool.query(`CALL SP_PRODUCTO_MAS_COSTOSO_MENOS();`);
+//         success(req, res, 200, respuesta[0]);
+//     } catch (err) {
+//         error(req, res, 500, err);
+//     }
+// };
+
+
+
+// // ------------------------------METODO DE MOSTRAR EL PRODUCTO MENOS COSTOSO A MAS---------------------------------
+// export const menosCostoso = async (req, res) => {
+//     try {
+//         const [respuesta] = await pool.query(`CALL SP_PRODUCTO_MENOS_COSTOSO_MAS();`);
+//         success(req, res, 200, respuesta[0]);
+//     } catch (err) {
+//         error(req, res, 500, err);
+//     }
+// };
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Este codigo es de el controlador categorias, se hizo la retiracion de algunos controladores por que se reorganizo la base de datos
+
+// ------------------------------METODO DE MOSTRAR LA DESCRIPCON DE LA CATEGORIA Y PRODUCTO--------------------------
+export const descripcion = async (req, res) => {
+    try {
+        const [respuesta] = await pool.query(`CALL SP_MOSTRAR_CATE_PRODUC();`);
+        success(req, res, 200, respuesta);
+    } catch (err) {
+        error(req, res, 500, err);
+    }
+};
+
+
+
+// ------------------------------METODO DE MOSTRAR CATEGORIA POR ORDEN ALFABETICO------------------------------------
+export const ordenAlfabetico = async (req, res) => {
+    try {
+        const [respuesta] = await pool.query(`CALL SP_CATEGORIAS_ORDENALFABETICO();`);
+        success(req, res, 200, respuesta[0]);
+    } catch (err) {
+        error(req, res, 500, err);
+    }
+};
+
+
+
+// ------------------------------METODO DE MOSTRAR CATEGORIA DE LA MAS NUEVA A LA MAS VIEJA--------------------------
+export const Nuevo = async (req, res) => {
+    try {
+        const [respuesta] = await pool.query(`CALL SP_CATEGORIAS_MAS_NUEVO_VIEJO();`);
+        success(req, res, 200, respuesta[0]);
+    } catch (err) {
+        error(req, res, 500, err);
+    }
+};
+
+
+
+// ------------------------------METODO DE MOSTRAR CATEGORIA DE LA MAS VIEJA A LA MAS NUEVA--------------------------
+export const Viejo = async (req, res) => {
+    try {
+        const [respuesta] = await pool.query(`CALL SP_CATEGORIAS_MAS_VIEJO_NUEVO();`);
+        success(req, res, 200, respuesta[0]);
+    } catch (err) {
+        error(req, res, 500, err);
+    }
+};
