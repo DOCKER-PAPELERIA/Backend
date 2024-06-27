@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {crearCategoria,  
+import {FiltrarProductos, crearCategoria,  
         eliminarCategoria, 
         listarCategoria, 
         modificarCategoria, 
@@ -11,6 +11,7 @@ const rutaCategoria = Router();
 
 rutaCategoria.get("/categoria/:id", mostrarCategoria);
 rutaCategoria.get("/categoria", listarCategoria);
+rutaCategoria.get("/catego-filtro",FiltrarProductos);
 rutaCategoria.post("/categoria", verifyToken, crearCategoria);
 rutaCategoria.put("/categoria", verifyToken, modificarCategoria);
 rutaCategoria.delete("/categoria", verifyToken, eliminarCategoria);

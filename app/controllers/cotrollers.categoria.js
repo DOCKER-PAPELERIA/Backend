@@ -46,6 +46,17 @@ export const crearCategoria = async (req, res) => {
 };
 
 
+// ------------------------------METODO DE FILTRAR LOS PRODUCTOS QUE ESTAN DENTRO DE DE LAS CATEGORIAS-------------------------------------------
+export const FiltrarProductos = async (req, res) =>{
+    const {filtro, categoria} =  req.body;
+    try {
+        const [respuesta] = await pool.query(`CALL SP_FILTRAR_PRODUCTOS_CATEGORIAS("${filtro}", "${categoria}");`);
+        success(req, res, 201, respuesta[0]);
+    } catch (err) {
+        error(req, res, 400, err);
+    }
+};
+
 
 // ------------------------------METODO DE MODIFICAR LAS CATEGORIAS--------------------------------------------------
 export const modificarCategoria = async (req, res) => {
