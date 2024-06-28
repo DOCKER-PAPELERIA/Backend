@@ -38,6 +38,7 @@ const listarProducto = async (req, res) => {
 };
 
 
+
 // ------------------------------METODO DE MOSTRAR EL PRODUCTO AGOTADO------------------------------------
 const Agotado = async (req, res) => {
     try {
@@ -47,6 +48,7 @@ const Agotado = async (req, res) => {
         error(req, res, 500, err);
     }
 };
+
 
 
 
