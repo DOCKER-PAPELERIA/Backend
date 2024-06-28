@@ -18,23 +18,29 @@ var verifyToken = exports.verifyToken = /*#__PURE__*/function () {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           token = req.headers["x-access-token"];
-          _context.prev = 1;
-          _context.next = 4;
+          if (token) {
+            _context.next = 3;
+            break;
+          }
+          return _context.abrupt("return", (0, _browser.success)(req, res, 401, "Acceso denegado."));
+        case 3:
+          _context.prev = 3;
+          _context.next = 6;
           return _jsonwebtoken["default"].verify(token, process.env.TOKEN_PRIVATEKEY);
-        case 4:
+        case 6:
           valida = _context.sent;
           next();
-          _context.next = 11;
+          _context.next = 13;
           break;
-        case 8:
-          _context.prev = 8;
-          _context.t0 = _context["catch"](1);
-          (0, _browser.error)(req, res, 401, _context.t0);
-        case 11:
+        case 10:
+          _context.prev = 10;
+          _context.t0 = _context["catch"](3);
+          (0, _browser.error)(req, res, 401, "Falta Acceso del token.");
+        case 13:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[1, 8]]);
+    }, _callee, null, [[3, 10]]);
   }));
   return function verifyToken(_x, _x2, _x3) {
     return _ref.apply(this, arguments);

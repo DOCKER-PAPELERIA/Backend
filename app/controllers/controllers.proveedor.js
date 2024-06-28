@@ -5,7 +5,7 @@ config();
 
 
 // ------------------------------METODO DE MOSTRAR UN SOLO PROVEEDOR------------------------------------------------
-export const mostrarProveedor = async (req, res) => {
+const mostrarProveedor = async (req, res) => {
     const id = req.params["id"];
     try {
         const [respuesta] = await pool.query(`CALL SP_MOSTRAR_PROVEEDOR("${id}");`);
@@ -17,7 +17,7 @@ export const mostrarProveedor = async (req, res) => {
 
 
 // ------------------------------METODO DE MOSTRAR TODOS LOS PROVEEDOR------------------------------------------------
-export const listarProveedor = async (req, res) => {
+const listarProveedor = async (req, res) => {
     try {
         const [respuesta] = await pool.query(`CALL SP_LISTAR_PROVEEDOR();`);
         success(req, res, 200, respuesta[0]);
@@ -28,7 +28,7 @@ export const listarProveedor = async (req, res) => {
 
 
 // ------------------------------METODO DE CREAR PROVEEDOR--------------------------------------------------------
-export const crearProveedor = async (req, res) => {
+const crearProveedor = async (req, res) => {
     const {nombre_proveedor , telefono , correo} = req.body;
     try {
         const respuesta = await pool.query(`CALL SP_INSERTAR_PROVEEDOR("${nombre_proveedor}", "${telefono}", "${correo}");`);
@@ -44,7 +44,7 @@ export const crearProveedor = async (req, res) => {
 
 
 // ------------------------------METODO DE MODIFICAR PROVEEDOR----------------------------------------------------
-export const modificarProveedor = async (req, res) => {
+const modificarProveedor = async (req, res) => {
     const {idProveedor, nombre_proveedor, telefono, correo} = req.body;
     try {
         const respuesta = await pool.query(`CALL SP_EDITAR_PROVEEDOR("${idProveedor}", "${nombre_proveedor}", "${telefono}", "${correo}");`);
@@ -61,7 +61,7 @@ export const modificarProveedor = async (req, res) => {
 
 
 // ------------------------------METODO DE ELIMINAR PROVEEDOR------------------------------------------------------
-export const eliminarProveedor = async (req, res) => {
+const eliminarProveedor = async (req, res) => {
     const {idProveedor} = req.body;
     try {
         const respuesta = await pool.query(`CALL SP_ELIMINAR_PROVEEDOR("${idProveedor}");`);
@@ -75,3 +75,5 @@ export const eliminarProveedor = async (req, res) => {
         
     }
 };
+
+export { listarProveedor, mostrarProveedor, crearProveedor, modificarProveedor, eliminarProveedor };

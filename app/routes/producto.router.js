@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {Precios, agotado, 
+import {Precios, 
         crearProducto, 
         eliminarProducto, 
         listarProducto, 
@@ -11,7 +11,6 @@ const rutaProducto = Router();
 
 rutaProducto.get("/producto/:id", mostrarProducto);
 rutaProducto.get("/producto", listarProducto);
-rutaProducto.get("/agotado", agotado)
 rutaProducto.get("/producto-precio", Precios);
 rutaProducto.post("/producto", verifyToken, crearProducto);
 rutaProducto.put("/producto", verifyToken, modificarProducto);

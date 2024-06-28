@@ -2,7 +2,7 @@
     "clientName": "Thunder Client",
     "collectionName": "factura",
     "collectionId": "e59780db-ef9a-49b4-8c35-8085d0cf474e",
-    "dateExported": "2024-06-21T02:34:56.873Z",
+    "dateExported": "2024-06-28T02:09:10.558Z",
     "version": "1.2",
     "folders": [],
     "requests": [
@@ -39,28 +39,11 @@
             "method": "POST",
             "sortNum": 30000,
             "created": "2024-06-17T04:46:05.794Z",
-            "modified": "2024-06-17T05:07:06.781Z",
+            "modified": "2024-06-26T23:43:37.488Z",
             "headers": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"idCuenta\": 80, \n  \"idRegProducto\": 5, \n  \"idMetodoPago\":1 , \n  \"cantidad\": 34, \n  \"fecha\": 20240614\n}",
-                "form": []
-            }
-        },
-        {
-            "_id": "9f6d704c-eeac-42f3-b845-c23a34c0711b",
-            "colId": "e59780db-ef9a-49b4-8c35-8085d0cf474e",
-            "containerId": "",
-            "name": "modificar",
-            "url": "http://localhost:3000/api/factura",
-            "method": "PUT",
-            "sortNum": 40000,
-            "created": "2024-06-17T05:09:31.262Z",
-            "modified": "2024-06-17T05:10:06.531Z",
-            "headers": [],
-            "body": {
-                "type": "json",
-                "raw": "{\n  \"idFactura\": 14,\n  \"idCuenta\": 80, \n  \"idRegProducto\": 5, \n  \"idMetodoPago\":1 , \n  \"cantidad\": 34, \n  \"fecha\": 20240614\n}",
+                "raw": "{\n  \"idUsuario\": 1, \n  \"idProducto\": 1, \n  \"idMetodoPago\": 1, \n  \"cantidad\": 7, \n  \"fecha\": \"\"\n}",
                 "form": []
             }
         },
@@ -82,5 +65,5 @@
             }
         }
     ],
-    "ref": "wt82SgOci1RXY8eNOVnBU30SRl1noEn0nAFXGQk-9kl1XLPgFbJ4-81xd6WBBpjRsm1m2HgZo7ii6iNHWTDkqw"
+    "ref": "wt82SgOci1RXY8eNOVnBU8AhyGbr6qcrlECqRHI9MwurLL8YgRp--0dkEfCs9owH-DmXR3BMPhvPQtxclckUrA"
 }

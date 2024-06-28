@@ -141,175 +141,9 @@
         }
       }
     },
-    "/categoria-descrip": {
+    "/catego-filtro": {
       "get": {
         "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/categoria-ordena": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/categoria-nuevo": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/categoria-viejo": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/cuenta/{id}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/cuenta": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "x-access-token",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "contrasena": {
-                  "example": "any"
-                },
-                "confirmacion": {
-                  "example": "any"
-                },
-                "idUsuario": {
-                  "example": "any"
-                },
-                "idRol": {
-                  "example": "any"
-                },
-                "correo": {
-                  "example": "any"
-                },
-                "estado": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "x-access-token",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "contrasena": {
-                  "example": "any"
-                },
-                "confirmacion": {
-                  "example": "any"
-                },
-                "idcuenta": {
-                  "example": "any"
-                },
-                "correo": {
-                  "example": "any"
-                },
-                "estado": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "x-access-token",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "idcuenta": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
         "responses": {
           "default": {
             "description": ""
@@ -358,52 +192,10 @@
             "schema": {
               "type": "object",
               "properties": {
-                "idCuenta": {
+                "idUsuario": {
                   "example": "any"
                 },
-                "idRegProducto": {
-                  "example": "any"
-                },
-                "idMetodoPago": {
-                  "example": "any"
-                },
-                "cantidad": {
-                  "example": "any"
-                },
-                "fecha": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "x-access-token",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "idFactura": {
-                  "example": "any"
-                },
-                "idCuenta": {
-                  "example": "any"
-                },
-                "idRegProducto": {
+                "idProducto": {
                   "example": "any"
                 },
                 "idMetodoPago": {
@@ -494,22 +286,31 @@
             "schema": {
               "type": "object",
               "properties": {
-                "descripcion": {
+                "idCategorias": {
                   "example": "any"
                 },
-                "unidades": {
+                "idProveedor": {
                   "example": "any"
                 },
-                "codigo": {
+                "nombre_product": {
+                  "example": "any"
+                },
+                "stock": {
+                  "example": "any"
+                },
+                "codigo_producto": {
                   "example": "any"
                 },
                 "imagen": {
                   "example": "any"
                 },
-                "precio_compra": {
+                "precio": {
                   "example": "any"
                 },
-                "precio_venta": {
+                "fecha": {
+                  "example": "any"
+                },
+                "estado": {
                   "example": "any"
                 }
               }
@@ -539,22 +340,31 @@
                 "idProducto": {
                   "example": "any"
                 },
-                "descripcion": {
+                "idCategorias": {
                   "example": "any"
                 },
-                "unidades": {
+                "idProveedor": {
                   "example": "any"
                 },
-                "codigo": {
+                "nombre_product": {
+                  "example": "any"
+                },
+                "stock": {
+                  "example": "any"
+                },
+                "codigo_producto": {
                   "example": "any"
                 },
                 "imagen": {
                   "example": "any"
                 },
-                "precio_compra": {
+                "precio": {
                   "example": "any"
                 },
-                "precio_venta": {
+                "fecha": {
+                  "example": "any"
+                },
+                "estado": {
                   "example": "any"
                 }
               }
@@ -588,66 +398,6 @@
             }
           }
         ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/agotado": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/producto-ordenar": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/producto-nuevo": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/producto-viejo": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/producto-maxcostoso": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/producto-mincostoso": {
-      "get": {
-        "description": "",
         "responses": {
           "default": {
             "description": ""
@@ -706,16 +456,13 @@
             "schema": {
               "type": "object",
               "properties": {
+                "nombre_proveedor": {
+                  "example": "any"
+                },
                 "telefono": {
                   "example": "any"
                 },
-                "direccion": {
-                  "example": "any"
-                },
                 "correo": {
-                  "example": "any"
-                },
-                "nit": {
                   "example": "any"
                 }
               }
@@ -745,17 +492,14 @@
                 "idProveedor": {
                   "example": "any"
                 },
-                "telefono": {
+                "nombre_proveedor": {
                   "example": "any"
                 },
-                "direccion": {
+                "telefono": {
                   "example": "any"
                 },
                 "correo": {
                   "example": "any"
-                },
-                "nit": {
-                  "example": "any"
                 }
               }
             }
@@ -782,151 +526,6 @@
               "type": "object",
               "properties": {
                 "idProveedor": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/regproducto/{id}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/regproducto": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "x-access-token",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "idProducto": {
-                  "example": "any"
-                },
-                "idCategoria": {
-                  "example": "any"
-                },
-                "idProveedor": {
-                  "example": "any"
-                },
-                "cantinicial": {
-                  "example": "any"
-                },
-                "cantfinal": {
-                  "example": "any"
-                },
-                "fecha": {
-                  "example": "any"
-                },
-                "valorcompra": {
-                  "example": "any"
-                },
-                "estado": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "x-access-token",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "idRegistro": {
-                  "example": "any"
-                },
-                "cantinicial": {
-                  "example": "any"
-                },
-                "cantfinal": {
-                  "example": "any"
-                },
-                "fecha": {
-                  "example": "any"
-                },
-                "valorcompra": {
-                  "example": "any"
-                },
-                "estado": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "x-access-token",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "idRegistro": {
                   "example": "any"
                 }
               }
@@ -981,6 +580,12 @@
             "schema": {
               "type": "object",
               "properties": {
+                "contrasena": {
+                  "example": "any"
+                },
+                "idRol": {
+                  "example": "any"
+                },
                 "identificacion": {
                   "example": "any"
                 },
@@ -991,6 +596,12 @@
                   "example": "any"
                 },
                 "fecha_naci": {
+                  "example": "any"
+                },
+                "correo": {
+                  "example": "any"
+                },
+                "estado": {
                   "example": "any"
                 }
               }
@@ -1017,6 +628,9 @@
             "schema": {
               "type": "object",
               "properties": {
+                "contrasena": {
+                  "example": "any"
+                },
                 "idUsuario": {
                   "example": "any"
                 },
@@ -1030,6 +644,12 @@
                   "example": "any"
                 },
                 "fecha_naci": {
+                  "example": "any"
+                },
+                "correo": {
+                  "example": "any"
+                },
+                "estado": {
                   "example": "any"
                 }
               }
@@ -1080,7 +700,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "usuario": {
+                "correo": {
                   "example": "any"
                 },
                 "contrasena": {

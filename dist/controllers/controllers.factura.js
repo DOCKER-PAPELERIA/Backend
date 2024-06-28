@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.mostrarFactura = exports.modificarFactura = exports.listarFactura = exports.eliminarFactura = exports.crearFactura = void 0;
+exports.mostrarFactura = exports.listarFactura = exports.eliminarFactura = exports.crearFactura = void 0;
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
@@ -81,20 +81,20 @@ var listarFactura = exports.listarFactura = /*#__PURE__*/function () {
 // ------------------------------METODO DE CREAR FACTURA----------------------------------------------------------
 var crearFactura = exports.crearFactura = /*#__PURE__*/function () {
   var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
-    var _req$body, idCuenta, idRegProducto, idMetodoPago, cantidad, fecha, respuesta;
+    var _req$body, idUsuario, idProducto, idMetodoPago, cantidad, fecha, respuesta;
     return _regenerator["default"].wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
-          _req$body = req.body, idCuenta = _req$body.idCuenta, idRegProducto = _req$body.idRegProducto, idMetodoPago = _req$body.idMetodoPago, cantidad = _req$body.cantidad, fecha = _req$body.fecha;
+          _req$body = req.body, idUsuario = _req$body.idUsuario, idProducto = _req$body.idProducto, idMetodoPago = _req$body.idMetodoPago, cantidad = _req$body.cantidad, fecha = _req$body.fecha;
           _context3.prev = 1;
           _context3.next = 4;
-          return _mysql["default"].query("CALL SP_CREAR_FACTURA(\"".concat(idCuenta, "\", \"").concat(idRegProducto, "\", \"").concat(idMetodoPago, "\", \"").concat(cantidad, "\", \"").concat(fecha, "\");"));
+          return _mysql["default"].query("CALL SP_CREAR_FACTURA(\"".concat(idUsuario, "\", \"").concat(idProducto, "\", \"").concat(idMetodoPago, "\", \"").concat(cantidad, "\", \"").concat(fecha, "\");"));
         case 4:
           respuesta = _context3.sent;
-          if (respuesta[0].affectedRows == 1) {
+          if (respuesta[0].affectedRows >= 1) {
             (0, _browser.success)(req, res, 201, "Factura Creada.");
           } else {
-            (0, _browser.error)(req, res, 400, "No se creo la factura, Intentalo mas tarde.");
+            (0, _browser.error)(req, res, 401, "No se creo la factura, Intentalo mas tarde.");
           }
           _context3.next = 11;
           break;
@@ -113,23 +113,23 @@ var crearFactura = exports.crearFactura = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE MODIFICAR FACTURA----------------------------------------------------------
-var modificarFactura = exports.modificarFactura = /*#__PURE__*/function () {
+// ------------------------------METODO DE ELIMINAR FACTURA----------------------------------------------------------
+var eliminarFactura = exports.eliminarFactura = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
-    var _req$body2, idFactura, idCuenta, idRegProducto, idMetodoPago, cantidad, fecha, respuesta;
+    var idFactura, respuesta;
     return _regenerator["default"].wrap(function _callee4$(_context4) {
       while (1) switch (_context4.prev = _context4.next) {
         case 0:
-          _req$body2 = req.body, idFactura = _req$body2.idFactura, idCuenta = _req$body2.idCuenta, idRegProducto = _req$body2.idRegProducto, idMetodoPago = _req$body2.idMetodoPago, cantidad = _req$body2.cantidad, fecha = _req$body2.fecha;
+          idFactura = req.body.idFactura;
           _context4.prev = 1;
           _context4.next = 4;
-          return _mysql["default"].query("CALL SP_EDITAR_FACTURA(\"".concat(idFactura, "\", \"").concat(idCuenta, "\", \"").concat(idRegProducto, "\", \"").concat(idMetodoPago, "\", \"").concat(cantidad, "\", \"").concat(fecha, "\");"));
+          return _mysql["default"].query("CALL SP_ELIMINAR_FACTURA(\"".concat(idFactura, "\");"));
         case 4:
           respuesta = _context4.sent;
           if (respuesta[0].affectedRows == 1) {
-            (0, _browser.success)(req, res, 201, "Factura Modificada.");
+            (0, _browser.success)(req, res, 201, "Factura eliminada.");
           } else {
-            (0, _browser.error)(req, res, 400, "No se modifico la factura, Intentalo mas tarde.");
+            (0, _browser.error)(req, res, 400, "No se elimino la factura, Intentalo mas tarde.");
           }
           _context4.next = 11;
           break;
@@ -143,42 +143,7 @@ var modificarFactura = exports.modificarFactura = /*#__PURE__*/function () {
       }
     }, _callee4, null, [[1, 8]]);
   }));
-  return function modificarFactura(_x7, _x8) {
+  return function eliminarFactura(_x7, _x8) {
     return _ref4.apply(this, arguments);
-  };
-}();
-
-// ------------------------------METODO DE ELIMINAR FACTURA----------------------------------------------------------
-var eliminarFactura = exports.eliminarFactura = /*#__PURE__*/function () {
-  var _ref5 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
-    var idFactura, respuesta;
-    return _regenerator["default"].wrap(function _callee5$(_context5) {
-      while (1) switch (_context5.prev = _context5.next) {
-        case 0:
-          idFactura = req.body.idFactura;
-          _context5.prev = 1;
-          _context5.next = 4;
-          return _mysql["default"].query("CALL SP_ELIMINAR_FACTURA(\"".concat(idFactura, "\");"));
-        case 4:
-          respuesta = _context5.sent;
-          if (respuesta[0].affectedRows == 1) {
-            (0, _browser.success)(req, res, 201, "Factura eliminada.");
-          } else {
-            (0, _browser.error)(req, res, 400, "No se elimino la factura, Intentalo mas tarde.");
-          }
-          _context5.next = 11;
-          break;
-        case 8:
-          _context5.prev = 8;
-          _context5.t0 = _context5["catch"](1);
-          (0, _browser.error)(req, res, 400, _context5.t0);
-        case 11:
-        case "end":
-          return _context5.stop();
-      }
-    }, _callee5, null, [[1, 8]]);
-  }));
-  return function eliminarFactura(_x9, _x10) {
-    return _ref5.apply(this, arguments);
   };
 }();

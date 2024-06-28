@@ -30,6 +30,8 @@
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "mysql2": "^3.9.7",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.14",
     "swagger-autogen": "^2.23.7",
     "swagger-ui-express": "^5.0.1"
   },

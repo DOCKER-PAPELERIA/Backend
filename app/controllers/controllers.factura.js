@@ -5,7 +5,7 @@ config();
 
 
 // ------------------------------METODO DE MOSTRAR UNA SOLA FACTURA------------------------------------------------
-export const mostrarFactura = async (req, res)  => {
+const mostrarFactura = async (req, res)  => {
     const id = req.params['id'];
     try {
         const [respuesta] = await pool.query(`CALL SP_MOSTRAR_FACTURA("${id}");`);
@@ -17,7 +17,7 @@ export const mostrarFactura = async (req, res)  => {
 
 
 // ------------------------------METODO DE MOSTRAR TODAS LAS FACTURA------------------------------------------------
-export const listarFactura = async (req, res)  => {
+const listarFactura = async (req, res)  => {
     try {
         const [respuesta] = await pool.query(`CALL SP_LISTAR_FACTURA();`);
         success(req, res, 200, respuesta[0]);
@@ -28,7 +28,7 @@ export const listarFactura = async (req, res)  => {
 
 
 // ------------------------------METODO DE CREAR FACTURA----------------------------------------------------------
-export const crearFactura = async (req, res) => {
+const crearFactura = async (req, res) => {
     const {idUsuario, idProducto, idMetodoPago, cantidad, fecha} = req.body;
     try {
         const respuesta = await pool.query(`CALL SP_CREAR_FACTURA("${idUsuario}", "${idProducto}", "${idMetodoPago}", "${cantidad}", "${fecha}");`);
@@ -42,24 +42,9 @@ export const crearFactura = async (req, res) => {
     }
 };
 
-// ------------------------------METODO DE MODIFICAR FACTURA----------------------------------------------------------
-export const modificarFactura = async (req, res) => {
-    const {idFactura, idUsuario, idProducto, idMetodoPago, cantidad, fecha} = req.body;
-    try {
-        const respuesta = await pool.query(`CALL SP_EDITAR_FACTURA("${idFactura}", "${idUsuario}", "${idProducto}", "${idMetodoPago}", "${cantidad}", "${fecha}");`);
-        if (respuesta[0].affectedRows >= 1) {
-            success(req, res, 201, "Factura Modificada.");
-        } else {
-            error(req, res, 400, "No se modifico la factura, Intentalo mas tarde.");
-        }
-    } catch (err) {
-        error(req, res, 400, err);
-    }
-};
-
 
 // ------------------------------METODO DE ELIMINAR FACTURA----------------------------------------------------------
-export const eliminarFactura = async (req, res) => {
+const eliminarFactura = async (req, res) => {
     const {idFactura} = req.body;
     try {
         const respuesta = await pool.query(`CALL SP_ELIMINAR_FACTURA("${idFactura}");`);
@@ -72,3 +57,5 @@ export const eliminarFactura = async (req, res) => {
         error(req, res, 400, err);
     }
 };
+
+export { listarFactura, mostrarFactura, crearFactura, eliminarFactura };

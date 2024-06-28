@@ -6,7 +6,7 @@ config();
 
 
 // ------------------------------METODO DE MOSTRAR UNA SOLA CATEGORIA------------------------------------------------
-export const mostrarCategoria = async (req, res)  => {
+const mostrarCategoria = async (req, res)  => {
     const id = req.params['id'];
     try {
         const [respuesta] = await pool.query(`CALL SP_MOSTRAR_CATEGORIAS("${id}");`);
@@ -19,7 +19,7 @@ export const mostrarCategoria = async (req, res)  => {
 
 
 // ------------------------------METODO DE MOSTRAR TODAS LAS CATEGORIA----------------------------------------------
-export const listarCategoria = async (req, res) => {
+const listarCategoria = async (req, res) => {
     try {
         const [respuesta] = await pool.query(`CALL SP_LISTAR_CATEGORIAS();`);
         success(req, res, 200, respuesta[0]);
@@ -30,7 +30,7 @@ export const listarCategoria = async (req, res) => {
 
 
 // ------------------------------METODO DE CREAR LAS CATEGORIAS------------------------------------------------------
-export const crearCategoria = async (req, res) => {
+const crearCategoria = async (req, res) => {
     const { Categoria, descripcion_categoria, imagen, fecha } = req.body;
 
     try {
@@ -47,7 +47,7 @@ export const crearCategoria = async (req, res) => {
 
 
 // ------------------------------METODO DE FILTRAR LOS PRODUCTOS QUE ESTAN DENTRO DE DE LAS CATEGORIAS-------------------------------------------
-export const FiltrarProductos = async (req, res) =>{
+const FiltrarProductos = async (req, res) =>{
     const {filtro, categoria} =  req.body;
     try {
         const [respuesta] = await pool.query(`CALL SP_FILTRAR_PRODUCTOS_CATEGORIAS("${filtro}", "${categoria}");`);
@@ -59,7 +59,7 @@ export const FiltrarProductos = async (req, res) =>{
 
 
 // ------------------------------METODO DE MODIFICAR LAS CATEGORIAS--------------------------------------------------
-export const modificarCategoria = async (req, res) => {
+const modificarCategoria = async (req, res) => {
     const {idCategorias, Categoria, descripcion_categoria, imagen, fecha} = req.body;
 
     try {
@@ -77,7 +77,7 @@ export const modificarCategoria = async (req, res) => {
 
 
 // ------------------------------METODO DE ELIMINAR LAS CATEGORIAS---------------------------------------------------
-export const eliminarCategoria = async (req, res) => {
+const eliminarCategoria = async (req, res) => {
     const {idCategorias} = req.body;
 
     try {
@@ -91,3 +91,5 @@ export const eliminarCategoria = async (req, res) => {
         error(req, res, 400, err);
     }
 };
+
+export { listarCategoria, mostrarCategoria, crearCategoria, FiltrarProductos, modificarCategoria, eliminarCategoria };

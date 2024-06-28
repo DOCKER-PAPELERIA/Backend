@@ -81,14 +81,14 @@ var listarProveedor = exports.listarProveedor = /*#__PURE__*/function () {
 // ------------------------------METODO DE CREAR PROVEEDOR--------------------------------------------------------
 var crearProveedor = exports.crearProveedor = /*#__PURE__*/function () {
   var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
-    var _req$body, telefono, direccion, correo, nit, respuesta;
+    var _req$body, nombre_proveedor, telefono, correo, respuesta;
     return _regenerator["default"].wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
-          _req$body = req.body, telefono = _req$body.telefono, direccion = _req$body.direccion, correo = _req$body.correo, nit = _req$body.nit;
+          _req$body = req.body, nombre_proveedor = _req$body.nombre_proveedor, telefono = _req$body.telefono, correo = _req$body.correo;
           _context3.prev = 1;
           _context3.next = 4;
-          return _mysql["default"].query("CALL SP_INSERTAR_PROVEEDOR(\"".concat(telefono, "\", \"").concat(direccion, "\", \"").concat(correo, "\", \"").concat(nit, "\");"));
+          return _mysql["default"].query("CALL SP_INSERTAR_PROVEEDOR(\"".concat(nombre_proveedor, "\", \"").concat(telefono, "\", \"").concat(correo, "\");"));
         case 4:
           respuesta = _context3.sent;
           if (respuesta[0].affectedRows == 1) {
@@ -116,14 +116,14 @@ var crearProveedor = exports.crearProveedor = /*#__PURE__*/function () {
 // ------------------------------METODO DE MODIFICAR PROVEEDOR----------------------------------------------------
 var modificarProveedor = exports.modificarProveedor = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
-    var _req$body2, idProveedor, telefono, direccion, correo, nit, respuesta;
+    var _req$body2, idProveedor, nombre_proveedor, telefono, correo, respuesta;
     return _regenerator["default"].wrap(function _callee4$(_context4) {
       while (1) switch (_context4.prev = _context4.next) {
         case 0:
-          _req$body2 = req.body, idProveedor = _req$body2.idProveedor, telefono = _req$body2.telefono, direccion = _req$body2.direccion, correo = _req$body2.correo, nit = _req$body2.nit;
+          _req$body2 = req.body, idProveedor = _req$body2.idProveedor, nombre_proveedor = _req$body2.nombre_proveedor, telefono = _req$body2.telefono, correo = _req$body2.correo;
           _context4.prev = 1;
           _context4.next = 4;
-          return _mysql["default"].query("CALL SP_EDITAR_PROVEEDOR(\"".concat(idProveedor, "\", \"").concat(telefono, "\", \"").concat(direccion, "\", \"").concat(correo, "\", \"").concat(nit, "\");"));
+          return _mysql["default"].query("CALL SP_EDITAR_PROVEEDOR(\"".concat(idProveedor, "\", \"").concat(nombre_proveedor, "\", \"").concat(telefono, "\", \"").concat(correo, "\");"));
         case 4:
           respuesta = _context4.sent;
           if (respuesta[0].affectedRows == 1) {

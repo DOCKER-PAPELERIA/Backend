@@ -1,11 +1,12 @@
 import pool from "../config/mysql.db";
 import { success, error } from "../messages/browser.js";
 import { config } from "dotenv";
+import nodemailer from "nodemailer";
 config();
 
 
 // ------------------------------METODO DE MOSTRAR UN SOLO PRODUCTO------------------------------------------------
-export const mostrarProducto = async (req, res) => {
+const mostrarProducto = async (req, res) => {
     const id = req.params["id"];
     try {
         const [respuesta] = await pool.query(`CALL SP_MOSTRAR_PRODUCTOS("${id}");`);
@@ -17,24 +18,19 @@ export const mostrarProducto = async (req, res) => {
 
 
 // ------------------------------METODO DE MOSTRAR TODAS LOS PRODUCTOS------------------------------------------------
-export const listarProducto = async (req, res) => {
+const listarProducto = async (req, res) => {
     try {
         const [respuesta] = await pool.query(`CALL SP_LISTAR_PRODUCTOS();`);
-        success(req, res, 200, respuesta[0]);
-    } catch (err) {
-        error(req, res, 500, err);
-    }
-};
-
-
-// ------------------------------METODO DE MOSTRAR EL PRODUCTO AGOTADO------------------------------------------------
-export const agotado = async (req, res) => {
-    try {
-        const [respuesta] = await pool.query(`CALL SP_PRODUCTO_AGOTADO();`);
         if (respuesta.length === 0 || (respuesta[0] && respuesta[0].length === 0)) {
             success(req, res, 200, "No hay productos agotados.");
         } else {
-            success(req, res, 200, respuesta[0], "Productos Agotados.");
+            // Enviar correo de alerta
+            const emailText = respuesta[0].map(producto => `Producto: ${producto.nombre_product}, Stock: ${producto.stock}`).join('\n');
+            const emailSubject = "Alerta: Productos Agotados";
+            const emailRecipient = "papeleria.angel.info@gmail.com"; // Cambia esto al correo deseado
+
+            await sendMail(emailRecipient, emailSubject, emailText);
+            success(req, res, 200, respuesta[0], "Productos Agotados y correo enviado.");
         }
     } catch (err) {
         error(req, res, 500, err);
@@ -43,7 +39,7 @@ export const agotado = async (req, res) => {
 
 
 // ------------------------------METODO DE MOSTRAR EL PRODUCTO Y SU PRECIO---------------------------------
-export const Precios = async (req, res) => {
+const Precios = async (req, res) => {
     try {
         const [respuesta] = await pool.query(`CALL SP_MOSTRAR_PRECIOS();`);
         success(req, res, 200, respuesta[0]);
@@ -54,7 +50,7 @@ export const Precios = async (req, res) => {
 
 
 // ------------------------------METODO DE CREAR LOS PRODUCTOS----------------------------------------------------
-export const crearProducto = async (req, res) => {
+const crearProducto = async (req, res) => {
     const {idCategorias, idProveedor, nombre_product, stock, codigo_producto, imagen, precio, fecha, estado} = req.body;
     try {
         const respuesta = await pool.query(`CALL  SP_INSERTAR_PRODUCTOS("${idCategorias}", "${idProveedor}", "${nombre_product}", "${stock}", "${codigo_producto}", "${imagen}", "${precio}", "${fecha}", "${estado}");`);
@@ -70,7 +66,7 @@ export const crearProducto = async (req, res) => {
 
 
 // ------------------------------METODO DE MODIFICAR LOS PRODUCTOS------------------------------------------------
-export const modificarProducto = async (req, res) => {
+const modificarProducto = async (req, res) => {
     const {idProducto, idCategorias, idProveedor, nombre_product, stock, codigo_producto, imagen, precio, fecha, estado} = req.body;
     try {
         const respuesta = await pool.query(`CALL SP_EDITAR_PRODUCTO("${idProducto}", "${idCategorias}", "${idProveedor}", "${nombre_product}", "${stock}", "${codigo_producto}", "${imagen}", "${precio}", "${fecha}", "${estado}");`);
@@ -86,7 +82,7 @@ export const modificarProducto = async (req, res) => {
 
 
 // ------------------------------METODO DE ELIMINAR LOS PRODUCTOS-------------------------------------------------
-export const eliminarProducto = async (req, res) => {
+const eliminarProducto = async (req, res) => {
     const {idProducto} = req.body;
     try {
         const respuesta = await pool.query(`CALL SP_ELIMINAR_PRODUCTO("${idProducto}");`);
@@ -99,3 +95,24 @@ export const eliminarProducto = async (req, res) => {
         error(req, res, 400, err);
     }
 };
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_CORREO,
+        pass: process.env.EMAIL_CLAVE
+    }
+});
+
+const sendMail = (to, subject, text) => {
+    const mailOptions = {
+        from: process.env.EMAIL_CORREO,
+        to,
+        subject,
+        text
+    };
+
+    return transporter.sendMail(mailOptions);
+};
+
+export { listarProducto, mostrarProducto, Precios, crearProducto, modificarProducto, eliminarProducto };

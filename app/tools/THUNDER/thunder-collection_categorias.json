@@ -2,7 +2,7 @@
     "clientName": "Thunder Client",
     "collectionName": "categorias",
     "collectionId": "76d6f078-78b5-4d17-b567-2d9acae80eb5",
-    "dateExported": "2024-06-21T02:34:32.434Z",
+    "dateExported": "2024-06-28T02:08:52.622Z",
     "version": "1.2",
     "folders": [],
     "requests": [
@@ -34,49 +34,18 @@
             "_id": "79bbb13c-8e5f-4508-b40b-28068d281d32",
             "colId": "76d6f078-78b5-4d17-b567-2d9acae80eb5",
             "containerId": "",
-            "name": "descripcion",
-            "url": "http://localhost:3000/api/categoria-descrip",
+            "name": "filtro",
+            "url": "http://localhost:3000/api/catego-filtro",
             "method": "GET",
             "sortNum": 60000,
             "created": "2024-06-13T03:58:31.326Z",
-            "modified": "2024-06-16T22:15:13.513Z",
-            "headers": []
-        },
-        {
-            "_id": "c0cad393-9613-45f8-a63c-4c21e7f99d16",
-            "colId": "76d6f078-78b5-4d17-b567-2d9acae80eb5",
-            "containerId": "",
-            "name": "ordenAlfabetico",
-            "url": "http://localhost:3000/api/categoria-ordena",
-            "method": "GET",
-            "sortNum": 70000,
-            "created": "2024-06-13T04:05:27.431Z",
-            "modified": "2024-06-16T22:15:30.762Z",
-            "headers": []
-        },
-        {
-            "_id": "36d619c8-a1ab-4644-849c-ada3d5bbb48f",
-            "colId": "76d6f078-78b5-4d17-b567-2d9acae80eb5",
-            "containerId": "",
-            "name": "mas_nuevo_a_viejo",
-            "url": "http://localhost:3000/api/categoria-nuevo",
-            "method": "GET",
-            "sortNum": 80000,
-            "created": "2024-06-16T22:05:26.234Z",
-            "modified": "2024-06-16T22:15:41.949Z",
-            "headers": []
-        },
-        {
-            "_id": "7fc22bc3-f7a7-41ff-961b-d3aa635a55ca",
-            "colId": "76d6f078-78b5-4d17-b567-2d9acae80eb5",
-            "containerId": "",
-            "name": "mas_viejo_a_nuevo",
-            "url": "http://localhost:3000/api/categoria-viejo",
-            "method": "GET",
-            "sortNum": 90000,
-            "created": "2024-06-16T22:18:02.264Z",
-            "modified": "2024-06-16T22:18:13.025Z",
-            "headers": []
+            "modified": "2024-06-27T02:06:59.538Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"filtro\": \"nuevo\",\n  \"categoria\": \"Papelería de Oficina\"\n}",
+                "form": []
+            }
         },
         {
             "_id": "7a5f8c5f-2fd0-4bd2-a243-49cf92953aa3",
@@ -140,5 +109,5 @@
             }
         }
     ],
-    "ref": "KoGgZ8Nz3kTiXR59frDdlEvhNAH8_KMHGEH2PJj2kggRr7YkAyyt2oY2IyT8HS7UV6hgCyFJWjhGw-xM484gBA"
+    "ref": "KoGgZ8Nz3kTiXR59frDdlHkD_CZTtXQHFGChHCWm6hNGTobkVuaHsWffzek-1t3rnmFbs8u41g3E4lqbJoI_AQ"
 }
