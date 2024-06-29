@@ -42,9 +42,30 @@
         "description": "",
         "parameters": [
           {
-            "name": "apply(this",
+            "name": "x-access-token",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Categoria": {
+                  "example": "any"
+                },
+                "descripcion_categoria": {
+                  "example": "any"
+                },
+                "imagen": {
+                  "example": "any"
+                },
+                "fecha": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -57,9 +78,60 @@
         "description": "",
         "parameters": [
           {
-            "name": "apply(this",
+            "name": "x-access-token",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idCategorias": {
+                  "example": "any"
+                },
+                "Categoria": {
+                  "example": "any"
+                },
+                "descripcion_categoria": {
+                  "example": "any"
+                },
+                "imagen": {
+                  "example": "any"
+                },
+                "fecha": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idCategorias": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -110,9 +182,60 @@
         "description": "",
         "parameters": [
           {
-            "name": "apply(this",
+            "name": "x-access-token",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idUsuario": {
+                  "example": "any"
+                },
+                "idProducto": {
+                  "example": "any"
+                },
+                "idMetodoPago": {
+                  "example": "any"
+                },
+                "cantidad": {
+                  "example": "any"
+                },
+                "fecha": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idFactura": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -153,9 +276,45 @@
         "description": "",
         "parameters": [
           {
-            "name": "apply(this",
+            "name": "x-access-token",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idCategorias": {
+                  "example": "any"
+                },
+                "idProveedor": {
+                  "example": "any"
+                },
+                "nombre_product": {
+                  "example": "any"
+                },
+                "stock": {
+                  "example": "any"
+                },
+                "codigo_producto": {
+                  "example": "any"
+                },
+                "imagen": {
+                  "example": "any"
+                },
+                "precio": {
+                  "example": "any"
+                },
+                "fecha": {
+                  "example": "any"
+                },
+                "estado": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -168,9 +327,75 @@
         "description": "",
         "parameters": [
           {
-            "name": "apply(this",
+            "name": "x-access-token",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idProducto": {
+                  "example": "any"
+                },
+                "idCategorias": {
+                  "example": "any"
+                },
+                "idProveedor": {
+                  "example": "any"
+                },
+                "nombre_product": {
+                  "example": "any"
+                },
+                "stock": {
+                  "example": "any"
+                },
+                "codigo_producto": {
+                  "example": "any"
+                },
+                "imagen": {
+                  "example": "any"
+                },
+                "precio": {
+                  "example": "any"
+                },
+                "fecha": {
+                  "example": "any"
+                },
+                "estado": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idProducto": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -231,9 +456,27 @@
         "description": "",
         "parameters": [
           {
-            "name": "apply(this",
+            "name": "x-access-token",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nombre_proveedor": {
+                  "example": "any"
+                },
+                "telefono": {
+                  "example": "any"
+                },
+                "correo": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -246,9 +489,57 @@
         "description": "",
         "parameters": [
           {
-            "name": "apply(this",
+            "name": "x-access-token",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idProveedor": {
+                  "example": "any"
+                },
+                "nombre_proveedor": {
+                  "example": "any"
+                },
+                "telefono": {
+                  "example": "any"
+                },
+                "correo": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idProveedor": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -289,7 +580,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "apply(this",
+            "name": "x-access-token",
             "in": "header",
             "type": "string"
           },
@@ -300,6 +591,27 @@
               "type": "object",
               "properties": {
                 "contrasena": {
+                  "example": "any"
+                },
+                "idRol": {
+                  "example": "any"
+                },
+                "identificacion": {
+                  "example": "any"
+                },
+                "nombres": {
+                  "example": "any"
+                },
+                "telefono": {
+                  "example": "any"
+                },
+                "fecha_naci": {
+                  "example": "any"
+                },
+                "correo": {
+                  "example": "any"
+                },
+                "estado": {
                   "example": "any"
                 }
               }
@@ -316,7 +628,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "apply(this",
+            "name": "x-access-token",
             "in": "header",
             "type": "string"
           },
@@ -327,6 +639,54 @@
               "type": "object",
               "properties": {
                 "contrasena": {
+                  "example": "any"
+                },
+                "idUsuario": {
+                  "example": "any"
+                },
+                "identificacion": {
+                  "example": "any"
+                },
+                "nombres": {
+                  "example": "any"
+                },
+                "telefono": {
+                  "example": "any"
+                },
+                "fecha_naci": {
+                  "example": "any"
+                },
+                "correo": {
+                  "example": "any"
+                },
+                "estado": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idUsuario": {
                   "example": "any"
                 }
               }
@@ -343,6 +703,23 @@
     "/login": {
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "correo": {
+                  "example": "any"
+                },
+                "contrasena": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
