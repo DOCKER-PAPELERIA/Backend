@@ -97,7 +97,7 @@ var listarProducto = exports.listarProducto = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE MOSTRAR EL PRODUCTO Y SU PRECIO---------------------------------
+// ------------------------------METODO DE MOSTRAR EL PRODUCTO AGOTADO-------------------------------------
 var Agotado = exports.Agotado = /*#__PURE__*/function () {
   var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
     var _yield$pool$query5, _yield$pool$query6, respuesta;

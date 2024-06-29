@@ -148,7 +148,7 @@ var modificarProveedor = exports.modificarProveedor = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE ELIMINAR PROVEEDOR------------------------------------------------------
+// ------------------------------METODO DE ELIMINAR PROVEEDOR-------------------------------------------------------
 var eliminarProveedor = exports.eliminarProveedor = /*#__PURE__*/function () {
   var _ref5 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
     var idProveedor, respuesta;

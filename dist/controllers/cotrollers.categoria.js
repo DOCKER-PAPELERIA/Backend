@@ -46,7 +46,7 @@ var mostrarCategoria = exports.mostrarCategoria = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE MOSTRAR TODAS LAS CATEGORIA----------------------------------------------
+// ------------------------------METODO DE MOSTRAR TODAS LAS CATEGORIA-----------------------------------------------
 var listarCategoria = exports.listarCategoria = /*#__PURE__*/function () {
   var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
     var _yield$pool$query3, _yield$pool$query4, respuesta;

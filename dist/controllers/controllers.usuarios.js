@@ -84,7 +84,7 @@ var listarUsuario = exports.listarUsuario = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE CREAR USUARIO------------------------------------------------------------
+// ------------------------------METODO DE CREAR USUARIO-------------------------------------------------------------
 var crearUsuario = exports.crearUsuario = /*#__PURE__*/function () {
   var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
     var _req$body, idRol, identificacion, nombres, telefono, fecha_naci, correo, estado, contrasenasincifrar, _hash, contrasena, respuesta, msg;

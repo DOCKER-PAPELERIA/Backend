@@ -113,7 +113,7 @@ var crearFactura = exports.crearFactura = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE ELIMINAR FACTURA----------------------------------------------------------
+// ------------------------------METODO DE ELIMINAR FACTURA-----------------------------------------------------------
 var eliminarFactura = exports.eliminarFactura = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
     var idFactura, respuesta;
