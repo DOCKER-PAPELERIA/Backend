@@ -18,7 +18,7 @@ const mostrarCategoria = async (req, res)  => {
 
 
 
-// ------------------------------METODO DE MOSTRAR TODAS LAS CATEGORIA----------------------------------------------
+// ------------------------------METODO DE MOSTRAR TODAS LAS CATEGORIA-----------------------------------------------
 const listarCategoria = async (req, res) => {
     try {
         const [respuesta] = await pool.query(`CALL SP_LISTAR_CATEGORIAS();`);

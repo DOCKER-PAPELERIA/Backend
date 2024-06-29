@@ -43,7 +43,7 @@ const crearFactura = async (req, res) => {
 };
 
 
-// ------------------------------METODO DE ELIMINAR FACTURA----------------------------------------------------------
+// ------------------------------METODO DE ELIMINAR FACTURA-----------------------------------------------------------
 const eliminarFactura = async (req, res) => {
     const {idFactura} = req.body;
     try {

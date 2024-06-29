@@ -60,7 +60,7 @@ const modificarProveedor = async (req, res) => {
 };
 
 
-// ------------------------------METODO DE ELIMINAR PROVEEDOR------------------------------------------------------
+// ------------------------------METODO DE ELIMINAR PROVEEDOR-------------------------------------------------------
 const eliminarProveedor = async (req, res) => {
     const {idProveedor} = req.body;
     try {

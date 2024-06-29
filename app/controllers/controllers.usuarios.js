@@ -32,7 +32,7 @@ const listarUsuario = async (req, res) => {
 };
 
 
-// ------------------------------METODO DE CREAR USUARIO------------------------------------------------------------
+// ------------------------------METODO DE CREAR USUARIO-------------------------------------------------------------
 const crearUsuario = async (req, res) => {
     const {idRol, identificacion, nombres, telefono, fecha_naci, correo, estado} = req.body;
     const contrasenasincifrar = req.body.contrasena;
