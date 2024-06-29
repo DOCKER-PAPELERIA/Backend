@@ -39,6 +39,17 @@ const listarProducto = async (req, res) => {
 
 
 // ------------------------------METODO DE MOSTRAR EL PRODUCTO Y SU PRECIO---------------------------------
+const Agotado = async (req, res) => {
+    try {
+        const [respuesta] = await pool.query(`CALL SP_PRODUCTO_AGOTADO();`);
+        success(req, res, 200, respuesta[0]);
+    } catch (err) {
+        error(req, res, 500, err);
+    }
+};
+
+
+// ------------------------------METODO DE MOSTRAR EL PRODUCTO Y SU PRECIO---------------------------------
 const Precios = async (req, res) => {
     try {
         const [respuesta] = await pool.query(`CALL SP_MOSTRAR_PRECIOS();`);
@@ -115,4 +126,4 @@ const sendMail = (to, subject, text) => {
     return transporter.sendMail(mailOptions);
 };
 
-export { listarProducto, mostrarProducto, Precios, crearProducto, modificarProducto, eliminarProducto };
+export { listarProducto, mostrarProducto, Precios, Agotado, crearProducto, modificarProducto, eliminarProducto };
