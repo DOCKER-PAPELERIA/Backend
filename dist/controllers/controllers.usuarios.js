@@ -5,7 +5,7 @@ var _typeof = require("@babel/runtime/helpers/typeof");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.mostrarUsuario = exports.modificarUsuario = exports.loginUsuario = exports.listarUsuario = exports.eliminarUsuario = exports.crearUsuario = void 0;
+exports.sendEmail = exports.mostrarUsuario = exports.modificarUsuario = exports.loginUsuario = exports.listarUsuario = exports.eliminarUsuario = exports.crearUsuario = void 0;
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
@@ -98,29 +98,38 @@ var crearUsuario = exports.crearUsuario = /*#__PURE__*/function () {
           return _bcrypt["default"].hash(contrasenasincifrar, 2);
         case 5:
           _hash = _context3.sent;
-          contrasena = _hash;
+          contrasena = _hash; // Insertar el nuevo usuario en la base de datos
           _context3.next = 9;
           return _mysql["default"].query("CALL SP_INSERTAR_USUARIO(\"".concat(idRol, "\", \"").concat(identificacion, "\", \"").concat(nombres, "\", \"").concat(telefono, "\", \"").concat(fecha_naci, "\", \"").concat(correo, "\", \"").concat(contrasena, "\", \"").concat(estado, "\");"));
         case 9:
           respuesta = _context3.sent;
-          if (respuesta[0].affectedRows == 1) {
-            msg = "\n                <!DOCTYPE html>\n  <html lang=\"es\">\n  <head>\n      <meta charset=\"UTF-8\">\n      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n      <style>\n          body {\n              font-family: Arial, sans-serif;\n              background-color: #f4f4f4;\n              color: #333;\n              line-height: 1.6;\n              padding: 20px;\n          }\n          .container {\n              background-color: #fff;\n              border-radius: 10px;\n              box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n              padding: 20px;\n              max-width: 600px;\n              margin: auto;\n          }\n          h1 {\n              color: #808080;\n          }\n          p {\n              font-size: 2em;\n          }\n      </style>\n  </head>\n  <body>\n      <div class=\"container\">\n          <h1>\xA1Bienvenido, ".concat(nombres, "!</h1>\n          <p>\xA1Te hemos asignado un usuario y una contrase\xF1a para que ingreses a la p\xE1gina!</p>\n          <p><strong>Tu usuario es:</strong> ").concat(correo, "</p>\n          <p><strong>Tu contrase\xF1a es:</strong> ").concat(contrasenasincifrar, "</p>\n          <p>\xA1Te esperamos!</p>\n      </div>\n  </body>\n  </html>\n            ");
-            sendEmail(msg, correo, "creacion de la cuenta");
-            (0, _browser.success)(req, res, 201, "Usuario creado correctamente");
-          } else {
-            (0, _browser.error)(req, res, 400, "No se pudo crear el usuario");
+          if (!(respuesta[0].affectedRows == 1)) {
+            _context3.next = 17;
+            break;
           }
-          _context3.next = 16;
+          // Crear el mensaje de correo
+          msg = "\n                <!DOCTYPE html>\n                <html lang=\"es\">\n                <head>\n                    <meta charset=\"UTF-8\">\n                    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n                    <style>\n                        body {\n                            font-family: Arial, sans-serif;\n                            background-color: #f4f4f4;\n                            color: #333;\n                            line-height: 1.6;\n                            padding: 20px;\n                        }\n                        .container {\n                            background-color: #fff;\n                            border-radius: 10px;\n                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n                            padding: 20px;\n                            max-width: 600px;\n                            margin: auto;\n                        }\n                        h1 {\n                            color: #808080;\n                        }\n                        p {\n                            font-size: 2em;\n                        }\n                    </style>\n                </head>\n                <body>\n                    <div class=\"container\">\n                        <h1>\xA1Bienvenido, ".concat(nombres, "!</h1>\n                        <p>\xA1Te hemos asignado un usuario y una contrase\xF1a para que ingreses a la p\xE1gina!</p>\n                        <p><strong>Tu usuario es:</strong> ").concat(correo, "</p>\n                        <p><strong>Tu contrase\xF1a es:</strong> ").concat(contrasenasincifrar, "</p>\n                        <p>\xA1Te esperamos!</p>\n                    </div>\n                </body>\n                </html>\n            "); // Enviar el correo de bienvenida
+          _context3.next = 14;
+          return sendEmail(msg, correo, "Creación de la cuenta");
+        case 14:
+          // Responder al cliente
+          (0, _browser.success)(req, res, 201, "Usuario creado correctamente y correo enviado");
+          _context3.next = 18;
           break;
-        case 13:
-          _context3.prev = 13;
+        case 17:
+          (0, _browser.error)(req, res, 400, "No se pudo crear el usuario");
+        case 18:
+          _context3.next = 23;
+          break;
+        case 20:
+          _context3.prev = 20;
           _context3.t0 = _context3["catch"](2);
           (0, _browser.error)(req, res, 400, _context3.t0);
-        case 16:
+        case 23:
         case "end":
           return _context3.stop();
       }
-    }, _callee3, null, [[2, 13]]);
+    }, _callee3, null, [[2, 20]]);
   }));
   return function crearUsuario(_x5, _x6) {
     return _ref3.apply(this, arguments);
@@ -266,35 +275,48 @@ var loginUsuario = exports.loginUsuario = /*#__PURE__*/function () {
 
 // ------------------------------ESTE METODO ES PARA MANDAR CORREO AL MOMENTO DE CRAR UN USUARIO------------------------------------------------------------
 
-var sendEmail = /*#__PURE__*/function () {
+var sendEmail = exports.sendEmail = /*#__PURE__*/function () {
   var _ref7 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee7(messages, receiverEmail, subject) {
     var transporter, info;
     return _regenerator["default"].wrap(function _callee7$(_context7) {
       while (1) switch (_context7.prev = _context7.next) {
         case 0:
+          _context7.prev = 0;
           transporter = _nodemailer["default"].createTransport({
             host: "smtp.gmail.com",
             service: "gmail",
-            secure: false,
+            secure: true,
+            // Usa secure: true para SSL y secure: false para TLS
             auth: {
               user: process.env.EMAIL_CORREO,
               pass: process.env.EMAIL_CLAVE
+            },
+            tls: {
+              rejectUnauthorized: false // Ignora errores de certificado autofirmado
             }
           });
-          _context7.next = 3;
+          _context7.next = 4;
           return transporter.sendMail({
             from: process.env.EMAIL_CORREO,
             to: receiverEmail,
             subject: subject,
             html: messages
           });
-        case 3:
-          info = _context7.sent;
         case 4:
+          info = _context7.sent;
+          console.log("Email enviado:", info.messageId);
+          _context7.next = 12;
+          break;
+        case 8:
+          _context7.prev = 8;
+          _context7.t0 = _context7["catch"](0);
+          console.error("Error al enviar el correo:", _context7.t0);
+          throw _context7.t0;
+        case 12:
         case "end":
           return _context7.stop();
       }
-    }, _callee7);
+    }, _callee7, null, [[0, 8]]);
   }));
   return function sendEmail(_x13, _x14, _x15) {
     return _ref7.apply(this, arguments);
