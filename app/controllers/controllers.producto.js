@@ -17,10 +17,10 @@ const mostrarProducto = async (req, res) => {
 };
 
 
-// ------------------------------METODO DE MOSTRAR TODAS LOS PRODUCTOS------------------------------------------------
-const listarProducto = async (req, res) => {
+// ------------------------------METODO DE MOSTRAR PRODUCTO AGOTADO------------------------------------------------
+const Agotado = async (req, res) => {
     try {
-        const [respuesta] = await pool.query(`CALL SP_LISTAR_PRODUCTOS();`);
+        const [respuesta] = await pool.query(`CALL SP_PRODUCTO_AGOTADO();`);
         if (respuesta.length === 0 || (respuesta[0] && respuesta[0].length === 0)) {
             success(req, res, 200, "No hay productos agotados.");
         } else {
@@ -39,10 +39,10 @@ const listarProducto = async (req, res) => {
 
 
 
-// ------------------------------METODO DE MOSTRAR EL PRODUCTO AGOTADO-------------------------------------
-const Agotado = async (req, res) => {
+// ------------------------------METODO DE MOSTRAR TODO LOS PRODUCTOS-------------------------------------
+const listarProducto = async (req, res) => {
     try {
-        const [respuesta] = await pool.query(`CALL SP_PRODUCTO_AGOTADO();`);
+        const [respuesta] = await pool.query(`CALL SP_LISTAR_PRODUCTOS();`);
         success(req, res, 200, respuesta[0]);
     } catch (err) {
         error(req, res, 500, err);

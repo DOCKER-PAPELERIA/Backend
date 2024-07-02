@@ -47,8 +47,8 @@ var mostrarProducto = exports.mostrarProducto = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE MOSTRAR TODAS LOS PRODUCTOS------------------------------------------------
-var listarProducto = exports.listarProducto = /*#__PURE__*/function () {
+// ------------------------------METODO DE MOSTRAR PRODUCTO AGOTADO------------------------------------------------
+var Agotado = exports.Agotado = /*#__PURE__*/function () {
   var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
     var _yield$pool$query3, _yield$pool$query4, respuesta, emailText, emailSubject, emailRecipient;
     return _regenerator["default"].wrap(function _callee2$(_context2) {
@@ -56,7 +56,7 @@ var listarProducto = exports.listarProducto = /*#__PURE__*/function () {
         case 0:
           _context2.prev = 0;
           _context2.next = 3;
-          return _mysql["default"].query("CALL SP_LISTAR_PRODUCTOS();");
+          return _mysql["default"].query("CALL SP_PRODUCTO_AGOTADO();");
         case 3:
           _yield$pool$query3 = _context2.sent;
           _yield$pool$query4 = (0, _slicedToArray2["default"])(_yield$pool$query3, 1);
@@ -92,13 +92,13 @@ var listarProducto = exports.listarProducto = /*#__PURE__*/function () {
       }
     }, _callee2, null, [[0, 18]]);
   }));
-  return function listarProducto(_x3, _x4) {
+  return function Agotado(_x3, _x4) {
     return _ref2.apply(this, arguments);
   };
 }();
 
-// ------------------------------METODO DE MOSTRAR EL PRODUCTO AGOTADO-------------------------------------
-var Agotado = exports.Agotado = /*#__PURE__*/function () {
+// ------------------------------METODO DE MOSTRAR TODO LOS PRODUCTOS-------------------------------------
+var listarProducto = exports.listarProducto = /*#__PURE__*/function () {
   var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
     var _yield$pool$query5, _yield$pool$query6, respuesta;
     return _regenerator["default"].wrap(function _callee3$(_context3) {
@@ -106,7 +106,7 @@ var Agotado = exports.Agotado = /*#__PURE__*/function () {
         case 0:
           _context3.prev = 0;
           _context3.next = 3;
-          return _mysql["default"].query("CALL SP_PRODUCTO_AGOTADO();");
+          return _mysql["default"].query("CALL SP_LISTAR_PRODUCTOS();");
         case 3:
           _yield$pool$query5 = _context3.sent;
           _yield$pool$query6 = (0, _slicedToArray2["default"])(_yield$pool$query5, 1);
@@ -124,7 +124,7 @@ var Agotado = exports.Agotado = /*#__PURE__*/function () {
       }
     }, _callee3, null, [[0, 9]]);
   }));
-  return function Agotado(_x5, _x6) {
+  return function listarProducto(_x5, _x6) {
     return _ref3.apply(this, arguments);
   };
 }();
