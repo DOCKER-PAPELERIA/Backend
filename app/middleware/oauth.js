@@ -14,6 +14,7 @@ export const verifyToken = async (req , res, next) => {
         const valida = await jwt.verify(
             token, process.env.TOKEN_PRIVATEKEY
         );
+        req.user = valida;
         next();
        } catch (e) {
         error(req, res, 401, "Falta Acceso del token.")

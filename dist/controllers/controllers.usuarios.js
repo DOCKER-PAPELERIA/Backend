@@ -5,7 +5,7 @@ var _typeof = require("@babel/runtime/helpers/typeof");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.sendEmail = exports.mostrarUsuario = exports.modificarUsuario = exports.loginUsuario = exports.listarUsuario = exports.eliminarUsuario = exports.crearUsuario = void 0;
+exports.sendEmail = exports.mostrarUsuariobaseToken = exports.mostrarUsuario = exports.modificarUsuario = exports.loginUsuario = exports.listarUsuario = exports.eliminarUsuario = exports.crearUsuario = exports.cambiarContrasenaYEnviarCorreo = void 0;
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
@@ -320,5 +320,127 @@ var sendEmail = exports.sendEmail = /*#__PURE__*/function () {
   }));
   return function sendEmail(_x13, _x14, _x15) {
     return _ref7.apply(this, arguments);
+  };
+}();
+
+// ------------------------------METODO DE CAMBIAR CONTRASEÑA Y ENVIAR CORREO------------------------------------------------------------
+var cambiarContrasenaYEnviarCorreo = exports.cambiarContrasenaYEnviarCorreo = /*#__PURE__*/function () {
+  var _ref8 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee8(req, res) {
+    var correo, generateRandomPassword, _yield$pool$query5, _yield$pool$query6, usuario, nuevaContrasena, _hash3, contrasenaEncriptada, _yield$pool$query7, _yield$pool$query8, respuesta, msg;
+    return _regenerator["default"].wrap(function _callee8$(_context8) {
+      while (1) switch (_context8.prev = _context8.next) {
+        case 0:
+          correo = req.body.correo;
+          _context8.prev = 1;
+          // Generar una nueva contraseña aleatoria
+          generateRandomPassword = function generateRandomPassword() {
+            var length = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 12;
+            var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var password = "";
+            for (var i = 0; i < length; i++) {
+              var randomIndex = Math.floor(Math.random() * charset.length);
+              password += charset[randomIndex];
+            }
+            return password;
+          };
+          _context8.next = 5;
+          return _mysql["default"].query("SELECT * FROM usuario WHERE correo = ?", [correo]);
+        case 5:
+          _yield$pool$query5 = _context8.sent;
+          _yield$pool$query6 = (0, _slicedToArray2["default"])(_yield$pool$query5, 1);
+          usuario = _yield$pool$query6[0];
+          if (usuario.length) {
+            _context8.next = 10;
+            break;
+          }
+          return _context8.abrupt("return", (0, _browser.error)(req, res, 400, "el correo proporcionado no existe"));
+        case 10:
+          nuevaContrasena = generateRandomPassword(); // Generar nueva contraseña aleatoria
+          // Encriptar la nueva contraseña
+          _context8.next = 13;
+          return _bcrypt["default"].hash(nuevaContrasena, 2);
+        case 13:
+          _hash3 = _context8.sent;
+          // Usar una sal de 10 rondas
+          contrasenaEncriptada = _hash3; // Actualizar la contraseña en la base de datos
+          _context8.next = 17;
+          return _mysql["default"].query("UPDATE usuario SET contrasena = ? WHERE correo = ?", [contrasenaEncriptada, correo]);
+        case 17:
+          _yield$pool$query7 = _context8.sent;
+          _yield$pool$query8 = (0, _slicedToArray2["default"])(_yield$pool$query7, 1);
+          respuesta = _yield$pool$query8[0];
+          if (!(respuesta.affectedRows === 1)) {
+            _context8.next = 27;
+            break;
+          }
+          // Crear el mensaje de correo
+          msg = " \n                <!DOCTYPE html>\n                <html lang=\"es\">\n                <head>\n                    <meta charset=\"UTF-8\">\n                    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n                    <style>\n                        /* Estilos CSS para el correo */\n                        /* ... (tus estilos aqu\xED) ... */\n                    </style>\n                </head>\n                <body>\n                    <div class=\"container\">\n                        <h1>\xA1Hola, ".concat(usuario[0].nombres, "!</h1>\n                        <p>\xA1Queremos informarte que tu contrase\xF1a ha sido actualizada!</p>\n                        <p><strong>Tu nueva contrase\xF1a es:</strong> ").concat(nuevaContrasena, "</p>\n                        <p>\xA1Gracias por tu atenci\xF3n!</p>\n                    </div>\n                </body>\n                </html>\n            "); // Enviar el correo de modificación de contraseña
+          _context8.next = 24;
+          return sendEmail(msg, correo, "Modificación de la contraseña");
+        case 24:
+          return _context8.abrupt("return", (0, _browser.success)(req, res, 200, "Contraseña modificada correctamente y correo enviado"));
+        case 27:
+          return _context8.abrupt("return", (0, _browser.error)(req, res, 400, "No se pudo modificar la contraseña"));
+        case 28:
+          _context8.next = 34;
+          break;
+        case 30:
+          _context8.prev = 30;
+          _context8.t0 = _context8["catch"](1);
+          console.error('Error:', _context8.t0);
+          return _context8.abrupt("return", (0, _browser.error)(req, res, 400, _context8.t0));
+        case 34:
+        case "end":
+          return _context8.stop();
+      }
+    }, _callee8, null, [[1, 30]]);
+  }));
+  return function cambiarContrasenaYEnviarCorreo(_x16, _x17) {
+    return _ref8.apply(this, arguments);
+  };
+}();
+
+// ---------------MOSTRAR USUARIO EN BASE AL TOKEN---------------------//
+var mostrarUsuariobaseToken = exports.mostrarUsuariobaseToken = /*#__PURE__*/function () {
+  var _ref9 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee9(req, res) {
+    var correo, sql, _yield$pool$query9, _yield$pool$query10, resultado, usuario;
+    return _regenerator["default"].wrap(function _callee9$(_context9) {
+      while (1) switch (_context9.prev = _context9.next) {
+        case 0:
+          correo = req.user.correo; // Accede al ID del usuario desde el objeto req.user
+          _context9.prev = 1;
+          // Consulta SQL para obtener los datos del usuario por su ID
+          sql = 'SELECT * FROM usuario WHERE correo = ?';
+          _context9.next = 5;
+          return _mysql["default"].query(sql, [correo]);
+        case 5:
+          _yield$pool$query9 = _context9.sent;
+          _yield$pool$query10 = (0, _slicedToArray2["default"])(_yield$pool$query9, 1);
+          resultado = _yield$pool$query10[0];
+          if (!(resultado.length === 0)) {
+            _context9.next = 10;
+            break;
+          }
+          return _context9.abrupt("return", (0, _browser.error)(req, res, 404, "usuario no encontrado"));
+        case 10:
+          usuario = resultado[0];
+          (0, _browser.success)(req, res, 200, usuario);
+          // res.json({ error: false, status: 200, body: usuario });
+          _context9.next = 18;
+          break;
+        case 14:
+          _context9.prev = 14;
+          _context9.t0 = _context9["catch"](1);
+          console.error(_context9.t0);
+          _context9.t0(req, res, 500, 'Error del servidor al obtener el perfil del usuario');
+          // res.status(500).json({ message: 'Error del servidor al obtener el perfil del usuario' });
+        case 18:
+        case "end":
+          return _context9.stop();
+      }
+    }, _callee9, null, [[1, 14]]);
+  }));
+  return function mostrarUsuariobaseToken(_x18, _x19) {
+    return _ref9.apply(this, arguments);
   };
 }();

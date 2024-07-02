@@ -29,18 +29,19 @@ var verifyToken = exports.verifyToken = /*#__PURE__*/function () {
           return _jsonwebtoken["default"].verify(token, process.env.TOKEN_PRIVATEKEY);
         case 6:
           valida = _context.sent;
+          req.user = valida;
           next();
-          _context.next = 13;
+          _context.next = 14;
           break;
-        case 10:
-          _context.prev = 10;
+        case 11:
+          _context.prev = 11;
           _context.t0 = _context["catch"](3);
           (0, _browser.error)(req, res, 401, "Falta Acceso del token.");
-        case 13:
+        case 14:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[3, 10]]);
+    }, _callee, null, [[3, 11]]);
   }));
   return function verifyToken(_x, _x2, _x3) {
     return _ref.apply(this, arguments);

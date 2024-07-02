@@ -4,7 +4,9 @@ import { success, error } from "../messages/browser";
 import { config } from "dotenv";
 import jwt from "jsonwebtoken"
 import nodemailer from "nodemailer";
+
 config();
+
 
 
 // ------------------------------METODO DE MOSTRAR UN SOLO USUARIO------------------------------------------------
@@ -206,7 +208,7 @@ const loginUsuario = async (req, res) => {
                 expiresIn : process.env.TOKEN_EXPIRES_IN
             }); 
         success(req, res, 200,token);
-         
+        
     } catch (e) {
         console.error("Error en el servidor:", e);
         error(req, res, 500, "error en el servidor, porfavor intente nuevamente");
@@ -244,4 +246,102 @@ const sendEmail = async (messages, receiverEmail, subject) => {
     }
 };
 
-export { listarUsuario, mostrarUsuario, crearUsuario, modificarUsuario, eliminarUsuario, loginUsuario, sendEmail };
+
+// ------------------------------METODO DE CAMBIAR CONTRASEÑA Y ENVIAR CORREO------------------------------------------------------------
+const cambiarContrasenaYEnviarCorreo = async (req, res) => {
+    const { correo } = req.body;
+    try {
+        // Verificar si el correo existe en la base de datos
+        const [usuario] = await pool.query(`SELECT * FROM usuario WHERE correo = ?`, [correo]);
+        if (!usuario.length) {
+            return error(req,res, 400, "el correo proporcionado no existe");
+        }
+
+        // Generar una nueva contraseña aleatoria
+        function generateRandomPassword(length = 12) {
+            const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            let password = "";
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * charset.length);
+                password += charset[randomIndex];
+            }
+            return password;
+        }
+
+        const nuevaContrasena = generateRandomPassword(); // Generar nueva contraseña aleatoria
+
+        // Encriptar la nueva contraseña
+        const hash = await bcrypt.hash(nuevaContrasena, 2); // Usar una sal de 10 rondas
+        const contrasenaEncriptada = hash;
+
+        // Actualizar la contraseña en la base de datos
+        const [respuesta] = await pool.query(`UPDATE usuario SET contrasena = ? WHERE correo = ?`, [contrasenaEncriptada, correo]);
+
+        // Verificar si se actualizó correctamente
+        if (respuesta.affectedRows === 1) {
+            // Crear el mensaje de correo
+            const msg = ` 
+                <!DOCTYPE html>
+                <html lang="es">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <style>
+                        /* Estilos CSS para el correo */
+                        /* ... (tus estilos aquí) ... */
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <h1>¡Hola, ${usuario[0].nombres}!</h1>
+                        <p>¡Queremos informarte que tu contraseña ha sido actualizada!</p>
+                        <p><strong>Tu nueva contraseña es:</strong> ${nuevaContrasena}</p>
+                        <p>¡Gracias por tu atención!</p>
+                    </div>
+                </body>
+                </html>
+            `;
+
+            // Enviar el correo de modificación de contraseña
+            await sendEmail(msg, correo, "Modificación de la contraseña");
+
+            // Responder al cliente
+            return success(req,res,200,"Contraseña modificada correctamente y correo enviado");
+        } else {
+            return error(req, res, 400, "No se pudo modificar la contraseña");
+        }
+    } catch (err) {
+        console.error('Error:', err);
+        return error(req,res,400, err);
+    }
+};
+
+// ---------------MOSTRAR USUARIO EN BASE AL TOKEN---------------------//
+const mostrarUsuariobaseToken = async (req, res) => {
+    const { correo } = req.user; // Accede al ID del usuario desde el objeto req.user
+
+    try {
+        // Consulta SQL para obtener los datos del usuario por su ID
+        const sql = 'SELECT * FROM usuario WHERE correo = ?';
+        const [resultado] = await pool.query(sql, [correo]);
+
+        if (resultado.length === 0) {
+            return error(req, res,404, "usuario no encontrado");
+            // return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        const usuario = resultado[0];
+        success(req,res, 200,usuario);
+        // res.json({ error: false, status: 200, body: usuario });
+    } catch (error) {
+        console.error(error);
+
+        error(req,res,500, 'Error del servidor al obtener el perfil del usuario');
+        // res.status(500).json({ message: 'Error del servidor al obtener el perfil del usuario' });
+    }
+};
+
+
+
+
+export { listarUsuario, mostrarUsuario, crearUsuario, modificarUsuario, eliminarUsuario, loginUsuario, sendEmail, cambiarContrasenaYEnviarCorreo, mostrarUsuariobaseToken};
