@@ -12,7 +12,7 @@ rutaUsuario.get("/usuario/:id", _controllers.mostrarUsuario);
 rutaUsuario.get("/usuario", _controllers.listarUsuario);
 rutaUsuario.get("/usuario-perfil", _oauth.verifyToken, _controllers.mostrarUsuariobaseToken);
 rutaUsuario.post("/usuario-nueva-contrsena", _controllers.cambiarContrasenaYEnviarCorreo);
-rutaUsuario.post("/usuario", _oauth.verifyToken, _controllers.crearUsuario);
+rutaUsuario.post("/usuario", _controllers.crearUsuario);
 rutaUsuario.put("/usuario", _oauth.verifyToken, _controllers.modificarUsuario);
 rutaUsuario["delete"]("/usuario", _oauth.verifyToken, _controllers.eliminarUsuario);
 rutaUsuario.post("/login", _controllers.loginUsuario);
