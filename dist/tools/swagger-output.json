@@ -5,7 +5,7 @@
     "description": "API DE SEGURIDAD",
     "version": "1.0.0"
   },
-  "host": "localhost:3000/api",
+  "host": "https://ms-inventario-api-mi-angel-1.onrender.com/api",
   "basePath": "/",
   "schemes": [
     "http"

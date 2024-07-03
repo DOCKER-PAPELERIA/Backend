@@ -13,7 +13,7 @@ const doc = {
         title: 'API DE SEGURIDAD', 
         description: 'API DE SEGURIDAD'
     },
-    host: 'localhost:' + port + '/api',
+    host: "https://ms-inventario-api-mi-angel-1.onrender.com" + '/api',
 };
 
 const outputFile = './swagger-output.json';
