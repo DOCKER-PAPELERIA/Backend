@@ -47,7 +47,7 @@ rutaProducto.get("/producto-precio", _controllers.Precios);
  * @description Crea un nuevo producto
  * @access Private
  */
-rutaProducto.post("/producto", _oauth.verifyToken, _controllers.crearProducto);
+rutaProducto.post("/producto", _controllers.crearProducto);
 
 /**
  * @route PUT /producto

@@ -46,7 +46,7 @@ rutaProducto.get("/producto-precio", Precios);
  * @description Crea un nuevo producto
  * @access Private
  */
-rutaProducto.post("/producto", verifyToken, crearProducto);
+rutaProducto.post("/producto", crearProducto);
 
 /**
  * @route PUT /producto
