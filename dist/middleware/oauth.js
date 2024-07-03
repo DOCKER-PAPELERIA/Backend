@@ -10,7 +10,20 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
 var _dotenv = require("dotenv");
 var _browser = require("../messages/browser");
+/**
+ * Este es sistema de funciones y servicios middleware
+ * @module crt-Middleware
+ */
+
 (0, _dotenv.config)();
+
+/**
+ * Middleware para verificar y decodificar un token JWT.
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ * @param {Function} next - Función de middleware para pasar el control al siguiente middleware.
+ * @returns {void}
+ */
 var verifyToken = exports.verifyToken = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res, next) {
     var token, valida;

@@ -12,9 +12,20 @@ var _mysql = _interopRequireDefault(require("../config/mysql.db"));
 var _browser = require("../messages/browser.js");
 var _dotenv = require("dotenv");
 var _nodemailer = _interopRequireDefault(require("nodemailer"));
+/**
+ * Este es el controlador de producto
+ * @module crt-producto
+ */
+
 (0, _dotenv.config)();
 
-// ------------------------------METODO DE MOSTRAR UN SOLO PRODUCTO------------------------------------------------
+/**
+ * Muestra un producto específico basado en el ID proporcionado.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ */
 var mostrarProducto = exports.mostrarProducto = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
     var id, _yield$pool$query, _yield$pool$query2, respuesta;
@@ -47,7 +58,13 @@ var mostrarProducto = exports.mostrarProducto = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE MOSTRAR PRODUCTO AGOTADO------------------------------------------------
+/**
+ * Muestra los productos agotados y envía un correo de alerta si hay productos agotados.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ */
 var Agotado = exports.Agotado = /*#__PURE__*/function () {
   var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
     var _yield$pool$query3, _yield$pool$query4, respuesta, emailText, emailSubject, emailRecipient;
@@ -97,7 +114,13 @@ var Agotado = exports.Agotado = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE MOSTRAR TODO LOS PRODUCTOS-------------------------------------
+/**
+ * Lista todos los productos disponibles.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ */
 var listarProducto = exports.listarProducto = /*#__PURE__*/function () {
   var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
     var _yield$pool$query5, _yield$pool$query6, respuesta;
@@ -129,7 +152,13 @@ var listarProducto = exports.listarProducto = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE MOSTRAR EL PRODUCTO Y SU PRECIO---------------------------------
+/**
+ * Muestra los productos junto con sus precios.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ */
 var Precios = exports.Precios = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
     var _yield$pool$query7, _yield$pool$query8, respuesta;
@@ -161,7 +190,22 @@ var Precios = exports.Precios = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE CREAR LOS PRODUCTOS----------------------------------------------------
+/**
+ * Crea un nuevo producto con los datos proporcionados en el cuerpo de la solicitud.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ * @param {string} req.body.idCategorias - ID de la categoría.
+ * @param {string} req.body.idProveedor - ID del proveedor.
+ * @param {string} req.body.nombre_product - Nombre del producto.
+ * @param {number} req.body.stock - Cantidad en stock.
+ * @param {string} req.body.codigo_producto - Código del producto.
+ * @param {string} req.body.imagen - URL de la imagen del producto.
+ * @param {number} req.body.precio - Precio del producto.
+ * @param {string} req.body.fecha - Fecha de creación del producto.
+ * @param {string} req.body.estado - Estado del producto.
+ */
 var crearProducto = exports.crearProducto = /*#__PURE__*/function () {
   var _ref5 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
     var _req$body, idCategorias, idProveedor, nombre_product, stock, codigo_producto, imagen, precio, fecha, estado, respuesta;
@@ -196,7 +240,23 @@ var crearProducto = exports.crearProducto = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE MODIFICAR LOS PRODUCTOS------------------------------------------------
+/**
+ * Modifica un producto existente con los datos proporcionados en el cuerpo de la solicitud.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ * @param {string} req.body.idProducto - ID del producto.
+ * @param {string} req.body.idCategorias - ID de la categoría.
+ * @param {string} req.body.idProveedor - ID del proveedor.
+ * @param {string} req.body.nombre_product - Nombre del producto.
+ * @param {number} req.body.stock - Cantidad en stock.
+ * @param {string} req.body.codigo_producto - Código del producto.
+ * @param {string} req.body.imagen - URL de la imagen del producto.
+ * @param {number} req.body.precio - Precio del producto.
+ * @param {string} req.body.fecha - Fecha de creación del producto.
+ * @param {string} req.body.estado - Estado del producto.
+ */
 var modificarProducto = exports.modificarProducto = /*#__PURE__*/function () {
   var _ref6 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(req, res) {
     var _req$body2, idProducto, idCategorias, idProveedor, nombre_product, stock, codigo_producto, imagen, precio, fecha, estado, respuesta;
@@ -231,7 +291,14 @@ var modificarProducto = exports.modificarProducto = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE ELIMINAR LOS PRODUCTOS-------------------------------------------------
+/**
+ * Elimina un producto específico basado en el ID proporcionado en el cuerpo de la solicitud.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ * @param {string} req.body.idProducto - ID del producto a eliminar.
+ */
 var eliminarProducto = exports.eliminarProducto = /*#__PURE__*/function () {
   var _ref7 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee7(req, res) {
     var idProducto, respuesta;
@@ -265,6 +332,15 @@ var eliminarProducto = exports.eliminarProducto = /*#__PURE__*/function () {
     return _ref7.apply(this, arguments);
   };
 }();
+
+/**
+ * Envía un correo electrónico.
+ * @function
+ * @param {string} to - Dirección de correo del destinatario.
+ * @param {string} subject - Asunto del correo.
+ * @param {string} text - Texto del correo.
+ * @returns {Promise} - Promesa que representa el resultado del envío del correo.
+ */
 var transporter = _nodemailer["default"].createTransport({
   service: 'gmail',
   auth: {

@@ -11,9 +11,20 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 var _mysql = _interopRequireDefault(require("../config/mysql.db"));
 var _browser = require("../messages/browser.js");
 var _dotenv = require("dotenv");
+/**
+ * Este es el controlador de proveedor
+ * @module crt-proveedor
+ */
+
 (0, _dotenv.config)();
 
-// ------------------------------METODO DE MOSTRAR UN SOLO PROVEEDOR------------------------------------------------
+/**
+ * Muestra un proveedor específico basado en el ID proporcionado.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ */
 var mostrarProveedor = exports.mostrarProveedor = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
     var id, _yield$pool$query, _yield$pool$query2, respuesta;
@@ -46,7 +57,13 @@ var mostrarProveedor = exports.mostrarProveedor = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE MOSTRAR TODOS LOS PROVEEDOR------------------------------------------------
+/**
+ * Lista todos los proveedores disponibles.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ */
 var listarProveedor = exports.listarProveedor = /*#__PURE__*/function () {
   var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
     var _yield$pool$query3, _yield$pool$query4, respuesta;
@@ -78,7 +95,16 @@ var listarProveedor = exports.listarProveedor = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE CREAR PROVEEDOR--------------------------------------------------------
+/**
+ * Crea un nuevo proveedor con los datos proporcionados en el cuerpo de la solicitud.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ * @param {string} req.body.nombre_proveedor - Nombre del proveedor.
+ * @param {string} req.body.telefono - Teléfono del proveedor.
+ * @param {string} req.body.correo - Correo electrónico del proveedor.
+ */
 var crearProveedor = exports.crearProveedor = /*#__PURE__*/function () {
   var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
     var _req$body, nombre_proveedor, telefono, correo, respuesta;
@@ -113,7 +139,17 @@ var crearProveedor = exports.crearProveedor = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE MODIFICAR PROVEEDOR----------------------------------------------------
+/**
+ * Modifica un proveedor existente con los datos proporcionados en el cuerpo de la solicitud.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ * @param {string} req.body.idProveedor - ID del proveedor.
+ * @param {string} req.body.nombre_proveedor - Nombre del proveedor.
+ * @param {string} req.body.telefono - Teléfono del proveedor.
+ * @param {string} req.body.correo - Correo electrónico del proveedor.
+ */
 var modificarProveedor = exports.modificarProveedor = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
     var _req$body2, idProveedor, nombre_proveedor, telefono, correo, respuesta;
@@ -148,7 +184,14 @@ var modificarProveedor = exports.modificarProveedor = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE ELIMINAR PROVEEDOR-------------------------------------------------------
+/**
+ * Elimina un proveedor específico basado en el ID proporcionado en el cuerpo de la solicitud.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ * @param {string} req.body.idProveedor - ID del proveedor a eliminar.
+ */
 var eliminarProveedor = exports.eliminarProveedor = /*#__PURE__*/function () {
   var _ref5 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
     var idProveedor, respuesta;

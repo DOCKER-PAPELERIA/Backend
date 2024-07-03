@@ -11,9 +11,20 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 var _mysql = _interopRequireDefault(require("../config/mysql.db"));
 var _browser = require("../messages/browser");
 var _dotenv = require("dotenv");
+/**
+ * Este es el controlador de factura
+ * @module crt-factura
+ */
+
 (0, _dotenv.config)();
 
-// ------------------------------METODO DE MOSTRAR UNA SOLA FACTURA------------------------------------------------
+/**
+ * Muestra una factura específica basada en el ID proporcionado.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ */
 var mostrarFactura = exports.mostrarFactura = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
     var id, _yield$pool$query, _yield$pool$query2, respuesta;
@@ -46,7 +57,13 @@ var mostrarFactura = exports.mostrarFactura = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE MOSTRAR TODAS LAS FACTURA------------------------------------------------
+/**
+ * Lista todas las facturas disponibles.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ */
 var listarFactura = exports.listarFactura = /*#__PURE__*/function () {
   var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
     var _yield$pool$query3, _yield$pool$query4, respuesta;
@@ -78,7 +95,18 @@ var listarFactura = exports.listarFactura = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE CREAR FACTURA----------------------------------------------------------
+/**
+ * Crea una nueva factura con los datos proporcionados en el cuerpo de la solicitud.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ * @param {string} req.body.idUsuario - ID del usuario.
+ * @param {string} req.body.idProducto - ID del producto.
+ * @param {string} req.body.idMetodoPago - ID del método de pago.
+ * @param {number} req.body.cantidad - Cantidad de productos.
+ * @param {string} req.body.fecha - Fecha de la factura.
+ */
 var crearFactura = exports.crearFactura = /*#__PURE__*/function () {
   var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
     var _req$body, idUsuario, idProducto, idMetodoPago, cantidad, fecha, respuesta;
@@ -113,7 +141,14 @@ var crearFactura = exports.crearFactura = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE ELIMINAR FACTURA-----------------------------------------------------------
+/**
+ * Elimina una factura específica basada en el ID proporcionado en el cuerpo de la solicitud.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ * @param {string} req.body.idFactura - ID de la factura a eliminar.
+ */
 var eliminarFactura = exports.eliminarFactura = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
     var idFactura, respuesta;

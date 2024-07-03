@@ -11,9 +11,20 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 var _mysql = _interopRequireDefault(require("../config/mysql.db"));
 var _browser = require("../messages/browser.js");
 var _dotenv = require("dotenv");
+/**
+ * Este es el controlador de categoria
+ * @module crt-categoria
+ */
+
 (0, _dotenv.config)();
 
-// ------------------------------METODO DE MOSTRAR UNA SOLA CATEGORIA------------------------------------------------
+/**
+ * Muestra una categoría específica basada en el ID proporcionado.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ */
 var mostrarCategoria = exports.mostrarCategoria = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
     var id, _yield$pool$query, _yield$pool$query2, respuesta;
@@ -46,7 +57,13 @@ var mostrarCategoria = exports.mostrarCategoria = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE MOSTRAR TODAS LAS CATEGORIA-----------------------------------------------
+/**
+ * Lista todas las categorías disponibles.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta (Response).
+ */
 var listarCategoria = exports.listarCategoria = /*#__PURE__*/function () {
   var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
     var _yield$pool$query3, _yield$pool$query4, respuesta;
@@ -78,7 +95,17 @@ var listarCategoria = exports.listarCategoria = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE CREAR LAS CATEGORIAS------------------------------------------------------
+/**
+ * Crea una nueva categoría con los datos proporcionados en el cuerpo de la solicitud.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta (Response).
+ * @param {string} req.body.Categoria - Nombre de la categoría.
+ * @param {string} req.body.descripcion_categoria - Descripción de la categoría.
+ * @param {string} req.body.imagen - Imagen de la categoría.
+ * @param {string} req.body.fecha - Fecha de creación de la categoría.
+ */
 var crearCategoria = exports.crearCategoria = /*#__PURE__*/function () {
   var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
     var _req$body, Categoria, descripcion_categoria, imagen, fecha, respuesta;
@@ -113,7 +140,15 @@ var crearCategoria = exports.crearCategoria = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE FILTRAR LOS PRODUCTOS QUE ESTAN DENTRO DE DE LAS CATEGORIAS-------------------------------------------
+/**
+ * Filtra los productos que están dentro de una categoría específica.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta (Response).
+ * @param {string} req.body.filtro - Filtro a aplicar a los productos.
+ * @param {string} req.body.categoria - Categoría de los productos.
+ */
 var FiltrarProductos = exports.FiltrarProductos = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
     var _req$body2, filtro, categoria, _yield$pool$query5, _yield$pool$query6, respuesta;
@@ -145,6 +180,19 @@ var FiltrarProductos = exports.FiltrarProductos = /*#__PURE__*/function () {
     return _ref4.apply(this, arguments);
   };
 }();
+
+/**
+ * Modifica una categoría existente con los datos proporcionados en el cuerpo de la solicitud.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta (Response).
+ * @param {string} req.body.idCategorias - ID de la categoría.
+ * @param {string} req.body.Categoria - Nombre de la categoría.
+ * @param {string} req.body.descripcion_categoria - Descripción de la categoría.
+ * @param {string} req.body.imagen - Imagen de la categoría.
+ * @param {string} req.body.fecha - Fecha de creación de la categoría.
+ */
 
 // ------------------------------METODO DE MODIFICAR LAS CATEGORIAS--------------------------------------------------
 var modificarCategoria = exports.modificarCategoria = /*#__PURE__*/function () {
@@ -181,7 +229,14 @@ var modificarCategoria = exports.modificarCategoria = /*#__PURE__*/function () {
   };
 }();
 
-// ------------------------------METODO DE ELIMINAR LAS CATEGORIAS---------------------------------------------------
+/**
+ * Elimina una categoría específica basada en el ID proporcionado en el cuerpo de la solicitud.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta (Response).
+ * @param {string} req.body.idCategorias - ID de la categoría a eliminar.
+ */
 var eliminarCategoria = exports.eliminarCategoria = /*#__PURE__*/function () {
   var _ref6 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(req, res) {
     var idCategorias, respuesta;
