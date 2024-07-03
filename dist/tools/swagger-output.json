@@ -8,7 +8,7 @@
   "host": "ms-inventario-api-mi-angel-1.onrender.com/api",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/categoria/{id}": {
