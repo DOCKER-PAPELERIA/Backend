@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: routes/categoria.router.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,76 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: routes/categoria.router.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * este es las rutas de categorias 
+ * @module ctr-categoria-ruta
+ */
+import { Router } from "express";
+import {FiltrarProductos, crearCategoria,  
+        eliminarCategoria, 
+        listarCategoria, 
+        modificarCategoria, 
+        mostrarCategoria} from "../controllers/cotrollers.categoria";
+import { verifyToken } from "../middleware/oauth";
 
 
-    <h3> </h3>
+const rutaCategoria = Router();
+
+/**
+ * @route GET /categoria/:id
+ * @description Obtiene una categoría específica por ID
+ * @access Public
+ */
+rutaCategoria.get("/categoria/:id", mostrarCategoria);
+
+/**
+ * @route GET /categoria
+ * @description Lista todas las categorías
+ * @access Public
+ */
+rutaCategoria.get("/categoria", listarCategoria);
+
+/**
+ * @route GET /catego-filtro
+ * @description Filtra productos dentro de una categoría
+ * @access Public
+ */
+rutaCategoria.get("/catego-filtro",FiltrarProductos);
+
+/**
+ * @route POST /categoria
+ * @description Crea una nueva categoría
+ * @access Private
+ */
+rutaCategoria.post("/categoria", verifyToken, crearCategoria);
+
+/**
+ * @route PUT /categoria
+ * @description Modifica una categoría existente
+ * @access Private
+ */
+rutaCategoria.put("/categoria", verifyToken, modificarCategoria);
+
+/**
+ * @route DELETE /categoria
+ * @description Elimina una categoría
+ * @access Private
+ */
+rutaCategoria.delete("/categoria", verifyToken, eliminarCategoria);
 
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default rutaCategoria;</code></pre>
+        </article>
+    </section>
 
 
 

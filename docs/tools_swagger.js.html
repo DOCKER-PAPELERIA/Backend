@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: tools/swagger.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,51 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: tools/swagger.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import swaggerAutogen from "swagger-autogen";
+import { config } from "dotenv";
+config();
 
+/**
+ * Puerto en el que la aplicación va a estar escuchando.
+ * @type {number}
+ */
+let port = process.env.PORT || 3000;
 
-    <h3> </h3>
+const doc = {
+    info: {
+        title: 'API DE SEGURIDAD', 
+        description: 'API DE SEGURIDAD'
+    },
+    host: 'localhost:' + port + '/api',
+};
 
+const outputFile = './swagger-output.json';
 
-
-
-
-
-
-
-
-
+/**
+ * Rutas de los archivos que contienen las definiciones de rutas para Swagger.
+ * @type {string[]}
+ */
+const routes = [
+    '../routes/categoria.router.js',
+    '../routes/factura.router.js',
+    '../routes/producto.router.js',
+    '../routes/proveedor.roter.js',
+    '../routes/usuarios.routers.js'
     
+];
 
-
-
-
-
+swaggerAutogen()(outputFile, routes, doc);</code></pre>
+        </article>
+    </section>
 
 
 

@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: controllers/controllers.usuarios.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: controllers/controllers.usuarios.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * Este es el controlador de usuario
  * @module crt-usuario
  */
@@ -78,12 +106,12 @@ const crearUsuario = async (req, res) => {
         if (respuesta[0].affectedRows == 1) {
             // Crear el mensaje de correo
             let msg = `
-                <!DOCTYPE html>
-                <html lang="es">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <style>
+                &lt;!DOCTYPE html>
+                &lt;html lang="es">
+                &lt;head>
+                    &lt;meta charset="UTF-8">
+                    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    &lt;style>
                         body {
                             font-family: Arial, sans-serif;
                             background-color: #f4f4f4;
@@ -105,18 +133,18 @@ const crearUsuario = async (req, res) => {
                         p {
                             font-size: 2em;
                         }
-                    </style>
-                </head>
-                <body>
-                    <div class="container">
-                        <h1>¡Bienvenido, ${nombres}!</h1>
-                        <p>¡Te hemos asignado un usuario y una contraseña para que ingreses a la página!</p>
-                        <p><strong>Tu usuario es:</strong> ${correo}</p>
-                        <p><strong>Tu contraseña es:</strong> ${contrasenasincifrar}</p>
-                        <p>¡Te esperamos!</p>
-                    </div>
-                </body>
-                </html>
+                    &lt;/style>
+                &lt;/head>
+                &lt;body>
+                    &lt;div class="container">
+                        &lt;h1>¡Bienvenido, ${nombres}!&lt;/h1>
+                        &lt;p>¡Te hemos asignado un usuario y una contraseña para que ingreses a la página!&lt;/p>
+                        &lt;p>&lt;strong>Tu usuario es:&lt;/strong> ${correo}&lt;/p>
+                        &lt;p>&lt;strong>Tu contraseña es:&lt;/strong> ${contrasenasincifrar}&lt;/p>
+                        &lt;p>¡Te esperamos!&lt;/p>
+                    &lt;/div>
+                &lt;/body>
+                &lt;/html>
             `;
             
             
@@ -159,12 +187,12 @@ const modificarUsuario = async (req, res) => {
         const respuesta = await pool.query(`CALL SP_EDITAR_USUARIO("${idUsuario}", "${identificacion}", "${nombres}", "${telefono}", "${fecha_naci}", "${correo}", "${contrasena}", "${estado}");`);
         if (respuesta[0].affectedRows == 1) {
             let msg = `
-                <!DOCTYPE html>
-  <html lang="es">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <style>
+                &lt;!DOCTYPE html>
+  &lt;html lang="es">
+  &lt;head>
+      &lt;meta charset="UTF-8">
+      &lt;meta name="viewport" content="width=device-width, initial-scale=1.0">
+      &lt;style>
           body {
               font-family: Arial, sans-serif;
               background-color: #f4f4f4;
@@ -186,18 +214,18 @@ const modificarUsuario = async (req, res) => {
           p {
               font-size: 2em;
           }
-      </style>
-  </head>
-  <body>
-      <div class="container">
-          <h1>¡Hola, ${nombres}!</h1>
-          <p>¡Queremos informarte que tu información ha sido actualizada!</p>
-          <p><strong>Tu nuevo usuario es:</strong> ${correo}</p>
-          <p><strong>Tu nueva contraseña es:</strong> ${contrasenasincifrar}</p>
-          <p>¡Gracias por tu atención!</p>
-      </div>
-  </body>
-  </html>
+      &lt;/style>
+  &lt;/head>
+  &lt;body>
+      &lt;div class="container">
+          &lt;h1>¡Hola, ${nombres}!&lt;/h1>
+          &lt;p>¡Queremos informarte que tu información ha sido actualizada!&lt;/p>
+          &lt;p>&lt;strong>Tu nuevo usuario es:&lt;/strong> ${correo}&lt;/p>
+          &lt;p>&lt;strong>Tu nueva contraseña es:&lt;/strong> ${contrasenasincifrar}&lt;/p>
+          &lt;p>¡Gracias por tu atención!&lt;/p>
+      &lt;/div>
+  &lt;/body>
+  &lt;/html>
             `;
             sendEmail(msg, correo, "Modificacion de la cuenta");
             success(req, res, 201, "Usuario modificado correctamente");
@@ -330,7 +358,7 @@ const cambiarContrasenaYEnviarCorreo = async (req, res) => {
         function generateRandomPassword(length = 12) {
             const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             let password = "";
-            for (let i = 0; i < length; i++) {
+            for (let i = 0; i &lt; length; i++) {
                 const randomIndex = Math.floor(Math.random() * charset.length);
                 password += charset[randomIndex];
             }
@@ -348,25 +376,25 @@ const cambiarContrasenaYEnviarCorreo = async (req, res) => {
         if (respuesta.affectedRows === 1) {
             // Crear el mensaje de correo
             const msg = ` 
-                <!DOCTYPE html>
-                <html lang="es">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <style>
+                &lt;!DOCTYPE html>
+                &lt;html lang="es">
+                &lt;head>
+                    &lt;meta charset="UTF-8">
+                    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    &lt;style>
                         /* Estilos CSS para el correo */
                         /* ... (tus estilos aquí) ... */
-                    </style>
-                </head>
-                <body>
-                    <div class="container">
-                        <h1>¡Hola, ${usuario[0].nombres}!</h1>
-                        <p>¡Queremos informarte que tu contraseña ha sido actualizada!</p>
-                        <p><strong>Tu nueva contraseña es:</strong> ${nuevaContrasena}</p>
-                        <p>¡Gracias por tu atención!</p>
-                    </div>
-                </body>
-                </html>
+                    &lt;/style>
+                &lt;/head>
+                &lt;body>
+                    &lt;div class="container">
+                        &lt;h1>¡Hola, ${usuario[0].nombres}!&lt;/h1>
+                        &lt;p>¡Queremos informarte que tu contraseña ha sido actualizada!&lt;/p>
+                        &lt;p>&lt;strong>Tu nueva contraseña es:&lt;/strong> ${nuevaContrasena}&lt;/p>
+                        &lt;p>¡Gracias por tu atención!&lt;/p>
+                    &lt;/div>
+                &lt;/body>
+                &lt;/html>
             `;
 
             await sendEmail(msg, correo, "Modificación de la contraseña");
@@ -414,3 +442,26 @@ const mostrarUsuariobaseToken = async (req, res) => {
 
 
 export { listarUsuario, mostrarUsuario, crearUsuario, modificarUsuario, eliminarUsuario, loginUsuario, sendEmail, cambiarContrasenaYEnviarCorreo, mostrarUsuariobaseToken};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-crt-Middleware.html">crt-Middleware</a></li><li><a href="module-crt-categoria.html">crt-categoria</a></li><li><a href="module-crt-configuracion.html">crt-configuracion</a></li><li><a href="module-crt-factura.html">crt-factura</a></li><li><a href="module-crt-mensajes-consola.html">crt-mensajes-consola</a></li><li><a href="module-crt-mensajes-manejo-erores.html">crt-mensajes-manejo-erores</a></li><li><a href="module-crt-principal.html">crt-principal</a></li><li><a href="module-crt-producto.html">crt-producto</a></li><li><a href="module-crt-proveedor.html">crt-proveedor</a></li><li><a href="module-crt-puerto.html">crt-puerto</a></li><li><a href="module-crt-usuario.html">crt-usuario</a></li><li><a href="module-ctr-categoria-ruta.html">ctr-categoria-ruta</a></li><li><a href="module-ctr-factura-ruta.html">ctr-factura-ruta</a></li><li><a href="module-ctr-index-rutas-principales.html">ctr-index-rutas-principales</a></li><li><a href="module-ctr-producto-ruta.html">ctr-producto-ruta</a></li><li><a href="module-ctr-proveedor-ruta.html">ctr-proveedor-ruta</a></li><li><a href="module-ctr-usaurio-ruta.html">ctr-usaurio-ruta</a></li></ul><h3>Global</h3><ul><li><a href="global.html#port">port</a></li><li><a href="global.html#routes">routes</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Jul 03 2024 00:38:32 GMT-0500 (hora estándar de Colombia)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

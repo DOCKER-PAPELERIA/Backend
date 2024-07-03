@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: config/mysql.db.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,44 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: config/mysql.db.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Este es la configuracion de la base de datos
+ * @module crt-configuracion
+ */
+import { createPool } from "mysql2/promise";
+import { config } from "dotenv";
+config();
 
+/**
+ * Pool de conexión a la base de datos MySQL.
+ * @type {Pool}
+ */
+const pool = createPool({
 
-    <h3> </h3>
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    port: process.env.MYSQL_PORT,
+    database: process.env.MYSQL_DATABASE
 
+});
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+/**
+ * Exporta el pool de conexión para ser utilizado en otras partes de la aplicación.
+ * @type {Pool}
+ */
+export default pool;</code></pre>
+        </article>
+    </section>
 
 
 

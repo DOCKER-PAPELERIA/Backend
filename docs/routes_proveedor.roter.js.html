@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: routes/proveedor.roter.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,70 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: routes/proveedor.roter.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * este es las rutas de proveedores 
+ * @module ctr-proveedor-ruta
+ */
+import { Router } from "express";
+import { crearProveedor, 
+        eliminarProveedor, 
+        listarProveedor, 
+        modificarProveedor, 
+        mostrarProveedor } from "../controllers/controllers.proveedor";
+import { verifyToken } from "../middleware/oauth";
 
 
-    <h3> </h3>
+const rutaProveedor = Router();
+
+/**
+ * @route GET /proveedor/:id
+ * @description Obtiene un proveedor específico por ID
+ * @access Public
+ */
+rutaProveedor.get("/proveedor/:id", mostrarProveedor);
+
+/**
+ * @route GET /proveedor
+ * @description Lista todos los proveedores
+ * @access Public
+ */
+rutaProveedor.get("/proveedor", listarProveedor);
+
+/**
+ * @route POST /proveedor
+ * @description Crea un nuevo proveedor
+ * @access Private
+ */
+rutaProveedor.post("/proveedor", verifyToken, crearProveedor);
+
+/**
+ * @route PUT /proveedor
+ * @description Modifica un proveedor existente
+ * @access Private
+ */
+rutaProveedor.put("/proveedor", verifyToken, modificarProveedor);
+
+/**
+ * @route DELETE /proveedor
+ * @description Elimina un proveedor
+ * @access Private
+ */
+rutaProveedor.delete("/proveedor", verifyToken, eliminarProveedor);
 
 
 
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default rutaProveedor;</code></pre>
+        </article>
+    </section>
 
 
 

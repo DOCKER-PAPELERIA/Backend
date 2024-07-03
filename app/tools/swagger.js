@@ -2,6 +2,10 @@ import swaggerAutogen from "swagger-autogen";
 import { config } from "dotenv";
 config();
 
+/**
+ * Puerto en el que la aplicación va a estar escuchando.
+ * @type {number}
+ */
 let port = process.env.PORT || 3000;
 
 const doc = {
@@ -13,6 +17,11 @@ const doc = {
 };
 
 const outputFile = './swagger-output.json';
+
+/**
+ * Rutas de los archivos que contienen las definiciones de rutas para Swagger.
+ * @type {string[]}
+ */
 const routes = [
     '../routes/categoria.router.js',
     '../routes/factura.router.js',

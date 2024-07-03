@@ -1,8 +1,19 @@
+/**
+ * Este es sistema de funciones y servicios middleware
+ * @module crt-Middleware
+ */
 import  jwt from "jsonwebtoken";
 import { config } from "dotenv";
 import { error, success } from "../messages/browser";
 config();
 
+/**
+ * Middleware para verificar y decodificar un token JWT.
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ * @param {Function} next - Función de middleware para pasar el control al siguiente middleware.
+ * @returns {void}
+ */
 export const verifyToken = async (req , res, next) => {
 
     const token = req.headers["x-access-token"];

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,34 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: index.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Este es el archivo ejecuta el puerto
+ * @module crt-puerto
+ */
+import app from "./app.js";
+import {msjConsole, mensa} from "./messages/consola.js";
 
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+/**
+ * Escucha el puerto definido en la configuración de la aplicación y muestra un mensaje de éxito en la consola.
+ * @param {number} app.get("port") - Puerto configurado en la aplicación Express.
+ * @param {string} mensa.puerto - Mensaje base que indica que el servidor está ejecutándose en un puerto.
+ * @param {string} app.get("port") - Puerto específico en el que está escuchando el servidor.
+ */
+app.listen(app.get("port"), () => {
+    msjConsole("puertoSuccess",
+        `${mensa.puerto} ${app.get("port")} http://localhost:${app.get("port")}`);
+});</code></pre>
+        </article>
+    </section>
 
 
 
