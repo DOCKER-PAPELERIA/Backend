@@ -14,20 +14,23 @@ config();
  * @param {Function} next - Función de middleware para pasar el control al siguiente middleware.
  * @returns {void}
  */
-export const verifyToken = async (req , res, next) => {
+export const verifyToken = async (req, res, next) => {
+    const token = req.headers['x-access-token'];
 
-    const token = req.headers["x-access-token"];
+    console.log('Token recibido:', token);
 
-    if(!token){
-        return success(req, res, 401, "Acceso denegado.");
+    if (!token) {
+        console.log('Acceso denegado: Token no proporcionado');
+        return success(req, res, 401, 'Acceso denegado.');
     }
+
     try {
-        const valida = await jwt.verify(
-            token, process.env.TOKEN_PRIVATEKEY
-        );
+        const valida = await jwt.verify(token, process.env.TOKEN_PRIVATEKEY);
         req.user = valida;
+        console.log('Usuario autenticado:', req.user);
         next();
-       } catch (e) {
-        error(req, res, 401, "Falta Acceso del token.")
-       }
+    } catch (e) {
+        console.error('Error al verificar token:', e);
+        error(req, res, 401, 'Falta Acceso del token.');
+    }
 };

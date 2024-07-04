@@ -19,7 +19,7 @@ var rutaProducto = (0, _express.Router)();
  * @description Obtiene un producto específico por ID
  * @access Public
  */
-rutaProducto.get("/producto/:id", _controllers.mostrarProducto);
+rutaProducto.get("/producto-ago", _controllers.mostrarProducto);
 
 /**
  * @route GET /producto

@@ -172,7 +172,6 @@ var crearUsuario = exports.crearUsuario = /*#__PURE__*/function () {
  * @async
  * @param {Object} req - Objeto de solicitud HTTP.
  * @param {Object} res - Objeto de respuesta HTTP.
- * @param {string} req.body.idUsuario - ID del usuario.
  * @param {string} req.body.identificacion - Identificación del usuario.
  * @param {string} req.body.nombres - Nombres del usuario.
  * @param {string} req.body.telefono - Teléfono del usuario.
@@ -183,11 +182,11 @@ var crearUsuario = exports.crearUsuario = /*#__PURE__*/function () {
  */
 var modificarUsuario = exports.modificarUsuario = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
-    var _req$body2, idUsuario, identificacion, nombres, telefono, fecha_naci, correo, estado, contrasenasincifrar, _hash2, contrasena, respuesta, msg;
+    var _req$body2, identificacion, nombres, telefono, fecha_naci, correo, estado, contrasenasincifrar, _hash2, contrasena, respuesta, msg;
     return _regenerator["default"].wrap(function _callee4$(_context4) {
       while (1) switch (_context4.prev = _context4.next) {
         case 0:
-          _req$body2 = req.body, idUsuario = _req$body2.idUsuario, identificacion = _req$body2.identificacion, nombres = _req$body2.nombres, telefono = _req$body2.telefono, fecha_naci = _req$body2.fecha_naci, correo = _req$body2.correo, estado = _req$body2.estado;
+          _req$body2 = req.body, identificacion = _req$body2.identificacion, nombres = _req$body2.nombres, telefono = _req$body2.telefono, fecha_naci = _req$body2.fecha_naci, correo = _req$body2.correo, estado = _req$body2.estado;
           contrasenasincifrar = req.body.contrasena;
           _context4.prev = 2;
           _context4.next = 5;
@@ -196,7 +195,7 @@ var modificarUsuario = exports.modificarUsuario = /*#__PURE__*/function () {
           _hash2 = _context4.sent;
           contrasena = _hash2;
           _context4.next = 9;
-          return _mysql["default"].query("CALL SP_EDITAR_USUARIO(\"".concat(idUsuario, "\", \"").concat(identificacion, "\", \"").concat(nombres, "\", \"").concat(telefono, "\", \"").concat(fecha_naci, "\", \"").concat(correo, "\", \"").concat(contrasena, "\", \"").concat(estado, "\");"));
+          return _mysql["default"].query("CALL SP_EDITAR_USUARIO(\"".concat(identificacion, "\", \"").concat(nombres, "\", \"").concat(telefono, "\", \"").concat(fecha_naci, "\", \"").concat(correo, "\", \"").concat(contrasena, "\", \"").concat(estado, "\");"));
         case 9:
           respuesta = _context4.sent;
           if (respuesta[0].affectedRows == 1) {

@@ -30,31 +30,35 @@ var verifyToken = exports.verifyToken = /*#__PURE__*/function () {
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          token = req.headers["x-access-token"];
+          token = req.headers['x-access-token'];
+          console.log('Token recibido:', token);
           if (token) {
-            _context.next = 3;
+            _context.next = 5;
             break;
           }
-          return _context.abrupt("return", (0, _browser.success)(req, res, 401, "Acceso denegado."));
-        case 3:
-          _context.prev = 3;
-          _context.next = 6;
+          console.log('Acceso denegado: Token no proporcionado');
+          return _context.abrupt("return", (0, _browser.success)(req, res, 401, 'Acceso denegado.'));
+        case 5:
+          _context.prev = 5;
+          _context.next = 8;
           return _jsonwebtoken["default"].verify(token, process.env.TOKEN_PRIVATEKEY);
-        case 6:
+        case 8:
           valida = _context.sent;
           req.user = valida;
+          console.log('Usuario autenticado:', req.user);
           next();
-          _context.next = 14;
+          _context.next = 18;
           break;
-        case 11:
-          _context.prev = 11;
-          _context.t0 = _context["catch"](3);
-          (0, _browser.error)(req, res, 401, "Falta Acceso del token.");
         case 14:
+          _context.prev = 14;
+          _context.t0 = _context["catch"](5);
+          console.error('Error al verificar token:', _context.t0);
+          (0, _browser.error)(req, res, 401, 'Falta Acceso del token.');
+        case 18:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[3, 11]]);
+    }, _callee, null, [[5, 14]]);
   }));
   return function verifyToken(_x, _x2, _x3) {
     return _ref.apply(this, arguments);

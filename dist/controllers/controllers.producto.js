@@ -20,7 +20,7 @@ var _nodemailer = _interopRequireDefault(require("nodemailer"));
 (0, _dotenv.config)();
 
 /**
- * Muestra un producto específico basado en el ID proporcionado.
+ * Muestra todos los productos que estan agotados sin mandar el correo electronico.
  * @function
  * @async
  * @param {Object} req - Objeto de solicitud HTTP.
@@ -28,30 +28,29 @@ var _nodemailer = _interopRequireDefault(require("nodemailer"));
  */
 var mostrarProducto = exports.mostrarProducto = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
-    var id, _yield$pool$query, _yield$pool$query2, respuesta;
+    var _yield$pool$query, _yield$pool$query2, respuesta;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          id = req.params["id"];
-          _context.prev = 1;
-          _context.next = 4;
-          return _mysql["default"].query("CALL SP_MOSTRAR_PRODUCTOS(\"".concat(id, "\");"));
-        case 4:
+          _context.prev = 0;
+          _context.next = 3;
+          return _mysql["default"].query("CALL SP_MOSTRAR_PRODUCTOS();");
+        case 3:
           _yield$pool$query = _context.sent;
           _yield$pool$query2 = (0, _slicedToArray2["default"])(_yield$pool$query, 1);
           respuesta = _yield$pool$query2[0];
           (0, _browser.success)(req, res, 200, respuesta[0]);
-          _context.next = 13;
+          _context.next = 12;
           break;
-        case 10:
-          _context.prev = 10;
-          _context.t0 = _context["catch"](1);
+        case 9:
+          _context.prev = 9;
+          _context.t0 = _context["catch"](0);
           (0, _browser.error)(req, res, 500, _context.t0);
-        case 13:
+        case 12:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[1, 10]]);
+    }, _callee, null, [[0, 9]]);
   }));
   return function mostrarProducto(_x, _x2) {
     return _ref.apply(this, arguments);
@@ -134,13 +133,15 @@ var listarProducto = exports.listarProducto = /*#__PURE__*/function () {
           _yield$pool$query5 = _context3.sent;
           _yield$pool$query6 = (0, _slicedToArray2["default"])(_yield$pool$query5, 1);
           respuesta = _yield$pool$query6[0];
-          (0, _browser.success)(req, res, 200, respuesta[0]);
+          res.json(respuesta[0]); // Asegúrate de enviar el array de productos correctamente
           _context3.next = 12;
           break;
         case 9:
           _context3.prev = 9;
           _context3.t0 = _context3["catch"](0);
-          (0, _browser.error)(req, res, 500, _context3.t0);
+          res.status(500).json({
+            error: _context3.t0.message
+          });
         case 12:
         case "end":
           return _context3.stop();

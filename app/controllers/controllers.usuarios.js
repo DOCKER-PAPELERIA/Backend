@@ -139,7 +139,6 @@ const crearUsuario = async (req, res) => {
  * @async
  * @param {Object} req - Objeto de solicitud HTTP.
  * @param {Object} res - Objeto de respuesta HTTP.
- * @param {string} req.body.idUsuario - ID del usuario.
  * @param {string} req.body.identificacion - Identificación del usuario.
  * @param {string} req.body.nombres - Nombres del usuario.
  * @param {string} req.body.telefono - Teléfono del usuario.
@@ -149,14 +148,14 @@ const crearUsuario = async (req, res) => {
  * @param {string} req.body.contrasena - Contraseña del usuario.
  */
 const modificarUsuario = async (req, res) => {
-    const {idUsuario, identificacion, nombres, telefono, fecha_naci, correo, estado} = req.body;
+    const {identificacion, nombres, telefono, fecha_naci, correo, estado} = req.body;
     const contrasenasincifrar = req.body.contrasena;
     try {
-        
+
         const hash = await bcrypt.hash(contrasenasincifrar, 2);
         const contrasena= hash;
-        
-        const respuesta = await pool.query(`CALL SP_EDITAR_USUARIO("${idUsuario}", "${identificacion}", "${nombres}", "${telefono}", "${fecha_naci}", "${correo}", "${contrasena}", "${estado}");`);
+
+        const respuesta = await pool.query(`CALL SP_EDITAR_USUARIO("${identificacion}", "${nombres}", "${telefono}", "${fecha_naci}", "${correo}", "${contrasena}", "${estado}");`);
         if (respuesta[0].affectedRows == 1) {
             let msg = `
                 <!DOCTYPE html>

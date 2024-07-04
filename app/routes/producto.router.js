@@ -18,7 +18,7 @@ const rutaProducto = Router();
  * @description Obtiene un producto específico por ID
  * @access Public
  */
-rutaProducto.get("/producto/:id", mostrarProducto);
+rutaProducto.get("/producto-ago", mostrarProducto);
 
 /**
  * @route GET /producto

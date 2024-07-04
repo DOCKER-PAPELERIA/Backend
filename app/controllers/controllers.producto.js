@@ -11,16 +11,15 @@ config();
 
 
 /**
- * Muestra un producto específico basado en el ID proporcionado.
+ * Muestra todos los productos que estan agotados sin mandar el correo electronico.
  * @function
  * @async
  * @param {Object} req - Objeto de solicitud HTTP.
  * @param {Object} res - Objeto de respuesta HTTP.
  */
 const mostrarProducto = async (req, res) => {
-    const id = req.params["id"];
     try {
-        const [respuesta] = await pool.query(`CALL SP_MOSTRAR_PRODUCTOS("${id}");`);
+        const [respuesta] = await pool.query(`CALL SP_MOSTRAR_PRODUCTOS();`);
         success(req, res, 200, respuesta[0]);
     } catch (err) {
         error(req, res, 500, err);
@@ -40,7 +39,7 @@ const Agotado = async (req, res) => {
         const [respuesta] = await pool.query(`CALL SP_PRODUCTO_AGOTADO();`);
         if (respuesta.length === 0 || (respuesta[0] && respuesta[0].length === 0)) {
             success(req, res, 200, "No hay productos agotados.");
-        } else {
+        }else {
             // Enviar correo de alerta
             const emailText = respuesta[0].map(producto => `Producto: ${producto.nombre_product}, Stock: ${producto.stock}`).join('\n');
             const emailSubject = "Alerta: Productos Agotados";
@@ -65,9 +64,9 @@ const Agotado = async (req, res) => {
 const listarProducto = async (req, res) => {
     try {
         const [respuesta] = await pool.query(`CALL SP_LISTAR_PRODUCTOS();`);
-        success(req, res, 200, respuesta[0]);
+        res.json(respuesta[0]); // Asegúrate de enviar el array de productos correctamente
     } catch (err) {
-        error(req, res, 500, err);
+        res.status(500).json({ error: err.message });
     }
 };
 
