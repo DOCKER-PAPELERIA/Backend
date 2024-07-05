@@ -89,6 +89,25 @@ const FiltrarProductos = async (req, res) =>{
     }
 };
 
+/**
+ * muestra los productos que están dentro de una categoría específica.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta (Response).
+ * @param {string} req.body.filtro - Filtro a aplicar a los productos.
+ * @param {string} req.body.categoria - Categoría de los productos.
+ */
+const Cate_Productos = async (req, res) =>{
+    const {filtro, categoria} =  req.body;
+    try {
+        const [respuesta] = await pool.query(`CALL SP_CATEGORIA_PRODUCTOS("${categoria}");`);
+        success(req, res, 201, respuesta[0]);
+    } catch (err) {
+        error(req, res, 400, err);
+    }
+};
+
 
 /**
  * Modifica una categoría existente con los datos proporcionados en el cuerpo de la solicitud.
@@ -143,4 +162,4 @@ const eliminarCategoria = async (req, res) => {
     }
 };
 
-export { listarCategoria, mostrarCategoria, crearCategoria, FiltrarProductos, modificarCategoria, eliminarCategoria };
+export { listarCategoria, mostrarCategoria, crearCategoria, FiltrarProductos, Cate_Productos, modificarCategoria, eliminarCategoria };

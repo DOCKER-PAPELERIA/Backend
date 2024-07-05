@@ -3,7 +3,7 @@
  * @module ctr-categoria-ruta
  */
 import { Router } from "express";
-import {FiltrarProductos, crearCategoria,  
+import {Cate_Productos, FiltrarProductos, crearCategoria,  
         eliminarCategoria, 
         listarCategoria, 
         modificarCategoria, 
@@ -33,6 +33,13 @@ rutaCategoria.get("/categoria", listarCategoria);
  * @access Public
  */
 rutaCategoria.get("/catego-filtro",FiltrarProductos);
+
+/**
+ * @route GET /catego-filtro
+ * @description muestra productos dentro de una categoría
+ * @access Public
+ */
+rutaCategoria.get("/catego-product",Cate_Productos);
 
 /**
  * @route POST /categoria

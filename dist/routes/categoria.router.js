@@ -36,6 +36,13 @@ rutaCategoria.get("/categoria", _cotrollers.listarCategoria);
 rutaCategoria.get("/catego-filtro", _cotrollers.FiltrarProductos);
 
 /**
+ * @route GET /catego-filtro
+ * @description muestra productos dentro de una categoría
+ * @access Public
+ */
+rutaCategoria.get("/catego-product", _cotrollers.Cate_Productos);
+
+/**
  * @route POST /categoria
  * @description Crea una nueva categoría
  * @access Private

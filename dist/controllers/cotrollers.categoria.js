@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.mostrarCategoria = exports.modificarCategoria = exports.listarCategoria = exports.eliminarCategoria = exports.crearCategoria = exports.FiltrarProductos = void 0;
+exports.mostrarCategoria = exports.modificarCategoria = exports.listarCategoria = exports.eliminarCategoria = exports.crearCategoria = exports.FiltrarProductos = exports.Cate_Productos = void 0;
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
@@ -182,6 +182,47 @@ var FiltrarProductos = exports.FiltrarProductos = /*#__PURE__*/function () {
 }();
 
 /**
+ * muestra los productos que están dentro de una categoría específica.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta (Response).
+ * @param {string} req.body.filtro - Filtro a aplicar a los productos.
+ * @param {string} req.body.categoria - Categoría de los productos.
+ */
+var Cate_Productos = exports.Cate_Productos = /*#__PURE__*/function () {
+  var _ref5 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
+    var _req$body3, filtro, categoria, _yield$pool$query7, _yield$pool$query8, respuesta;
+    return _regenerator["default"].wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
+        case 0:
+          _req$body3 = req.body, filtro = _req$body3.filtro, categoria = _req$body3.categoria;
+          _context5.prev = 1;
+          _context5.next = 4;
+          return _mysql["default"].query("CALL SP_CATEGORIA_PRODUCTOS(\"".concat(categoria, "\");"));
+        case 4:
+          _yield$pool$query7 = _context5.sent;
+          _yield$pool$query8 = (0, _slicedToArray2["default"])(_yield$pool$query7, 1);
+          respuesta = _yield$pool$query8[0];
+          (0, _browser.success)(req, res, 201, respuesta[0]);
+          _context5.next = 13;
+          break;
+        case 10:
+          _context5.prev = 10;
+          _context5.t0 = _context5["catch"](1);
+          (0, _browser.error)(req, res, 400, _context5.t0);
+        case 13:
+        case "end":
+          return _context5.stop();
+      }
+    }, _callee5, null, [[1, 10]]);
+  }));
+  return function Cate_Productos(_x9, _x10) {
+    return _ref5.apply(this, arguments);
+  };
+}();
+
+/**
  * Modifica una categoría existente con los datos proporcionados en el cuerpo de la solicitud.
  * @function
  * @async
@@ -196,63 +237,21 @@ var FiltrarProductos = exports.FiltrarProductos = /*#__PURE__*/function () {
 
 // ------------------------------METODO DE MODIFICAR LAS CATEGORIAS--------------------------------------------------
 var modificarCategoria = exports.modificarCategoria = /*#__PURE__*/function () {
-  var _ref5 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
-    var _req$body3, idCategorias, Categoria, descripcion_categoria, imagen, fecha, respuesta;
-    return _regenerator["default"].wrap(function _callee5$(_context5) {
-      while (1) switch (_context5.prev = _context5.next) {
+  var _ref6 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(req, res) {
+    var _req$body4, idCategorias, Categoria, descripcion_categoria, imagen, fecha, respuesta;
+    return _regenerator["default"].wrap(function _callee6$(_context6) {
+      while (1) switch (_context6.prev = _context6.next) {
         case 0:
-          _req$body3 = req.body, idCategorias = _req$body3.idCategorias, Categoria = _req$body3.Categoria, descripcion_categoria = _req$body3.descripcion_categoria, imagen = _req$body3.imagen, fecha = _req$body3.fecha;
-          _context5.prev = 1;
-          _context5.next = 4;
+          _req$body4 = req.body, idCategorias = _req$body4.idCategorias, Categoria = _req$body4.Categoria, descripcion_categoria = _req$body4.descripcion_categoria, imagen = _req$body4.imagen, fecha = _req$body4.fecha;
+          _context6.prev = 1;
+          _context6.next = 4;
           return _mysql["default"].query("CALL SP_EDITAR_CATEGORIAS(\"".concat(idCategorias, "\", \"").concat(Categoria, "\", \"").concat(descripcion_categoria, "\", \"").concat(imagen, "\", \"").concat(fecha, "\");"));
         case 4:
-          respuesta = _context5.sent;
+          respuesta = _context6.sent;
           if (respuesta[0].affectedRows == 1) {
             (0, _browser.success)(req, res, 201, "La Categoria ha sido Modificada.");
           } else {
             (0, _browser.error)(req, res, 400, "La Categoria NO se Modifico Vuelve a Intentarlo.");
-          }
-          _context5.next = 11;
-          break;
-        case 8:
-          _context5.prev = 8;
-          _context5.t0 = _context5["catch"](1);
-          (0, _browser.error)(req, res, 400, _context5.t0);
-        case 11:
-        case "end":
-          return _context5.stop();
-      }
-    }, _callee5, null, [[1, 8]]);
-  }));
-  return function modificarCategoria(_x9, _x10) {
-    return _ref5.apply(this, arguments);
-  };
-}();
-
-/**
- * Elimina una categoría específica basada en el ID proporcionado en el cuerpo de la solicitud.
- * @function
- * @async
- * @param {Object} req - Objeto de solicitud HTTP.
- * @param {Object} res - Objeto de respuesta (Response).
- * @param {string} req.body.idCategorias - ID de la categoría a eliminar.
- */
-var eliminarCategoria = exports.eliminarCategoria = /*#__PURE__*/function () {
-  var _ref6 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(req, res) {
-    var idCategorias, respuesta;
-    return _regenerator["default"].wrap(function _callee6$(_context6) {
-      while (1) switch (_context6.prev = _context6.next) {
-        case 0:
-          idCategorias = req.body.idCategorias;
-          _context6.prev = 1;
-          _context6.next = 4;
-          return _mysql["default"].query("CALL SP_ELIMINAR_CATEGORIAS(\"".concat(idCategorias, "\");"));
-        case 4:
-          respuesta = _context6.sent;
-          if (respuesta[0].affectedRows == 1) {
-            (0, _browser.success)(req, res, 201, "La Categori ha sido Eliminada.");
-          } else {
-            (0, _browser.error)(req, res, 400, "La Categoria NO se ha Eliminado");
           }
           _context6.next = 11;
           break;
@@ -266,7 +265,49 @@ var eliminarCategoria = exports.eliminarCategoria = /*#__PURE__*/function () {
       }
     }, _callee6, null, [[1, 8]]);
   }));
-  return function eliminarCategoria(_x11, _x12) {
+  return function modificarCategoria(_x11, _x12) {
     return _ref6.apply(this, arguments);
+  };
+}();
+
+/**
+ * Elimina una categoría específica basada en el ID proporcionado en el cuerpo de la solicitud.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta (Response).
+ * @param {string} req.body.idCategorias - ID de la categoría a eliminar.
+ */
+var eliminarCategoria = exports.eliminarCategoria = /*#__PURE__*/function () {
+  var _ref7 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee7(req, res) {
+    var idCategorias, respuesta;
+    return _regenerator["default"].wrap(function _callee7$(_context7) {
+      while (1) switch (_context7.prev = _context7.next) {
+        case 0:
+          idCategorias = req.body.idCategorias;
+          _context7.prev = 1;
+          _context7.next = 4;
+          return _mysql["default"].query("CALL SP_ELIMINAR_CATEGORIAS(\"".concat(idCategorias, "\");"));
+        case 4:
+          respuesta = _context7.sent;
+          if (respuesta[0].affectedRows == 1) {
+            (0, _browser.success)(req, res, 201, "La Categori ha sido Eliminada.");
+          } else {
+            (0, _browser.error)(req, res, 400, "La Categoria NO se ha Eliminado");
+          }
+          _context7.next = 11;
+          break;
+        case 8:
+          _context7.prev = 8;
+          _context7.t0 = _context7["catch"](1);
+          (0, _browser.error)(req, res, 400, _context7.t0);
+        case 11:
+        case "end":
+          return _context7.stop();
+      }
+    }, _callee7, null, [[1, 8]]);
+  }));
+  return function eliminarCategoria(_x13, _x14) {
+    return _ref7.apply(this, arguments);
   };
 }();
