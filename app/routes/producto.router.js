@@ -53,14 +53,14 @@ rutaProducto.post("/producto", crearProducto);
  * @description Modifica un producto existente
  * @access Private
  */
-rutaProducto.put("/producto", verifyToken, modificarProducto);
+rutaProducto.put("/producto/:id", verifyToken, modificarProducto);
 
 /**
  * @route DELETE /producto
  * @description Elimina un producto
  * @access Private
  */
-rutaProducto.delete("/producto", verifyToken, eliminarProducto);
+rutaProducto.delete("/producto/:id", verifyToken, eliminarProducto);
 
 
 export default rutaProducto;

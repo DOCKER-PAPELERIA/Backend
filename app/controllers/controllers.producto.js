@@ -137,18 +137,21 @@ const crearProducto = async (req, res) => {
  * @param {string} req.body.estado - Estado del producto.
  */
 const modificarProducto = async (req, res) => {
-    const {idProducto, idCategorias, idProveedor, nombre_product, stock, codigo_producto, imagen, precio, fecha, estado} = req.body;
+    const { id } = req.params; // Obtener el id de los parámetros de la URL
+    const { idCategorias, idProveedor, nombre_product, stock, codigo_producto, imagen, precio, fecha, estado } = req.body;
     try {
-        const respuesta = await pool.query(`CALL SP_EDITAR_PRODUCTO("${idProducto}", "${idCategorias}", "${idProveedor}", "${nombre_product}", "${stock}", "${codigo_producto}", "${imagen}", "${precio}", "${fecha}", "${estado}");`);
+        const respuesta = await pool.query(`CALL SP_EDITAR_PRODUCTO("${id}", "${idCategorias}", "${idProveedor}", "${nombre_product}", "${stock}", "${codigo_producto}", "${imagen}", "${precio}", "${fecha}", "${estado}");`);
         if (respuesta[0].affectedRows == 1) {
-            success(req, res, 201, "Producto  modificado correctamete.");
+            success(req, res, 201, "Producto modificado correctamente.");
         } else {
-            error(req, res, 401, "Producto No se modifico, Intentalo mas tarde.");
+            error(req, res, 401, "Producto no se modificó, inténtalo más tarde.");
         }
     } catch (err) {
         error(req, res, 400, err);
     }
 };
+
+
 
 
 /**
@@ -159,19 +162,23 @@ const modificarProducto = async (req, res) => {
  * @param {Object} res - Objeto de respuesta HTTP.
  * @param {string} req.body.idProducto - ID del producto a eliminar.
  */
+// Controlador para eliminar un producto por su ID
 const eliminarProducto = async (req, res) => {
-    const {idProducto} = req.body;
+    const { id } = req.params; // Obtener el id desde los parámetros de la URL
     try {
-        const respuesta = await pool.query(`CALL SP_ELIMINAR_PRODUCTO("${idProducto}");`);
-        if (respuesta[0].affectedRows == 1) {
+        const respuesta = await pool.query(`CALL SP_ELIMINAR_PRODUCTO("${id}")`);
+        if (respuesta[0].affectedRows === 1) {
             success(req, res, 200, "Producto Eliminado");
         } else {
-            error(req, res, 400, "Producto NO se elimino, Intenta mas tarde.");
+            error(req, res, 400, "Producto NO se eliminó, intenta más tarde.");
         }
     } catch (err) {
-        error(req, res, 400, err);
+        error(req, res, 500, err.message || "Error al eliminar el producto");
     }
 };
+
+// Ruta para eliminar un producto por su ID
+
 
 /**
  * Envía un correo electrónico.

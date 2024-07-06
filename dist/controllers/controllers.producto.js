@@ -260,32 +260,33 @@ var crearProducto = exports.crearProducto = /*#__PURE__*/function () {
  */
 var modificarProducto = exports.modificarProducto = /*#__PURE__*/function () {
   var _ref6 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(req, res) {
-    var _req$body2, idProducto, idCategorias, idProveedor, nombre_product, stock, codigo_producto, imagen, precio, fecha, estado, respuesta;
+    var id, _req$body2, idCategorias, idProveedor, nombre_product, stock, codigo_producto, imagen, precio, fecha, estado, respuesta;
     return _regenerator["default"].wrap(function _callee6$(_context6) {
       while (1) switch (_context6.prev = _context6.next) {
         case 0:
-          _req$body2 = req.body, idProducto = _req$body2.idProducto, idCategorias = _req$body2.idCategorias, idProveedor = _req$body2.idProveedor, nombre_product = _req$body2.nombre_product, stock = _req$body2.stock, codigo_producto = _req$body2.codigo_producto, imagen = _req$body2.imagen, precio = _req$body2.precio, fecha = _req$body2.fecha, estado = _req$body2.estado;
-          _context6.prev = 1;
-          _context6.next = 4;
-          return _mysql["default"].query("CALL SP_EDITAR_PRODUCTO(\"".concat(idProducto, "\", \"").concat(idCategorias, "\", \"").concat(idProveedor, "\", \"").concat(nombre_product, "\", \"").concat(stock, "\", \"").concat(codigo_producto, "\", \"").concat(imagen, "\", \"").concat(precio, "\", \"").concat(fecha, "\", \"").concat(estado, "\");"));
-        case 4:
+          id = req.params.id; // Obtener el id de los parámetros de la URL
+          _req$body2 = req.body, idCategorias = _req$body2.idCategorias, idProveedor = _req$body2.idProveedor, nombre_product = _req$body2.nombre_product, stock = _req$body2.stock, codigo_producto = _req$body2.codigo_producto, imagen = _req$body2.imagen, precio = _req$body2.precio, fecha = _req$body2.fecha, estado = _req$body2.estado;
+          _context6.prev = 2;
+          _context6.next = 5;
+          return _mysql["default"].query("CALL SP_EDITAR_PRODUCTO(\"".concat(id, "\", \"").concat(idCategorias, "\", \"").concat(idProveedor, "\", \"").concat(nombre_product, "\", \"").concat(stock, "\", \"").concat(codigo_producto, "\", \"").concat(imagen, "\", \"").concat(precio, "\", \"").concat(fecha, "\", \"").concat(estado, "\");"));
+        case 5:
           respuesta = _context6.sent;
           if (respuesta[0].affectedRows == 1) {
-            (0, _browser.success)(req, res, 201, "Producto  modificado correctamete.");
+            (0, _browser.success)(req, res, 201, "Producto modificado correctamente.");
           } else {
-            (0, _browser.error)(req, res, 401, "Producto No se modifico, Intentalo mas tarde.");
+            (0, _browser.error)(req, res, 401, "Producto no se modificó, inténtalo más tarde.");
           }
-          _context6.next = 11;
+          _context6.next = 12;
           break;
-        case 8:
-          _context6.prev = 8;
-          _context6.t0 = _context6["catch"](1);
+        case 9:
+          _context6.prev = 9;
+          _context6.t0 = _context6["catch"](2);
           (0, _browser.error)(req, res, 400, _context6.t0);
-        case 11:
+        case 12:
         case "end":
           return _context6.stop();
       }
-    }, _callee6, null, [[1, 8]]);
+    }, _callee6, null, [[2, 9]]);
   }));
   return function modificarProducto(_x11, _x12) {
     return _ref6.apply(this, arguments);
@@ -300,29 +301,30 @@ var modificarProducto = exports.modificarProducto = /*#__PURE__*/function () {
  * @param {Object} res - Objeto de respuesta HTTP.
  * @param {string} req.body.idProducto - ID del producto a eliminar.
  */
+// Controlador para eliminar un producto por su ID
 var eliminarProducto = exports.eliminarProducto = /*#__PURE__*/function () {
   var _ref7 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee7(req, res) {
-    var idProducto, respuesta;
+    var id, respuesta;
     return _regenerator["default"].wrap(function _callee7$(_context7) {
       while (1) switch (_context7.prev = _context7.next) {
         case 0:
-          idProducto = req.body.idProducto;
+          id = req.params.id; // Obtener el id desde los parámetros de la URL
           _context7.prev = 1;
           _context7.next = 4;
-          return _mysql["default"].query("CALL SP_ELIMINAR_PRODUCTO(\"".concat(idProducto, "\");"));
+          return _mysql["default"].query("CALL SP_ELIMINAR_PRODUCTO(\"".concat(id, "\")"));
         case 4:
           respuesta = _context7.sent;
-          if (respuesta[0].affectedRows == 1) {
+          if (respuesta[0].affectedRows === 1) {
             (0, _browser.success)(req, res, 200, "Producto Eliminado");
           } else {
-            (0, _browser.error)(req, res, 400, "Producto NO se elimino, Intenta mas tarde.");
+            (0, _browser.error)(req, res, 400, "Producto NO se eliminó, intenta más tarde.");
           }
           _context7.next = 11;
           break;
         case 8:
           _context7.prev = 8;
           _context7.t0 = _context7["catch"](1);
-          (0, _browser.error)(req, res, 400, _context7.t0);
+          (0, _browser.error)(req, res, 500, _context7.t0.message || "Error al eliminar el producto");
         case 11:
         case "end":
           return _context7.stop();
@@ -333,6 +335,8 @@ var eliminarProducto = exports.eliminarProducto = /*#__PURE__*/function () {
     return _ref7.apply(this, arguments);
   };
 }();
+
+// Ruta para eliminar un producto por su ID
 
 /**
  * Envía un correo electrónico.

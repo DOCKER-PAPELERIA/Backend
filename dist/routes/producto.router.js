@@ -54,12 +54,12 @@ rutaProducto.post("/producto", _controllers.crearProducto);
  * @description Modifica un producto existente
  * @access Private
  */
-rutaProducto.put("/producto", _oauth.verifyToken, _controllers.modificarProducto);
+rutaProducto.put("/producto/:id", _oauth.verifyToken, _controllers.modificarProducto);
 
 /**
  * @route DELETE /producto
  * @description Elimina un producto
  * @access Private
  */
-rutaProducto["delete"]("/producto", _oauth.verifyToken, _controllers.eliminarProducto);
+rutaProducto["delete"]("/producto/:id", _oauth.verifyToken, _controllers.eliminarProducto);
 var _default = exports["default"] = rutaProducto;
