@@ -196,7 +196,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-const sendMail = (to, subject, text) => {
+const sendMail = async (to, subject, text) => {
     const mailOptions = {
         from: process.env.EMAIL_CORREO,
         to,
@@ -204,7 +204,102 @@ const sendMail = (to, subject, text) => {
         text
     };
 
-    return transporter.sendMail(mailOptions);
+    try {
+        const info = await transporter.sendMail(mailOptions);
+        console.log(`Correo enviado: ${info.response}`);
+    } catch (err) {
+        console.error(`Error al enviar el correo: ${err}`);
+        throw err;
+    }
 };
 
-export { listarProducto, mostrarProducto, Precios, Agotado, crearProducto, modificarProducto, eliminarProducto };
+
+
+
+
+
+
+// --------------------------METODO 2 PARA ENVIAR CORREOS----------------------------
+
+const sendEmail2 = async (messages, receiverEmail, subject) => {
+    try {
+        let transporter = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            service: "gmail",
+            secure: true,
+            auth: {
+                user: process.env.EMAIL_CORREO,
+                pass: process.env.EMAIL_CLAVE
+            },
+            tls: {
+                rejectUnauthorized: false 
+            }
+        });
+
+        let info = await transporter.sendMail({
+            from: process.env.EMAIL_CORREO,
+            to: receiverEmail,
+            subject: subject,
+            html: messages
+        });
+
+        console.log("Email enviado:", info.messageId);
+    } catch (error) {
+        console.error("Error al enviar el correo:", error);
+        throw error;
+    }
+};
+
+
+// -------------------------------PRODUCTOS AGOTADOS WEB-----------------
+const agotadosWeb = async (req, res) => {
+    try {
+        const [respuesta] = await pool.query(`CALL SP_PRODUCTO_AGOTADO_Web();`);
+        if (respuesta.length === 0 || (respuesta[0] && respuesta[0].length === 0)) {
+            success(req, res, 200, "No hay productos agotados.");
+        }else {
+            success(req, res, 200, respuesta[0], "Productos Agotados.");
+        }
+    } catch (err) {
+        error(req, res, 500, err);
+    }
+};
+
+
+
+
+
+/**
+ * Envía un correo con la lista de productos agotados.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ */
+const enviarCorreoAgotados = async (req, res) => {
+    const { productosAgotados } = req.body;
+
+    if (!productosAgotados || productosAgotados.length === 0) {
+        return res.status(400).json({ error: true, message: 'No hay productos agotados para enviar.' });
+    }
+
+    const emailHtml = productosAgotados.map(producto => 
+        `<p>Nombre: ${producto.nombre_product}<br>Categoría: ${producto.Categoria}<br>Proveedor: ${producto.nombre_proveedor}<br>Stock: ${producto.stock}<br>Precio: $${producto.precio}</p>`
+    ).join('');
+
+    const emailSubject = "Alerta: Productos Agotados";
+    const emailRecipient = "papeleria.angel.info@gmail.com"; // Cambia esto al correo deseado
+
+    try {
+        await sendEmail2(emailHtml, emailRecipient, emailSubject);
+        success(req, res, 200, "Correo enviado exitosamente.");
+    } catch (err) {
+        console.error(`Error al enviar el correo: ${err}`);
+        error(req, res, 500, err.message || "Error al enviar el correo.");
+    }
+};
+
+
+
+
+export { listarProducto, mostrarProducto, Precios, Agotado, crearProducto, modificarProducto, eliminarProducto, agotadosWeb, enviarCorreoAgotados, sendEmail2};

@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.mostrarProducto = exports.modificarProducto = exports.listarProducto = exports.eliminarProducto = exports.crearProducto = exports.Precios = exports.Agotado = void 0;
+exports.sendEmail2 = exports.mostrarProducto = exports.modificarProducto = exports.listarProducto = exports.enviarCorreoAgotados = exports.eliminarProducto = exports.crearProducto = exports.agotadosWeb = exports.Precios = exports.Agotado = void 0;
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
@@ -353,12 +353,174 @@ var transporter = _nodemailer["default"].createTransport({
     pass: process.env.EMAIL_CLAVE
   }
 });
-var sendMail = function sendMail(to, subject, text) {
-  var mailOptions = {
-    from: process.env.EMAIL_CORREO,
-    to: to,
-    subject: subject,
-    text: text
+var sendMail = /*#__PURE__*/function () {
+  var _ref8 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee8(to, subject, text) {
+    var mailOptions, info;
+    return _regenerator["default"].wrap(function _callee8$(_context8) {
+      while (1) switch (_context8.prev = _context8.next) {
+        case 0:
+          mailOptions = {
+            from: process.env.EMAIL_CORREO,
+            to: to,
+            subject: subject,
+            text: text
+          };
+          _context8.prev = 1;
+          _context8.next = 4;
+          return transporter.sendMail(mailOptions);
+        case 4:
+          info = _context8.sent;
+          console.log("Correo enviado: ".concat(info.response));
+          _context8.next = 12;
+          break;
+        case 8:
+          _context8.prev = 8;
+          _context8.t0 = _context8["catch"](1);
+          console.error("Error al enviar el correo: ".concat(_context8.t0));
+          throw _context8.t0;
+        case 12:
+        case "end":
+          return _context8.stop();
+      }
+    }, _callee8, null, [[1, 8]]);
+  }));
+  return function sendMail(_x15, _x16, _x17) {
+    return _ref8.apply(this, arguments);
   };
-  return transporter.sendMail(mailOptions);
-};
+}();
+
+// --------------------------METODO 2 PARA ENVIAR CORREOS----------------------------
+
+var sendEmail2 = exports.sendEmail2 = /*#__PURE__*/function () {
+  var _ref9 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee9(messages, receiverEmail, subject) {
+    var _transporter, info;
+    return _regenerator["default"].wrap(function _callee9$(_context9) {
+      while (1) switch (_context9.prev = _context9.next) {
+        case 0:
+          _context9.prev = 0;
+          _transporter = _nodemailer["default"].createTransport({
+            host: "smtp.gmail.com",
+            service: "gmail",
+            secure: true,
+            auth: {
+              user: process.env.EMAIL_CORREO,
+              pass: process.env.EMAIL_CLAVE
+            },
+            tls: {
+              rejectUnauthorized: false
+            }
+          });
+          _context9.next = 4;
+          return _transporter.sendMail({
+            from: process.env.EMAIL_CORREO,
+            to: receiverEmail,
+            subject: subject,
+            html: messages
+          });
+        case 4:
+          info = _context9.sent;
+          console.log("Email enviado:", info.messageId);
+          _context9.next = 12;
+          break;
+        case 8:
+          _context9.prev = 8;
+          _context9.t0 = _context9["catch"](0);
+          console.error("Error al enviar el correo:", _context9.t0);
+          throw _context9.t0;
+        case 12:
+        case "end":
+          return _context9.stop();
+      }
+    }, _callee9, null, [[0, 8]]);
+  }));
+  return function sendEmail2(_x18, _x19, _x20) {
+    return _ref9.apply(this, arguments);
+  };
+}();
+
+// -------------------------------PRODUCTOS AGOTADOS WEB-----------------
+var agotadosWeb = exports.agotadosWeb = /*#__PURE__*/function () {
+  var _ref10 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee10(req, res) {
+    var _yield$pool$query9, _yield$pool$query10, respuesta;
+    return _regenerator["default"].wrap(function _callee10$(_context10) {
+      while (1) switch (_context10.prev = _context10.next) {
+        case 0:
+          _context10.prev = 0;
+          _context10.next = 3;
+          return _mysql["default"].query("CALL SP_PRODUCTO_AGOTADO_Web();");
+        case 3:
+          _yield$pool$query9 = _context10.sent;
+          _yield$pool$query10 = (0, _slicedToArray2["default"])(_yield$pool$query9, 1);
+          respuesta = _yield$pool$query10[0];
+          if (respuesta.length === 0 || respuesta[0] && respuesta[0].length === 0) {
+            (0, _browser.success)(req, res, 200, "No hay productos agotados.");
+          } else {
+            (0, _browser.success)(req, res, 200, respuesta[0], "Productos Agotados.");
+          }
+          _context10.next = 12;
+          break;
+        case 9:
+          _context10.prev = 9;
+          _context10.t0 = _context10["catch"](0);
+          (0, _browser.error)(req, res, 500, _context10.t0);
+        case 12:
+        case "end":
+          return _context10.stop();
+      }
+    }, _callee10, null, [[0, 9]]);
+  }));
+  return function agotadosWeb(_x21, _x22) {
+    return _ref10.apply(this, arguments);
+  };
+}();
+
+/**
+ * Envía un correo con la lista de productos agotados.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ */
+var enviarCorreoAgotados = exports.enviarCorreoAgotados = /*#__PURE__*/function () {
+  var _ref11 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee11(req, res) {
+    var productosAgotados, emailHtml, emailSubject, emailRecipient;
+    return _regenerator["default"].wrap(function _callee11$(_context11) {
+      while (1) switch (_context11.prev = _context11.next) {
+        case 0:
+          productosAgotados = req.body.productosAgotados;
+          if (!(!productosAgotados || productosAgotados.length === 0)) {
+            _context11.next = 3;
+            break;
+          }
+          return _context11.abrupt("return", res.status(400).json({
+            error: true,
+            message: 'No hay productos agotados para enviar.'
+          }));
+        case 3:
+          emailHtml = productosAgotados.map(function (producto) {
+            return "<p>Nombre: ".concat(producto.nombre_product, "<br>Categor\xEDa: ").concat(producto.Categoria, "<br>Proveedor: ").concat(producto.nombre_proveedor, "<br>Stock: ").concat(producto.stock, "<br>Precio: $").concat(producto.precio, "</p>");
+          }).join('');
+          emailSubject = "Alerta: Productos Agotados";
+          emailRecipient = "papeleria.angel.info@gmail.com"; // Cambia esto al correo deseado
+          _context11.prev = 6;
+          _context11.next = 9;
+          return sendEmail2(emailHtml, emailRecipient, emailSubject);
+        case 9:
+          (0, _browser.success)(req, res, 200, "Correo enviado exitosamente.");
+          _context11.next = 16;
+          break;
+        case 12:
+          _context11.prev = 12;
+          _context11.t0 = _context11["catch"](6);
+          console.error("Error al enviar el correo: ".concat(_context11.t0));
+          (0, _browser.error)(req, res, 500, _context11.t0.message || "Error al enviar el correo.");
+        case 16:
+        case "end":
+          return _context11.stop();
+      }
+    }, _callee11, null, [[6, 12]]);
+  }));
+  return function enviarCorreoAgotados(_x23, _x24) {
+    return _ref11.apply(this, arguments);
+  };
+}();

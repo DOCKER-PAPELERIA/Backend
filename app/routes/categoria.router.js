@@ -20,7 +20,7 @@ const rutaCategoria = Router();
  */
 rutaCategoria.get("/categoria/:id", mostrarCategoria);
 
-/**
+/** 
  * @route GET /categoria
  * @description Lista todas las categorías
  * @access Public
@@ -32,7 +32,8 @@ rutaCategoria.get("/categoria", listarCategoria);
  * @description Filtra productos dentro de una categoría
  * @access Public
  */
-rutaCategoria.get("/catego-filtro",FiltrarProductos);
+rutaCategoria.post("/productos-por-categoria", FiltrarProductos);
+
 
 /**
  * @route GET /catego-filtro

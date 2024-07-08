@@ -21,7 +21,7 @@ var rutaCategoria = (0, _express.Router)();
  */
 rutaCategoria.get("/categoria/:id", _cotrollers.mostrarCategoria);
 
-/**
+/** 
  * @route GET /categoria
  * @description Lista todas las categorías
  * @access Public
@@ -33,7 +33,7 @@ rutaCategoria.get("/categoria", _cotrollers.listarCategoria);
  * @description Filtra productos dentro de una categoría
  * @access Public
  */
-rutaCategoria.get("/catego-filtro", _cotrollers.FiltrarProductos);
+rutaCategoria.post("/productos-por-categoria", _cotrollers.FiltrarProductos);
 
 /**
  * @route GET /catego-filtro

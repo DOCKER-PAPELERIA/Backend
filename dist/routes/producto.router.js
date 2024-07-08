@@ -62,4 +62,6 @@ rutaProducto.put("/producto/:id", _oauth.verifyToken, _controllers.modificarProd
  * @access Private
  */
 rutaProducto["delete"]("/producto/:id", _oauth.verifyToken, _controllers.eliminarProducto);
+rutaProducto.get("/producto-agotadoWeb", _controllers.agotadosWeb);
+rutaProducto.post("/enviar-correo-productos-agotados", _controllers.enviarCorreoAgotados);
 var _default = exports["default"] = rutaProducto;

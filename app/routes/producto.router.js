@@ -3,7 +3,10 @@
  * @module ctr-producto-ruta
  */
 import { Router } from "express";
-import {Agotado, Precios, 
+import {Agotado, 
+        Precios,
+        enviarCorreoAgotados, 
+        agotadosWeb, 
         crearProducto, 
         eliminarProducto, 
         listarProducto, 
@@ -61,6 +64,13 @@ rutaProducto.put("/producto/:id", verifyToken, modificarProducto);
  * @access Private
  */
 rutaProducto.delete("/producto/:id", verifyToken, eliminarProducto);
+
+
+
+rutaProducto.get("/producto-agotadoWeb", agotadosWeb)
+
+
+rutaProducto.post("/enviar-correo-productos-agotados", enviarCorreoAgotados)
 
 
 export default rutaProducto;
