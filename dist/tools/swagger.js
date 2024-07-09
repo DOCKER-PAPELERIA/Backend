@@ -23,5 +23,5 @@ var outputFile = './swagger-output.json';
  * Rutas de los archivos que contienen las definiciones de rutas para Swagger.
  * @type {string[]}
  */
-var routes = ['../routes/categoria.router.js', '../routes/factura.router.js', '../routes/producto.router.js', '../routes/proveedor.roter.js', '../routes/usuarios.routers.js'];
+var routes = ['../routes/categoria.router.js', '../routes/historial.router.js', '../routes/producto.router.js', '../routes/proveedor.roter.js', '../routes/usuarios.routers.js'];
 (0, _swaggerAutogen["default"])()(outputFile, routes, doc);

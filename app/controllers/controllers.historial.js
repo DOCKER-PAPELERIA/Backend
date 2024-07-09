@@ -1,6 +1,6 @@
 /**
- * Este es el controlador de factura
- * @module crt-factura
+ * Este es el controlador de Historial
+ * @module crt-historial
  */
 
 import pool from "../config/mysql.db";
@@ -11,16 +11,16 @@ config();
 
 
 /**
- * Muestra una factura específica basada en el ID proporcionado.
+ * Muestra un Historial específica basada en el ID proporcionado.
  * @function
  * @async
  * @param {Object} req - Objeto de solicitud HTTP.
  * @param {Object} res - Objeto de respuesta HTTP.
  */
-const mostrarFactura = async (req, res)  => {
+const mostrarHistorial = async (req, res)  => {
     const id = req.params['id'];
     try {
-        const [respuesta] = await pool.query(`CALL SP_MOSTRAR_FACTURA("${id}");`);
+        const [respuesta] = await pool.query(`CALL SP_MOSTRAR_HISTORIAL("${id}");`);
         success(req, res, 200, respuesta[0]);
     } catch (err) {
         error(req, res, 500, err);
@@ -29,15 +29,15 @@ const mostrarFactura = async (req, res)  => {
 
 
 /**
- * Lista todas las facturas disponibles.
+ * Lista todos los Historiales disponibles.
  * @function
  * @async
  * @param {Object} req - Objeto de solicitud HTTP.
  * @param {Object} res - Objeto de respuesta HTTP.
  */
-const listarFactura = async (req, res)  => {
+const listarHistorial = async (req, res)  => {
     try {
-        const [respuesta] = await pool.query(`CALL SP_LISTAR_FACTURA();`);
+        const [respuesta] = await pool.query(`CALL SP_LISTAR_HISTORIAL();`);
         success(req, res, 200, respuesta[0]);
     } catch (err) {
         error(req, res, 500, err);
@@ -46,7 +46,7 @@ const listarFactura = async (req, res)  => {
 
 
 /**
- * Crea una nueva factura con los datos proporcionados en el cuerpo de la solicitud.
+ * Crea un nuevo Historial con los datos proporcionados en el cuerpo de la solicitud.
  * @function
  * @async
  * @param {Object} req - Objeto de solicitud HTTP.
@@ -55,16 +55,16 @@ const listarFactura = async (req, res)  => {
  * @param {string} req.body.idProducto - ID del producto.
  * @param {string} req.body.idMetodoPago - ID del método de pago.
  * @param {number} req.body.cantidad - Cantidad de productos.
- * @param {string} req.body.fecha - Fecha de la factura.
+ * @param {string} req.body.fecha - Fecha de la Historial.
  */
-const crearFactura = async (req, res) => {
+const crearHistorial = async (req, res) => {
     const {idUsuario, idProducto, idMetodoPago, cantidad, fecha} = req.body;
     try {
-        const respuesta = await pool.query(`CALL SP_CREAR_FACTURA("${idUsuario}", "${idProducto}", "${idMetodoPago}", "${cantidad}", "${fecha}");`);
+        const respuesta = await pool.query(`CALL SP_CREAR_HISTORIAL("${idUsuario}", "${idProducto}", "${idMetodoPago}", "${cantidad}", "${fecha}");`);
         if (respuesta[0].affectedRows >= 1) {
-            success(req, res, 201, "Factura Creada.");
+            success(req, res, 201, "Historial Creada.");
         } else {
-            error(req, res, 401, "No se creo la factura, Intentalo mas tarde.");
+            error(req, res, 401, "No se creo la Historial, Intentalo mas tarde.");
         }
     } catch (err) {
         error(req, res, 400, err);
@@ -73,25 +73,25 @@ const crearFactura = async (req, res) => {
 
 
 /**
- * Elimina una factura específica basada en el ID proporcionado en el cuerpo de la solicitud.
+ * Elimina un Historial específica basada en el ID proporcionado en el cuerpo de la solicitud.
  * @function
  * @async
  * @param {Object} req - Objeto de solicitud HTTP.
  * @param {Object} res - Objeto de respuesta HTTP.
- * @param {string} req.body.idFactura - ID de la factura a eliminar.
+ * @param {string} req.body.idFactura - ID de la Historial a eliminar.
  */
-const eliminarFactura = async (req, res) => {
+const eliminarHistorial = async (req, res) => {
     const {idFactura} = req.body;
     try {
-        const respuesta = await pool.query(`CALL SP_ELIMINAR_FACTURA("${idFactura}");`);
+        const respuesta = await pool.query(`CALL SP_ELIMINAR_HISTORIAL("${idFactura}");`);
         if (respuesta[0].affectedRows == 1) {
-            success(req, res, 201, "Factura eliminada.");
+            success(req, res, 201, "Historial eliminada.");
         } else {
-            error(req, res, 400, "No se elimino la factura, Intentalo mas tarde.");
+            error(req, res, 400, "No se elimino la Historial, Intentalo mas tarde.");
         }
     } catch (err) {
         error(req, res, 400, err);
     }
 };
 
-export { listarFactura, mostrarFactura, crearFactura, eliminarFactura };
+export { listarHistorial, mostrarHistorial, crearHistorial, eliminarHistorial };

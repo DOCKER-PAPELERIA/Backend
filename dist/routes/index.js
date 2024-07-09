@@ -13,7 +13,7 @@ var _categoria = _interopRequireDefault(require("./categoria.router"));
 var _producto = _interopRequireDefault(require("./producto.router"));
 var _proveedor = _interopRequireDefault(require("./proveedor.roter"));
 var _usuarios = _interopRequireDefault(require("./usuarios.routers"));
-var _factura = _interopRequireDefault(require("./factura.router"));
+var _historial = _interopRequireDefault(require("./historial.router"));
 /**
  * este es las rutas de categorias 
  * @module ctr-index-rutas-principales
@@ -30,7 +30,7 @@ var ruta = (0, _express.Router)();
 ruta.use("/api", _categoria["default"]); // Rutas relacionadas con categorías bajo /api/categoria
 ruta.use("/api", _producto["default"]); // Rutas relacionadas con productos bajo /api/producto
 ruta.use("/api", _proveedor["default"]); // Rutas relacionadas con proveedores bajo /api/proveedor 
-ruta.use("/api", _factura["default"]); // Rutas relacionadas con facturas bajo /api/factura
+ruta.use("/api", _historial["default"]); // Rutas relacionadas con facturas bajo /api/factura
 
 // Rutas adicionales
 ruta.use("/user", _usuarios["default"]); // Rutas relacionadas con usuarios bajo /user

@@ -5,10 +5,10 @@
     "description": "API DE SEGURIDAD",
     "version": "1.0.0"
   },
-  "host": "ms-inventario-api-mi-angel-1.onrender.com/api",
+  "host": "https://ms-inventario-api-mi-angel-1.onrender.com/api",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/categoria/{id}": {
@@ -141,7 +141,34 @@
         }
       }
     },
-    "/catego-filtro": {
+    "/productos-por-categoria": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "filtro": {
+                  "example": "any"
+                },
+                "categoria": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/catego-product": {
       "get": {
         "description": "",
         "responses": {
@@ -151,7 +178,7 @@
         }
       }
     },
-    "/factura/{id}": {
+    "/historial/{id}": {
       "get": {
         "description": "",
         "parameters": [
@@ -169,7 +196,7 @@
         }
       }
     },
-    "/factura": {
+    "/historial": {
       "get": {
         "description": "",
         "responses": {
@@ -245,17 +272,9 @@
         }
       }
     },
-    "/producto/{id}": {
+    "/producto-ago": {
       "get": {
         "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "responses": {
           "default": {
             "description": ""
@@ -267,19 +286,17 @@
       "get": {
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "post": {
         "description": "",
         "parameters": [
-          {
-            "name": "x-access-token",
-            "in": "header",
-            "type": "string"
-          },
           {
             "name": "body",
             "in": "body",
@@ -322,10 +339,38 @@
             "description": ""
           }
         }
-      },
+      }
+    },
+    "/producto-agotado": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/producto-precio": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/producto/{id}": {
       "put": {
         "description": "",
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "x-access-token",
             "in": "header",
@@ -337,9 +382,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "idProducto": {
-                  "example": "any"
-                },
                 "idCategorias": {
                   "example": "any"
                 },
@@ -381,21 +423,15 @@
         "description": "",
         "parameters": [
           {
-            "name": "x-access-token",
-            "in": "header",
+            "name": "id",
+            "in": "path",
+            "required": true,
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "idProducto": {
-                  "example": "any"
-                }
-              }
-            }
+            "name": "x-access-token",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -405,7 +441,7 @@
         }
       }
     },
-    "/producto-agotado": {
+    "/producto-agotadoWeb": {
       "get": {
         "description": "",
         "responses": {
@@ -415,12 +451,26 @@
         }
       }
     },
-    "/producto-precio": {
-      "get": {
+    "/enviar-correo-productos-agotados": {
+      "post": {
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "productosAgotados": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -580,11 +630,6 @@
         "description": "",
         "parameters": [
           {
-            "name": "x-access-token",
-            "in": "header",
-            "type": "string"
-          },
-          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -639,9 +684,6 @@
               "type": "object",
               "properties": {
                 "contrasena": {
-                  "example": "any"
-                },
-                "idUsuario": {
                   "example": "any"
                 },
                 "identificacion": {
@@ -717,7 +759,7 @@
         }
       }
     },
-    "/usuario-nueva-contrsena": {
+    "/usuario-nueva-contrasena": {
       "post": {
         "description": "",
         "parameters": [

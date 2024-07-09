@@ -10,7 +10,7 @@ import rutaCategoria from "./categoria.router";
 import rutaProducto from "./producto.router";
 import rutaProveedor from "./proveedor.roter";
 import rutaUsuario from "./usuarios.routers";
-import rutaFactura from "./factura.router";
+import rutaHistorial from "./historial.router";
 
 /**
  * Esta es la ruta de mi proyecto
@@ -23,7 +23,7 @@ const ruta = Router();
 ruta.use("/api", rutaCategoria); // Rutas relacionadas con categorías bajo /api/categoria
 ruta.use("/api", rutaProducto); // Rutas relacionadas con productos bajo /api/producto
 ruta.use("/api", rutaProveedor); // Rutas relacionadas con proveedores bajo /api/proveedor 
-ruta.use("/api", rutaFactura); // Rutas relacionadas con facturas bajo /api/factura
+ruta.use("/api", rutaHistorial); // Rutas relacionadas con facturas bajo /api/factura
  
 // Rutas adicionales
 ruta.use("/user", rutaUsuario);// Rutas relacionadas con usuarios bajo /user

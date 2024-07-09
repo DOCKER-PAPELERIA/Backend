@@ -39,16 +39,15 @@ config();
 
 
 /**
- * Muestra un producto específico basado en el ID proporcionado.
+ * Muestra todos los productos que estan agotados sin mandar el correo electronico.
  * @function
  * @async
  * @param {Object} req - Objeto de solicitud HTTP.
  * @param {Object} res - Objeto de respuesta HTTP.
  */
 const mostrarProducto = async (req, res) => {
-    const id = req.params["id"];
     try {
-        const [respuesta] = await pool.query(`CALL SP_MOSTRAR_PRODUCTOS("${id}");`);
+        const [respuesta] = await pool.query(`CALL SP_MOSTRAR_PRODUCTOS();`);
         success(req, res, 200, respuesta[0]);
     } catch (err) {
         error(req, res, 500, err);
@@ -68,7 +67,7 @@ const Agotado = async (req, res) => {
         const [respuesta] = await pool.query(`CALL SP_PRODUCTO_AGOTADO();`);
         if (respuesta.length === 0 || (respuesta[0] &amp;&amp; respuesta[0].length === 0)) {
             success(req, res, 200, "No hay productos agotados.");
-        } else {
+        }else {
             // Enviar correo de alerta
             const emailText = respuesta[0].map(producto => `Producto: ${producto.nombre_product}, Stock: ${producto.stock}`).join('\n');
             const emailSubject = "Alerta: Productos Agotados";
@@ -93,9 +92,9 @@ const Agotado = async (req, res) => {
 const listarProducto = async (req, res) => {
     try {
         const [respuesta] = await pool.query(`CALL SP_LISTAR_PRODUCTOS();`);
-        success(req, res, 200, respuesta[0]);
+        res.json(respuesta[0]); // Asegúrate de enviar el array de productos correctamente
     } catch (err) {
-        error(req, res, 500, err);
+        res.status(500).json({ error: err.message });
     }
 };
 
@@ -166,18 +165,21 @@ const crearProducto = async (req, res) => {
  * @param {string} req.body.estado - Estado del producto.
  */
 const modificarProducto = async (req, res) => {
-    const {idProducto, idCategorias, idProveedor, nombre_product, stock, codigo_producto, imagen, precio, fecha, estado} = req.body;
+    const { id } = req.params; // Obtener el id de los parámetros de la URL
+    const { idCategorias, idProveedor, nombre_product, stock, codigo_producto, imagen, precio, fecha, estado } = req.body;
     try {
-        const respuesta = await pool.query(`CALL SP_EDITAR_PRODUCTO("${idProducto}", "${idCategorias}", "${idProveedor}", "${nombre_product}", "${stock}", "${codigo_producto}", "${imagen}", "${precio}", "${fecha}", "${estado}");`);
+        const respuesta = await pool.query(`CALL SP_EDITAR_PRODUCTO("${id}", "${idCategorias}", "${idProveedor}", "${nombre_product}", "${stock}", "${codigo_producto}", "${imagen}", "${precio}", "${fecha}", "${estado}");`);
         if (respuesta[0].affectedRows == 1) {
-            success(req, res, 201, "Producto  modificado correctamete.");
+            success(req, res, 201, "Producto modificado correctamente.");
         } else {
-            error(req, res, 401, "Producto No se modifico, Intentalo mas tarde.");
+            error(req, res, 401, "Producto no se modificó, inténtalo más tarde.");
         }
     } catch (err) {
         error(req, res, 400, err);
     }
 };
+
+
 
 
 /**
@@ -188,19 +190,23 @@ const modificarProducto = async (req, res) => {
  * @param {Object} res - Objeto de respuesta HTTP.
  * @param {string} req.body.idProducto - ID del producto a eliminar.
  */
+// Controlador para eliminar un producto por su ID
 const eliminarProducto = async (req, res) => {
-    const {idProducto} = req.body;
+    const { id } = req.params; // Obtener el id desde los parámetros de la URL
     try {
-        const respuesta = await pool.query(`CALL SP_ELIMINAR_PRODUCTO("${idProducto}");`);
-        if (respuesta[0].affectedRows == 1) {
+        const respuesta = await pool.query(`CALL SP_ELIMINAR_PRODUCTO("${id}")`);
+        if (respuesta[0].affectedRows === 1) {
             success(req, res, 200, "Producto Eliminado");
         } else {
-            error(req, res, 400, "Producto NO se elimino, Intenta mas tarde.");
+            error(req, res, 400, "Producto NO se eliminó, intenta más tarde.");
         }
     } catch (err) {
-        error(req, res, 400, err);
+        error(req, res, 500, err.message || "Error al eliminar el producto");
     }
 };
+
+// Ruta para eliminar un producto por su ID
+
 
 /**
  * Envía un correo electrónico.
@@ -218,7 +224,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-const sendMail = (to, subject, text) => {
+const sendMail = async (to, subject, text) => {
     const mailOptions = {
         from: process.env.EMAIL_CORREO,
         to,
@@ -226,10 +232,105 @@ const sendMail = (to, subject, text) => {
         text
     };
 
-    return transporter.sendMail(mailOptions);
+    try {
+        const info = await transporter.sendMail(mailOptions);
+        console.log(`Correo enviado: ${info.response}`);
+    } catch (err) {
+        console.error(`Error al enviar el correo: ${err}`);
+        throw err;
+    }
 };
 
-export { listarProducto, mostrarProducto, Precios, Agotado, crearProducto, modificarProducto, eliminarProducto };</code></pre>
+
+
+
+
+
+
+// --------------------------METODO 2 PARA ENVIAR CORREOS----------------------------
+
+const sendEmail2 = async (messages, receiverEmail, subject) => {
+    try {
+        let transporter = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            service: "gmail",
+            secure: true,
+            auth: {
+                user: process.env.EMAIL_CORREO,
+                pass: process.env.EMAIL_CLAVE
+            },
+            tls: {
+                rejectUnauthorized: false 
+            }
+        });
+
+        let info = await transporter.sendMail({
+            from: process.env.EMAIL_CORREO,
+            to: receiverEmail,
+            subject: subject,
+            html: messages
+        });
+
+        console.log("Email enviado:", info.messageId);
+    } catch (error) {
+        console.error("Error al enviar el correo:", error);
+        throw error;
+    }
+};
+
+
+// -------------------------------PRODUCTOS AGOTADOS WEB-----------------
+const agotadosWeb = async (req, res) => {
+    try {
+        const [respuesta] = await pool.query(`CALL SP_PRODUCTO_AGOTADO_Web();`);
+        if (respuesta.length === 0 || (respuesta[0] &amp;&amp; respuesta[0].length === 0)) {
+            success(req, res, 200, "No hay productos agotados.");
+        }else {
+            success(req, res, 200, respuesta[0], "Productos Agotados.");
+        }
+    } catch (err) {
+        error(req, res, 500, err);
+    }
+};
+
+
+
+
+
+/**
+ * Envía un correo con la lista de productos agotados.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ */
+const enviarCorreoAgotados = async (req, res) => {
+    const { productosAgotados } = req.body;
+
+    if (!productosAgotados || productosAgotados.length === 0) {
+        return res.status(400).json({ error: true, message: 'No hay productos agotados para enviar.' });
+    }
+
+    const emailHtml = productosAgotados.map(producto => 
+        `&lt;p>Nombre: ${producto.nombre_product}&lt;br>Categoría: ${producto.Categoria}&lt;br>Proveedor: ${producto.nombre_proveedor}&lt;br>Stock: ${producto.stock}&lt;br>Precio: $${producto.precio}&lt;/p>`
+    ).join('');
+
+    const emailSubject = "Alerta: Productos Agotados";
+    const emailRecipient = "papeleria.angel.info@gmail.com"; // Cambia esto al correo deseado
+
+    try {
+        await sendEmail2(emailHtml, emailRecipient, emailSubject);
+        success(req, res, 200, "Correo enviado exitosamente.");
+    } catch (err) {
+        console.error(`Error al enviar el correo: ${err}`);
+        error(req, res, 500, err.message || "Error al enviar el correo.");
+    }
+};
+
+
+
+
+export { listarProducto, mostrarProducto, Precios, Agotado, crearProducto, modificarProducto, eliminarProducto, agotadosWeb, enviarCorreoAgotados, sendEmail2};</code></pre>
         </article>
     </section>
 
@@ -239,13 +340,13 @@ export { listarProducto, mostrarProducto, Precios, Agotado, crearProducto, modif
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-crt-Middleware.html">crt-Middleware</a></li><li><a href="module-crt-categoria.html">crt-categoria</a></li><li><a href="module-crt-configuracion.html">crt-configuracion</a></li><li><a href="module-crt-factura.html">crt-factura</a></li><li><a href="module-crt-mensajes-consola.html">crt-mensajes-consola</a></li><li><a href="module-crt-mensajes-manejo-erores.html">crt-mensajes-manejo-erores</a></li><li><a href="module-crt-principal.html">crt-principal</a></li><li><a href="module-crt-producto.html">crt-producto</a></li><li><a href="module-crt-proveedor.html">crt-proveedor</a></li><li><a href="module-crt-puerto.html">crt-puerto</a></li><li><a href="module-crt-usuario.html">crt-usuario</a></li><li><a href="module-ctr-categoria-ruta.html">ctr-categoria-ruta</a></li><li><a href="module-ctr-factura-ruta.html">ctr-factura-ruta</a></li><li><a href="module-ctr-index-rutas-principales.html">ctr-index-rutas-principales</a></li><li><a href="module-ctr-producto-ruta.html">ctr-producto-ruta</a></li><li><a href="module-ctr-proveedor-ruta.html">ctr-proveedor-ruta</a></li><li><a href="module-ctr-usaurio-ruta.html">ctr-usaurio-ruta</a></li></ul><h3>Global</h3><ul><li><a href="global.html#port">port</a></li><li><a href="global.html#routes">routes</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-crt-Middleware.html">crt-Middleware</a></li><li><a href="module-crt-categoria.html">crt-categoria</a></li><li><a href="module-crt-configuracion.html">crt-configuracion</a></li><li><a href="module-crt-historial.html">crt-historial</a></li><li><a href="module-crt-mensajes-consola.html">crt-mensajes-consola</a></li><li><a href="module-crt-mensajes-manejo-erores.html">crt-mensajes-manejo-erores</a></li><li><a href="module-crt-principal.html">crt-principal</a></li><li><a href="module-crt-producto.html">crt-producto</a></li><li><a href="module-crt-proveedor.html">crt-proveedor</a></li><li><a href="module-crt-puerto.html">crt-puerto</a></li><li><a href="module-crt-usuario.html">crt-usuario</a></li><li><a href="module-ctr-Historial-ruta.html">ctr-Historial-ruta</a></li><li><a href="module-ctr-categoria-ruta.html">ctr-categoria-ruta</a></li><li><a href="module-ctr-index-rutas-principales.html">ctr-index-rutas-principales</a></li><li><a href="module-ctr-producto-ruta.html">ctr-producto-ruta</a></li><li><a href="module-ctr-proveedor-ruta.html">ctr-proveedor-ruta</a></li><li><a href="module-ctr-usaurio-ruta.html">ctr-usaurio-ruta</a></li></ul><h3>Global</h3><ul><li><a href="global.html#port">port</a></li><li><a href="global.html#routes">routes</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Jul 03 2024 00:38:32 GMT-0500 (hora estándar de Colombia)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Mon Jul 08 2024 22:30:38 GMT-0500 (hora estándar de Colombia)
 </footer>
 
 <script> prettyPrint(); </script>

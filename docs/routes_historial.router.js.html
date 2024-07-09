@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: ctr-usaurio-ruta</title>
+    <title>JSDoc: Source: routes/historial.router.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,132 +17,64 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: ctr-usaurio-ruta</h1>
+    <h1 class="page-title">Source: routes/historial.router.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description">este es las rutas de usuarios</div>
-        
-
-        
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_usuarios.routers.js.html">routes/usuarios.routers.js</a>, <a href="routes_usuarios.routers.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * este es las rutas de historial 
+ * @module ctr-Historial-ruta
+ */
+
+import { Router } from "express";
+import { crearHistorial, 
+        eliminarHistorial, 
+        listarHistorial,
+        mostrarHistorial } from "../controllers/controllers.historial";
+import { verifyToken } from "../middleware/oauth";
+
+
+
+const rutaHistorial = Router();
+
+/**
+ * @route GET /Historial/:id
+ * @description Obtiene una Historial específica por ID
+ * @access Public
+ */
+rutaHistorial.get("/historial/:id", mostrarHistorial);
+
+/**
+ * @route GET /Historial
+ * @description Lista todas las Historial
+ * @access Public
+ */
+rutaHistorial.get("/historial", listarHistorial);
+
+/**
+ * @route POST /Historial
+ * @description Crea una nueva Historial
+ * @access Private
+ */
+rutaHistorial.post("/historial", verifyToken, crearHistorial);
+
+/**
+ * @route DELETE /Historial
+ * @description Elimina una Historial
+ * @access Private
+ */
+rutaHistorial.delete("/historial", verifyToken, eliminarHistorial);
+
+
+
+export default rutaHistorial;</code></pre>
+        </article>
+    </section>
 
 
 

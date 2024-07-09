@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: controllers/controllers.proveedor.js</title>
+    <title>JSDoc: Source: controllers/controllers.historial.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: controllers/controllers.proveedor.js</h1>
+    <h1 class="page-title">Source: controllers/controllers.historial.js</h1>
 
     
 
@@ -27,123 +27,102 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Este es el controlador de proveedor
- * @module crt-proveedor
+ * Este es el controlador de Historial
+ * @module crt-historial
  */
 
-
 import pool from "../config/mysql.db";
-import { success, error } from "../messages/browser.js";
+import { success, error } from "../messages/browser";
 import { config } from "dotenv";
 config();
 
+
+
 /**
- * Muestra un proveedor específico basado en el ID proporcionado.
+ * Muestra un Historial específica basada en el ID proporcionado.
  * @function
  * @async
  * @param {Object} req - Objeto de solicitud HTTP.
  * @param {Object} res - Objeto de respuesta HTTP.
  */
-const mostrarProveedor = async (req, res) => {
-    const id = req.params["id"];
+const mostrarHistorial = async (req, res)  => {
+    const id = req.params['id'];
     try {
-        const [respuesta] = await pool.query(`CALL SP_MOSTRAR_PROVEEDOR("${id}");`);
+        const [respuesta] = await pool.query(`CALL SP_MOSTRAR_HISTORIAL("${id}");`);
         success(req, res, 200, respuesta[0]);
     } catch (err) {
         error(req, res, 500, err);
     }
 };
 
+
 /**
- * Lista todos los proveedores disponibles.
+ * Lista todos los Historiales disponibles.
  * @function
  * @async
  * @param {Object} req - Objeto de solicitud HTTP.
  * @param {Object} res - Objeto de respuesta HTTP.
  */
-const listarProveedor = async (req, res) => {
+const listarHistorial = async (req, res)  => {
     try {
-        const [respuesta] = await pool.query(`CALL SP_LISTAR_PROVEEDOR();`);
+        const [respuesta] = await pool.query(`CALL SP_LISTAR_HISTORIAL();`);
         success(req, res, 200, respuesta[0]);
     } catch (err) {
         error(req, res, 500, err);
     }
 };
 
+
 /**
- * Crea un nuevo proveedor con los datos proporcionados en el cuerpo de la solicitud.
+ * Crea un nuevo Historial con los datos proporcionados en el cuerpo de la solicitud.
  * @function
  * @async
  * @param {Object} req - Objeto de solicitud HTTP.
  * @param {Object} res - Objeto de respuesta HTTP.
- * @param {string} req.body.nombre_proveedor - Nombre del proveedor.
- * @param {string} req.body.telefono - Teléfono del proveedor.
- * @param {string} req.body.correo - Correo electrónico del proveedor.
+ * @param {string} req.body.idUsuario - ID del usuario.
+ * @param {string} req.body.idProducto - ID del producto.
+ * @param {string} req.body.idMetodoPago - ID del método de pago.
+ * @param {number} req.body.cantidad - Cantidad de productos.
+ * @param {string} req.body.fecha - Fecha de la Historial.
  */
-const crearProveedor = async (req, res) => {
-    const {nombre_proveedor , telefono , correo} = req.body;
+const crearHistorial = async (req, res) => {
+    const {idUsuario, idProducto, idMetodoPago, cantidad, fecha} = req.body;
     try {
-        const respuesta = await pool.query(`CALL SP_INSERTAR_PROVEEDOR("${nombre_proveedor}", "${telefono}", "${correo}");`);
-        if (respuesta[0].affectedRows == 1) {
-            success(req, res, 201, "Proveedor creado correctamente.");
+        const respuesta = await pool.query(`CALL SP_CREAR_HISTORIAL("${idUsuario}", "${idProducto}", "${idMetodoPago}", "${cantidad}", "${fecha}");`);
+        if (respuesta[0].affectedRows >= 1) {
+            success(req, res, 201, "Historial Creada.");
         } else {
-            error(req, res, 400, "Proveedor NO se creo, Intenta mas tarde.");
+            error(req, res, 401, "No se creo la Historial, Intentalo mas tarde.");
         }
     } catch (err) {
         error(req, res, 400, err);
     }
 };
 
+
 /**
- * Modifica un proveedor existente con los datos proporcionados en el cuerpo de la solicitud.
+ * Elimina un Historial específica basada en el ID proporcionado en el cuerpo de la solicitud.
  * @function
  * @async
  * @param {Object} req - Objeto de solicitud HTTP.
  * @param {Object} res - Objeto de respuesta HTTP.
- * @param {string} req.body.idProveedor - ID del proveedor.
- * @param {string} req.body.nombre_proveedor - Nombre del proveedor.
- * @param {string} req.body.telefono - Teléfono del proveedor.
- * @param {string} req.body.correo - Correo electrónico del proveedor.
+ * @param {string} req.body.idFactura - ID de la Historial a eliminar.
  */
-const modificarProveedor = async (req, res) => {
-    const {idProveedor, nombre_proveedor, telefono, correo} = req.body;
+const eliminarHistorial = async (req, res) => {
+    const {idFactura} = req.body;
     try {
-        const respuesta = await pool.query(`CALL SP_EDITAR_PROVEEDOR("${idProveedor}", "${nombre_proveedor}", "${telefono}", "${correo}");`);
+        const respuesta = await pool.query(`CALL SP_ELIMINAR_HISTORIAL("${idFactura}");`);
         if (respuesta[0].affectedRows == 1) {
-            success(req, res, 201, "Proveedor Modificado correctamente.");
+            success(req, res, 201, "Historial eliminada.");
         } else {
-            error(req, res, 400, "Proveedor NO se modifico, Intenta mas tarde.");
+            error(req, res, 400, "No se elimino la Historial, Intentalo mas tarde.");
         }
     } catch (err) {
         error(req, res, 400, err);
-        
     }
 };
 
-/**
- * Elimina un proveedor específico basado en el ID proporcionado en el cuerpo de la solicitud.
- * @function
- * @async
- * @param {Object} req - Objeto de solicitud HTTP.
- * @param {Object} res - Objeto de respuesta HTTP.
- * @param {string} req.body.idProveedor - ID del proveedor a eliminar.
- */
-const eliminarProveedor = async (req, res) => {
-    const {idProveedor} = req.body;
-    try {
-        const respuesta = await pool.query(`CALL SP_ELIMINAR_PROVEEDOR("${idProveedor}");`);
-        if (respuesta[0].affectedRows == 1) {
-            success(req, res, 200, "Proveedor Eliminado");
-        } else {
-            error(req, res, 400, "Proveedor NO se elimino, Intenta mas tarde.");
-        }
-    } catch (err) {
-        error(req, res, 400, err);
-        
-    }
-};
-
-export { listarProveedor, mostrarProveedor, crearProveedor, modificarProveedor, eliminarProveedor };</code></pre>
+export { listarHistorial, mostrarHistorial, crearHistorial, eliminarHistorial };</code></pre>
         </article>
     </section>
 
