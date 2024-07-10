@@ -28,6 +28,17 @@ const mostrarHistorial = async (req, res)  => {
 };
 
 
+
+const MetodoPago = async (req, res) => {
+    try {
+        const [respuesta] = await pool.query(`CALL SP_MOSTRAR_METODOPAGO();`);
+        success(req, res, 200, respuesta[0]);
+    } catch (err) {
+        error(req, res, 500, err);
+    }
+}
+
+
 /**
  * Lista todos los Historiales disponibles.
  * @function
@@ -94,4 +105,4 @@ const eliminarHistorial = async (req, res) => {
     }
 };
 
-export { listarHistorial, mostrarHistorial, crearHistorial, eliminarHistorial };
+export { listarHistorial, mostrarHistorial, crearHistorial, eliminarHistorial, MetodoPago };

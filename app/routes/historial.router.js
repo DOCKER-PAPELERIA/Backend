@@ -7,6 +7,7 @@ import { Router } from "express";
 import { crearHistorial, 
         eliminarHistorial, 
         listarHistorial,
+        MetodoPago,
         mostrarHistorial } from "../controllers/controllers.historial";
 import { verifyToken } from "../middleware/oauth";
 
@@ -27,6 +28,8 @@ rutaHistorial.get("/historial/:id", mostrarHistorial);
  * @access Public
  */
 rutaHistorial.get("/historial", listarHistorial);
+
+rutaHistorial.get("/metopago", MetodoPago)
 
 /**
  * @route POST /Historial

@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.mostrarHistorial = exports.listarHistorial = exports.eliminarHistorial = exports.crearHistorial = void 0;
+exports.mostrarHistorial = exports.listarHistorial = exports.eliminarHistorial = exports.crearHistorial = exports.MetodoPago = void 0;
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
@@ -56,15 +56,7 @@ var mostrarHistorial = exports.mostrarHistorial = /*#__PURE__*/function () {
     return _ref.apply(this, arguments);
   };
 }();
-
-/**
- * Lista todos los Historiales disponibles.
- * @function
- * @async
- * @param {Object} req - Objeto de solicitud HTTP.
- * @param {Object} res - Objeto de respuesta HTTP.
- */
-var listarHistorial = exports.listarHistorial = /*#__PURE__*/function () {
+var MetodoPago = exports.MetodoPago = /*#__PURE__*/function () {
   var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
     var _yield$pool$query3, _yield$pool$query4, respuesta;
     return _regenerator["default"].wrap(function _callee2$(_context2) {
@@ -72,7 +64,7 @@ var listarHistorial = exports.listarHistorial = /*#__PURE__*/function () {
         case 0:
           _context2.prev = 0;
           _context2.next = 3;
-          return _mysql["default"].query("CALL SP_LISTAR_HISTORIAL();");
+          return _mysql["default"].query("CALL SP_MOSTRAR_METODOPAGO();");
         case 3:
           _yield$pool$query3 = _context2.sent;
           _yield$pool$query4 = (0, _slicedToArray2["default"])(_yield$pool$query3, 1);
@@ -90,8 +82,46 @@ var listarHistorial = exports.listarHistorial = /*#__PURE__*/function () {
       }
     }, _callee2, null, [[0, 9]]);
   }));
-  return function listarHistorial(_x3, _x4) {
+  return function MetodoPago(_x3, _x4) {
     return _ref2.apply(this, arguments);
+  };
+}();
+
+/**
+ * Lista todos los Historiales disponibles.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ */
+var listarHistorial = exports.listarHistorial = /*#__PURE__*/function () {
+  var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
+    var _yield$pool$query5, _yield$pool$query6, respuesta;
+    return _regenerator["default"].wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.prev = 0;
+          _context3.next = 3;
+          return _mysql["default"].query("CALL SP_LISTAR_HISTORIAL();");
+        case 3:
+          _yield$pool$query5 = _context3.sent;
+          _yield$pool$query6 = (0, _slicedToArray2["default"])(_yield$pool$query5, 1);
+          respuesta = _yield$pool$query6[0];
+          (0, _browser.success)(req, res, 200, respuesta[0]);
+          _context3.next = 12;
+          break;
+        case 9:
+          _context3.prev = 9;
+          _context3.t0 = _context3["catch"](0);
+          (0, _browser.error)(req, res, 500, _context3.t0);
+        case 12:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3, null, [[0, 9]]);
+  }));
+  return function listarHistorial(_x5, _x6) {
+    return _ref3.apply(this, arguments);
   };
 }();
 
@@ -108,63 +138,21 @@ var listarHistorial = exports.listarHistorial = /*#__PURE__*/function () {
  * @param {string} req.body.fecha - Fecha de la Historial.
  */
 var crearHistorial = exports.crearHistorial = /*#__PURE__*/function () {
-  var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
+  var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
     var _req$body, idUsuario, idProducto, idMetodoPago, cantidad, fecha, respuesta;
-    return _regenerator["default"].wrap(function _callee3$(_context3) {
-      while (1) switch (_context3.prev = _context3.next) {
+    return _regenerator["default"].wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
         case 0:
           _req$body = req.body, idUsuario = _req$body.idUsuario, idProducto = _req$body.idProducto, idMetodoPago = _req$body.idMetodoPago, cantidad = _req$body.cantidad, fecha = _req$body.fecha;
-          _context3.prev = 1;
-          _context3.next = 4;
+          _context4.prev = 1;
+          _context4.next = 4;
           return _mysql["default"].query("CALL SP_CREAR_HISTORIAL(\"".concat(idUsuario, "\", \"").concat(idProducto, "\", \"").concat(idMetodoPago, "\", \"").concat(cantidad, "\", \"").concat(fecha, "\");"));
         case 4:
-          respuesta = _context3.sent;
+          respuesta = _context4.sent;
           if (respuesta[0].affectedRows >= 1) {
             (0, _browser.success)(req, res, 201, "Historial Creada.");
           } else {
             (0, _browser.error)(req, res, 401, "No se creo la Historial, Intentalo mas tarde.");
-          }
-          _context3.next = 11;
-          break;
-        case 8:
-          _context3.prev = 8;
-          _context3.t0 = _context3["catch"](1);
-          (0, _browser.error)(req, res, 400, _context3.t0);
-        case 11:
-        case "end":
-          return _context3.stop();
-      }
-    }, _callee3, null, [[1, 8]]);
-  }));
-  return function crearHistorial(_x5, _x6) {
-    return _ref3.apply(this, arguments);
-  };
-}();
-
-/**
- * Elimina un Historial específica basada en el ID proporcionado en el cuerpo de la solicitud.
- * @function
- * @async
- * @param {Object} req - Objeto de solicitud HTTP.
- * @param {Object} res - Objeto de respuesta HTTP.
- * @param {string} req.body.idFactura - ID de la Historial a eliminar.
- */
-var eliminarHistorial = exports.eliminarHistorial = /*#__PURE__*/function () {
-  var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
-    var idFactura, respuesta;
-    return _regenerator["default"].wrap(function _callee4$(_context4) {
-      while (1) switch (_context4.prev = _context4.next) {
-        case 0:
-          idFactura = req.body.idFactura;
-          _context4.prev = 1;
-          _context4.next = 4;
-          return _mysql["default"].query("CALL SP_ELIMINAR_HISTORIAL(\"".concat(idFactura, "\");"));
-        case 4:
-          respuesta = _context4.sent;
-          if (respuesta[0].affectedRows == 1) {
-            (0, _browser.success)(req, res, 201, "Historial eliminada.");
-          } else {
-            (0, _browser.error)(req, res, 400, "No se elimino la Historial, Intentalo mas tarde.");
           }
           _context4.next = 11;
           break;
@@ -178,7 +166,49 @@ var eliminarHistorial = exports.eliminarHistorial = /*#__PURE__*/function () {
       }
     }, _callee4, null, [[1, 8]]);
   }));
-  return function eliminarHistorial(_x7, _x8) {
+  return function crearHistorial(_x7, _x8) {
     return _ref4.apply(this, arguments);
+  };
+}();
+
+/**
+ * Elimina un Historial específica basada en el ID proporcionado en el cuerpo de la solicitud.
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ * @param {string} req.body.idFactura - ID de la Historial a eliminar.
+ */
+var eliminarHistorial = exports.eliminarHistorial = /*#__PURE__*/function () {
+  var _ref5 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
+    var idFactura, respuesta;
+    return _regenerator["default"].wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
+        case 0:
+          idFactura = req.body.idFactura;
+          _context5.prev = 1;
+          _context5.next = 4;
+          return _mysql["default"].query("CALL SP_ELIMINAR_HISTORIAL(\"".concat(idFactura, "\");"));
+        case 4:
+          respuesta = _context5.sent;
+          if (respuesta[0].affectedRows == 1) {
+            (0, _browser.success)(req, res, 201, "Historial eliminada.");
+          } else {
+            (0, _browser.error)(req, res, 400, "No se elimino la Historial, Intentalo mas tarde.");
+          }
+          _context5.next = 11;
+          break;
+        case 8:
+          _context5.prev = 8;
+          _context5.t0 = _context5["catch"](1);
+          (0, _browser.error)(req, res, 400, _context5.t0);
+        case 11:
+        case "end":
+          return _context5.stop();
+      }
+    }, _callee5, null, [[1, 8]]);
+  }));
+  return function eliminarHistorial(_x9, _x10) {
+    return _ref5.apply(this, arguments);
   };
 }();
