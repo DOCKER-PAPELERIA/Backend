@@ -7,7 +7,6 @@ import { Router } from "express";
 import { crearHistorial, 
         eliminarHistorial, 
         listarHistorial,
-        MetodoPago,
         mostrarHistorial } from "../controllers/controllers.historial";
 import { verifyToken } from "../middleware/oauth";
 
@@ -29,14 +28,13 @@ rutaHistorial.get("/historial/:id", mostrarHistorial);
  */
 rutaHistorial.get("/historial", listarHistorial);
 
-rutaHistorial.get("/metopago", MetodoPago)
 
 /**
  * @route POST /Historial
  * @description Crea una nueva Historial
  * @access Private
  */
-rutaHistorial.post("/historial", verifyToken, crearHistorial);
+rutaHistorial.post("/historial", crearHistorial);
 
 /**
  * @route DELETE /Historial

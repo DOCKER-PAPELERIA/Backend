@@ -6,6 +6,9 @@
 import pool from "../config/mysql.db";
 import { success, error } from "../messages/browser";
 import { config } from "dotenv";
+
+
+
 config();
 
 
@@ -26,17 +29,6 @@ const mostrarHistorial = async (req, res)  => {
         error(req, res, 500, err);
     }
 };
-
-
-
-const MetodoPago = async (req, res) => {
-    try {
-        const [respuesta] = await pool.query(`CALL SP_MOSTRAR_METODOPAGO();`);
-        success(req, res, 200, respuesta[0]);
-    } catch (err) {
-        error(req, res, 500, err);
-    }
-}
 
 
 /**
@@ -69,18 +61,19 @@ const listarHistorial = async (req, res)  => {
  * @param {string} req.body.fecha - Fecha de la Historial.
  */
 const crearHistorial = async (req, res) => {
-    const {idUsuario, idProducto, idMetodoPago, cantidad, fecha} = req.body;
+    const { nombres, nombreProducto, tipopago, cantidad, fecha } = req.body;
     try {
-        const respuesta = await pool.query(`CALL SP_CREAR_HISTORIAL("${idUsuario}", "${idProducto}", "${idMetodoPago}", "${cantidad}", "${fecha}");`);
+        const respuesta = await pool.query(`CALL SP_CREAR_HISTORIAL2("${nombres}", "${nombreProducto}", "${tipopago}", "${cantidad}", "${fecha}");`);
         if (respuesta[0].affectedRows >= 1) {
             success(req, res, 201, "Historial Creada.");
         } else {
-            error(req, res, 401, "No se creo la Historial, Intentalo mas tarde.");
+            error(req, res, 401, "No se creó el historial, inténtalo más tarde.");
         }
     } catch (err) {
         error(req, res, 400, err);
     }
 };
+
 
 
 /**
@@ -105,4 +98,12 @@ const eliminarHistorial = async (req, res) => {
     }
 };
 
-export { listarHistorial, mostrarHistorial, crearHistorial, eliminarHistorial, MetodoPago };
+
+
+
+
+
+
+
+
+export { listarHistorial, mostrarHistorial, crearHistorial, eliminarHistorial };

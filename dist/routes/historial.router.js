@@ -27,14 +27,13 @@ rutaHistorial.get("/historial/:id", _controllers.mostrarHistorial);
  * @access Public
  */
 rutaHistorial.get("/historial", _controllers.listarHistorial);
-rutaHistorial.get("/metopago", _controllers.MetodoPago);
 
 /**
  * @route POST /Historial
  * @description Crea una nueva Historial
  * @access Private
  */
-rutaHistorial.post("/historial", _oauth.verifyToken, _controllers.crearHistorial);
+rutaHistorial.post("/historial", _controllers.crearHistorial);
 
 /**
  * @route DELETE /Historial
