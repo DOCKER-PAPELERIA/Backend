@@ -41,7 +41,7 @@ rutaHistorial.post("/historial", crearHistorial);
  * @description Elimina una Historial
  * @access Private
  */
-rutaHistorial.delete("/historial", verifyToken, eliminarHistorial);
+rutaHistorial.delete("/historial", eliminarHistorial);
 
 
 

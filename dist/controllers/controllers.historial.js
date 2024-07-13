@@ -11,6 +11,7 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 var _mysql = _interopRequireDefault(require("../config/mysql.db"));
 var _browser = require("../messages/browser");
 var _dotenv = require("dotenv");
+var _bcrypt = _interopRequireDefault(require("bcrypt"));
 /**
  * Este es el controlador de Historial
  * @module crt-historial
@@ -151,32 +152,59 @@ var crearHistorial = exports.crearHistorial = /*#__PURE__*/function () {
  */
 var eliminarHistorial = exports.eliminarHistorial = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
-    var idFactura, respuesta;
+    var _req$body2, idFactura, correo, contrasena, _yield$pool$query5, _yield$pool$query6, respuesta, match, _yield$pool$query7, _yield$pool$query8, resultado;
     return _regenerator["default"].wrap(function _callee4$(_context4) {
       while (1) switch (_context4.prev = _context4.next) {
         case 0:
-          idFactura = req.body.idFactura;
+          _req$body2 = req.body, idFactura = _req$body2.idFactura, correo = _req$body2.correo, contrasena = _req$body2.contrasena;
           _context4.prev = 1;
           _context4.next = 4;
-          return _mysql["default"].query("CALL SP_ELIMINAR_HISTORIAL(\"".concat(idFactura, "\");"));
+          return _mysql["default"].query("SELECT contrasena FROM usuario WHERE correo = ?", [correo]);
         case 4:
-          respuesta = _context4.sent;
-          if (respuesta[0].affectedRows == 1) {
-            (0, _browser.success)(req, res, 201, "Historial eliminada.");
-          } else {
-            (0, _browser.error)(req, res, 400, "No se elimino la Historial, Intentalo mas tarde.");
+          _yield$pool$query5 = _context4.sent;
+          _yield$pool$query6 = (0, _slicedToArray2["default"])(_yield$pool$query5, 1);
+          respuesta = _yield$pool$query6[0];
+          if (!(respuesta.length === 0)) {
+            _context4.next = 9;
+            break;
           }
+          return _context4.abrupt("return", (0, _browser.error)(req, res, 404, "Usuario no encontrado."));
+        case 9:
           _context4.next = 11;
-          break;
-        case 8:
-          _context4.prev = 8;
-          _context4.t0 = _context4["catch"](1);
-          (0, _browser.error)(req, res, 400, _context4.t0);
+          return _bcrypt["default"].compare(contrasena, respuesta[0].contrasena);
         case 11:
+          match = _context4.sent;
+          if (match) {
+            _context4.next = 14;
+            break;
+          }
+          return _context4.abrupt("return", (0, _browser.error)(req, res, 400, "Contraseña incorrecta."));
+        case 14:
+          _context4.next = 16;
+          return _mysql["default"].query("CALL SP_ELIMINAR_HISTORIAL(?, ?)", [idFactura, correo]);
+        case 16:
+          _yield$pool$query7 = _context4.sent;
+          _yield$pool$query8 = (0, _slicedToArray2["default"])(_yield$pool$query7, 1);
+          resultado = _yield$pool$query8[0];
+          if (!(resultado.affectedRows === 1)) {
+            _context4.next = 23;
+            break;
+          }
+          return _context4.abrupt("return", (0, _browser.success)(req, res, 201, "Factura eliminada."));
+        case 23:
+          return _context4.abrupt("return", (0, _browser.error)(req, res, 404, "Factura no encontrada."));
+        case 24:
+          _context4.next = 29;
+          break;
+        case 26:
+          _context4.prev = 26;
+          _context4.t0 = _context4["catch"](1);
+          return _context4.abrupt("return", (0, _browser.error)(req, res, 500, _context4.t0.message));
+        case 29:
         case "end":
           return _context4.stop();
       }
-    }, _callee4, null, [[1, 8]]);
+    }, _callee4, null, [[1, 26]]);
   }));
   return function eliminarHistorial(_x7, _x8) {
     return _ref4.apply(this, arguments);

@@ -40,5 +40,5 @@ rutaHistorial.post("/historial", _controllers.crearHistorial);
  * @description Elimina una Historial
  * @access Private
  */
-rutaHistorial["delete"]("/historial", _oauth.verifyToken, _controllers.eliminarHistorial);
+rutaHistorial["delete"]("/historial", _controllers.eliminarHistorial);
 var _default = exports["default"] = rutaHistorial;

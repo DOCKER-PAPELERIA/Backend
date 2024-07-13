@@ -6,6 +6,7 @@
 import pool from "../config/mysql.db";
 import { success, error } from "../messages/browser";
 import { config } from "dotenv";
+import bcrypt from "bcrypt";
 
 
 
@@ -85,18 +86,36 @@ const crearHistorial = async (req, res) => {
  * @param {string} req.body.idFactura - ID de la Historial a eliminar.
  */
 const eliminarHistorial = async (req, res) => {
-    const {idFactura} = req.body;
+    const { idFactura, correo, contrasena } = req.body;
+    
     try {
-        const respuesta = await pool.query(`CALL SP_ELIMINAR_HISTORIAL("${idFactura}");`);
-        if (respuesta[0].affectedRows == 1) {
-            success(req, res, 201, "Historial eliminada.");
+        // Comprueba si el usuario existe y obtiene la contraseña encriptada
+        const [respuesta] = await pool.query(`SELECT contrasena FROM usuario WHERE correo = ?`, [correo]);
+
+        if (respuesta.length === 0) {
+            return error(req, res, 404, "Usuario no encontrado.");
+        }
+
+        // Compara la contraseña proporcionada con la contraseña encriptada
+        const match = await bcrypt.compare(contrasena, respuesta[0].contrasena);
+
+        if (!match) {
+            return error(req, res, 400, "Contraseña incorrecta.");
+        }
+
+        // Si la contraseña coincide, elimina la factura usando parámetros de consulta
+        const [resultado] = await pool.query(`CALL SP_ELIMINAR_HISTORIAL(?, ?)`, [idFactura, correo]);
+
+        if (resultado.affectedRows === 1) {
+            return success(req, res, 201, "Factura eliminada.");
         } else {
-            error(req, res, 400, "No se elimino la Historial, Intentalo mas tarde.");
+            return error(req, res, 404, "Factura no encontrada.");
         }
     } catch (err) {
-        error(req, res, 400, err);
+        return error(req, res, 500, err.message);
     }
 };
+
 
 
 
