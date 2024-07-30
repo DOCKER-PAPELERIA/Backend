@@ -25,13 +25,13 @@ DELIMITER $$
 --
 -- Procedimientos
 --
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_BUSCAR_LOGIN` (IN `_correo` VARCHAR(100))   BEGIN
+CREATE  PROCEDURE `SP_BUSCAR_LOGIN` (IN `_correo` VARCHAR(100))   BEGIN
     SELECT correo, contrasena FROM usuario
     WHERE correo = _correo
     LIMIT 1;
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_CATEGORIA_PRODUCTOS` (IN `_categoria` VARCHAR(50))   BEGIN
+CREATE  PROCEDURE `SP_CATEGORIA_PRODUCTOS` (IN `_categoria` VARCHAR(50))   BEGIN
     DECLARE _idCategoria INT;
     
     -- Obtener el ID de la categoría
@@ -56,7 +56,7 @@ CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_CATEGORIA_PRODUCTOS` (IN `_catego
         AND p.stock != 0;
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_CREAR_FACTURA` (IN `_idUsuario` INT(10), IN `_idProducto` INT(10), IN `_idMetodoPago` INT(10), IN `_cantidad` INT(100), IN `_fecha` DATE)   BEGIN
+CREATE  PROCEDURE `SP_CREAR_FACTURA` (IN `_idUsuario` INT(10), IN `_idProducto` INT(10), IN `_idMetodoPago` INT(10), IN `_cantidad` INT(100), IN `_fecha` DATE)   BEGIN
     INSERT INTO factura (
         idUsuario, 
         idProducto, 
@@ -72,7 +72,7 @@ CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_CREAR_FACTURA` (IN `_idUsuario` I
     );
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_EDITAR_CATEGORIAS` (IN `_IDCATEGORIAS` INT(10), IN `_DESCRIPCION_CATEGORIA` VARCHAR(200), IN `_CATEGORIA` VARCHAR(100), IN `_imagen` TEXT, IN `_FECHA` VARCHAR(15))   BEGIN
+CREATE  PROCEDURE `SP_EDITAR_CATEGORIAS` (IN `_IDCATEGORIAS` INT(10), IN `_DESCRIPCION_CATEGORIA` VARCHAR(200), IN `_CATEGORIA` VARCHAR(100), IN `_imagen` TEXT, IN `_FECHA` VARCHAR(15))   BEGIN
 UPDATE categorias
 SET Categoria = _CATEGORIA,
 descripcion_categoria = _DESCRIPCION_CATEGORIA,
@@ -81,7 +81,7 @@ imagen = _imagen
 WHERE idCategorias = _IDCATEGORIAS;
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_EDITAR_PRODUCTO` (IN `_idProducto` INT(10), IN `_idCategorias` INT(10), IN `_idProveedor` INT(10), IN `_nombre_product` VARCHAR(200), IN `_stock` INT(25), IN `_codigo_producto` INT(50), IN `_imagen` TEXT, IN `_precio` INT(20), IN `_fecha` VARCHAR(15), IN `_estado` VARCHAR(50))   BEGIN
+CREATE  PROCEDURE `SP_EDITAR_PRODUCTO` (IN `_idProducto` INT(10), IN `_idCategorias` INT(10), IN `_idProveedor` INT(10), IN `_nombre_product` VARCHAR(200), IN `_stock` INT(25), IN `_codigo_producto` INT(50), IN `_imagen` TEXT, IN `_precio` INT(20), IN `_fecha` VARCHAR(15), IN `_estado` VARCHAR(50))   BEGIN
 UPDATE producto
 SET idCategorias =
 CASE
@@ -125,7 +125,7 @@ WHERE idProducto = _idProducto;
 
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_EDITAR_PROVEEDOR` (IN `_idProveedor` INT(10), IN `_nombre_proveedor` VARCHAR(100), IN `_telefono` INT(10), IN `_correo` VARCHAR(150))   BEGIN
+CREATE  PROCEDURE `SP_EDITAR_PROVEEDOR` (IN `_idProveedor` INT(10), IN `_nombre_proveedor` VARCHAR(100), IN `_telefono` INT(10), IN `_correo` VARCHAR(150))   BEGIN
 UPDATE proveedor
 SET nombre_proveedor =
 CASE
@@ -147,7 +147,7 @@ WHERE idProveedor = _idProveedor;
 
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_EDITAR_USUARIO` (IN `_identificacion` INT(12), IN `_nombres` VARCHAR(50), IN `_telefono` INT(12), IN `_fecha_naci` VARCHAR(15), IN `_correo` VARCHAR(100), IN `_contrasena` VARCHAR(500), IN `_estado` VARCHAR(50))   BEGIN
+CREATE  PROCEDURE `SP_EDITAR_USUARIO` (IN `_identificacion` INT(12), IN `_nombres` VARCHAR(50), IN `_telefono` INT(12), IN `_fecha_naci` VARCHAR(15), IN `_correo` VARCHAR(100), IN `_contrasena` VARCHAR(500), IN `_estado` VARCHAR(50))   BEGIN
 UPDATE usuario
 SET identificacion =
 CASE
@@ -184,32 +184,32 @@ WHERE correo = _correo;
 
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_ELIMINAR_CATEGORIAS` (IN `_IDCATEGORIAS` INT(10))   BEGIN
+CREATE  PROCEDURE `SP_ELIMINAR_CATEGORIAS` (IN `_IDCATEGORIAS` INT(10))   BEGIN
 DELETE FROM categorias
 WHERE idCategorias = _IDCATEGORIAS;
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_ELIMINAR_FACTURA` (IN `_idFactura` INT(10))   BEGIN
+CREATE  PROCEDURE `SP_ELIMINAR_FACTURA` (IN `_idFactura` INT(10))   BEGIN
 DELETE FROM factura
 WHERE idFactura = _idFactura;
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_ELIMINAR_PRODUCTO` (IN `_idProducto` INT(10))   BEGIN
+CREATE  PROCEDURE `SP_ELIMINAR_PRODUCTO` (IN `_idProducto` INT(10))   BEGIN
 DELETE FROM producto
 WHERE idProducto = _idProducto;
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_ELIMINAR_PROVEEDOR` (IN `_idProveedor` INT(10))   BEGIN
+CREATE  PROCEDURE `SP_ELIMINAR_PROVEEDOR` (IN `_idProveedor` INT(10))   BEGIN
 DELETE FROM proveedor
 WHERE idProveedor = _idProveedor;
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_ELIMINAR_USUARIO` (IN `_idUsuario` INT(10))   BEGIN
+CREATE  PROCEDURE `SP_ELIMINAR_USUARIO` (IN `_idUsuario` INT(10))   BEGIN
 DELETE FROM usuario
 WHERE idUsuario = _idUsuario;
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_FILTRAR_PRODUCTOS_CATEGORIAS` (IN `_filtro` VARCHAR(50), IN `_categoria` INT(50))   BEGIN
+CREATE  PROCEDURE `SP_FILTRAR_PRODUCTOS_CATEGORIAS` (IN `_filtro` VARCHAR(50), IN `_categoria` INT(50))   BEGIN
     IF _filtro = 'sin filtro' THEN
         SELECT p.*, c.Categoria, c.imagen AS foto
         FROM producto p
@@ -236,31 +236,31 @@ CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_FILTRAR_PRODUCTOS_CATEGORIAS` (IN
     END IF;
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_INSERTAR_CATEGORIA` (IN `_CATEGORIA` VARCHAR(100), IN `_DESCRIPCION_CATEGORIA` VARCHAR(200), IN `_imagen` TEXT, IN `_FECHA` DATE)   BEGIN
+CREATE  PROCEDURE `SP_INSERTAR_CATEGORIA` (IN `_CATEGORIA` VARCHAR(100), IN `_DESCRIPCION_CATEGORIA` VARCHAR(200), IN `_imagen` TEXT, IN `_FECHA` DATE)   BEGIN
 INSERT INTO categorias (categoria, descripcion_categoria, imagen, fecha)
 VALUES (_CATEGORIA, _DESCRIPCION_CATEGORIA, _imagen, _FECHA);
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_INSERTAR_PRODUCTOS` (IN `_idCategorias` INT(10), IN `_idProveedor` INT(10), IN `_nombre_product` VARCHAR(200), IN `_stock` INT(25), IN `_codigo_producto` INT(50), IN `_imagen` TEXT, IN `_precio` INT(20), IN `_fecha` DATE, IN `_estado` VARCHAR(50))   BEGIN
+CREATE  PROCEDURE `SP_INSERTAR_PRODUCTOS` (IN `_idCategorias` INT(10), IN `_idProveedor` INT(10), IN `_nombre_product` VARCHAR(200), IN `_stock` INT(25), IN `_codigo_producto` INT(50), IN `_imagen` TEXT, IN `_precio` INT(20), IN `_fecha` DATE, IN `_estado` VARCHAR(50))   BEGIN
 INSERT INTO producto (idCategorias, idProveedor, nombre_product, stock, codigo_producto, imagen, precio, fecha, estado)
 VALUES (_idCategorias, _idProveedor, _nombre_product, _stock, _codigo_producto, _imagen, _precio, _fecha, _estado);
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_INSERTAR_PROVEEDOR` (IN `_nombre_proveedor` VARCHAR(100), IN `_telefono` INT(10), IN `_correo` VARCHAR(150))   BEGIN
+CREATE  PROCEDURE `SP_INSERTAR_PROVEEDOR` (IN `_nombre_proveedor` VARCHAR(100), IN `_telefono` INT(10), IN `_correo` VARCHAR(150))   BEGIN
 INSERT INTO proveedor (nombre_proveedor, telefono, correo)
 VALUES (_nombre_proveedor, _telefono, _correo);
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_INSERTAR_USUARIO` (IN `_idRol` INT(10), IN `_identificacion` INT(15), IN `_nombres` VARCHAR(50), IN `_telefono` INT(15), IN `_fecha_naci` DATE, IN `_correo` VARCHAR(100), IN `_contrasena` VARCHAR(500), IN `_estado` VARCHAR(50))   BEGIN
+CREATE  PROCEDURE `SP_INSERTAR_USUARIO` (IN `_idRol` INT(10), IN `_identificacion` INT(15), IN `_nombres` VARCHAR(50), IN `_telefono` INT(15), IN `_fecha_naci` DATE, IN `_correo` VARCHAR(100), IN `_contrasena` VARCHAR(500), IN `_estado` VARCHAR(50))   BEGIN
     INSERT INTO usuario (idRol, identificacion, nombres, telefono, fecha_naci, correo, contrasena, estado)
     VALUES(_idRol, _identificacion, _nombres, _telefono, _fecha_naci, _correo, _contrasena, _estado);
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_LISTAR_CATEGORIAS` ()   BEGIN
+CREATE  PROCEDURE `SP_LISTAR_CATEGORIAS` ()   BEGIN
  SELECT * FROM categorias;
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_LISTAR_FACTURA` ()   BEGIN
+CREATE  PROCEDURE `SP_LISTAR_FACTURA` ()   BEGIN
     SELECT 
         f.idFactura AS ID,
         p.nombre_product AS Nombre_Producto,
@@ -281,7 +281,7 @@ CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_LISTAR_FACTURA` ()   BEGIN
         metodopago m ON f.idMetodoPago = m.idMetodoPago;
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_LISTAR_PRODUCTOS` ()   BEGIN
+CREATE  PROCEDURE `SP_LISTAR_PRODUCTOS` ()   BEGIN
 
 SELECT
 		p.idProducto,
@@ -306,25 +306,25 @@ SELECT
 
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_LISTAR_PROVEEDOR` ()   BEGIN
+CREATE  PROCEDURE `SP_LISTAR_PROVEEDOR` ()   BEGIN
 
 SELECT * FROM proveedor;
 
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_LISTAR_USUARIO` ()   BEGIN
+CREATE  PROCEDURE `SP_LISTAR_USUARIO` ()   BEGIN
 
 SELECT * FROM usuario;
 
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_MOSTRAR_CATEGORIAS` (IN `_IDCATEGORIAS` INT(10))   BEGIN
+CREATE  PROCEDURE `SP_MOSTRAR_CATEGORIAS` (IN `_IDCATEGORIAS` INT(10))   BEGIN
 
 SELECT * FROM categorias WHERE idCategorias = _IDCATEGORIAS;
 
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_MOSTRAR_FACTURA` (IN `_idFactura` INT(10))   BEGIN
+CREATE  PROCEDURE `SP_MOSTRAR_FACTURA` (IN `_idFactura` INT(10))   BEGIN
     SELECT 
          f.idFactura AS ID,
         p.nombre_product AS Nombre_Producto,
@@ -346,11 +346,11 @@ CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_MOSTRAR_FACTURA` (IN `_idFactura`
      WHERE idFactura = _idFactura;
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_MOSTRAR_PRECIOS` ()   BEGIN
+CREATE  PROCEDURE `SP_MOSTRAR_PRECIOS` ()   BEGIN
 SELECT precio, nombre_product FROM producto;
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_MOSTRAR_PRODUCTOS` ()   BEGIN
+CREATE  PROCEDURE `SP_MOSTRAR_PRODUCTOS` ()   BEGIN
 
 SELECT
 		p.idProducto,
@@ -375,24 +375,24 @@ SELECT
 
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_MOSTRAR_PROVEEDOR` (IN `_IDPROVEEDOR` INT(10))   BEGIN
+CREATE  PROCEDURE `SP_MOSTRAR_PROVEEDOR` (IN `_IDPROVEEDOR` INT(10))   BEGIN
 
 SELECT * FROM proveedor WHERE idProveedor = _IDPROVEEDOR;
 
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_MOSTRAR_USUARIO` (IN `_IDUSUARIO` INT(10))   BEGIN
+CREATE  PROCEDURE `SP_MOSTRAR_USUARIO` (IN `_IDUSUARIO` INT(10))   BEGIN
 
 SELECT * FROM usuario WHERE idUsuario = _IDUSUARIO;
 
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_PRODUCTO_AGOTADO` ()   BEGIN
+CREATE  PROCEDURE `SP_PRODUCTO_AGOTADO` ()   BEGIN
  SELECT * FROM producto
 WHERE stock <= 0;
 END$$
 
-CREATE DEFINER=`mi_angel123`@`%` PROCEDURE `SP_PRODUCTO_AGOTADO_Web` ()   BEGIN
+CREATE  PROCEDURE `SP_PRODUCTO_AGOTADO_Web` ()   BEGIN
 
 SELECT
 		p.idProducto,
